@@ -23,7 +23,7 @@
 \examples{
 \dontshow{
 hacfile <- system.file("hac","Hac-test_000001.hac",package="HAC")
-x <- readExchange(hacfile)
+x <- readHAC(hacfile)
 }
 x[1:2]
 subset(x,type==10000)

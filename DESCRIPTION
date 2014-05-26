@@ -12,4 +12,4 @@ License: GPL
 LazyLoad: yes
 Collate:
     'hac.R'
-    'HAC.R'
+    'HACpackage.R'
