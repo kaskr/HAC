@@ -1,0 +1,58 @@
+\docType{package}
+\name{HAC-package}
+\alias{HAC}
+\alias{HAC-package}
+\title{Read acoustic HAC raw data}
+\description{
+  The HAC data format is a binary format containing
+  so-called \code{tuples}. A tuple can hold various sorts
+  of information depending on the tuple type. For instance
+  tuples exist to specify positions, echosounder
+  information and acoustic signal data etc. This R package
+  can read, write and manipulate the HAC data format.
+}
+\details{
+  \tabular{ll}{ Package: \tab HAC\cr Type: \tab Package\cr
+  Version: \tab 1.0\cr Date: \tab 2013-01-01\cr License:
+  \tab GPL\cr LazyLoad: \tab yes\cr }
+}
+\examples{
+require(HAC)
+
+## Example file
+hacfile <- system.file("hac","Hac-test_000001.hac",package="HAC")
+
+## Step 1. Read hac data into R
+hac <- readHAC(hacfile)
+print(hac)
+
+## Step 2. Select sub-components
+## e.g. "softwarechannel==i"
+i <- 3
+pingdata <- ( subset(hac,softwarechannel==i & type==10000) )
+channel <- ( subset(hac,softwarechannel==i & type==9001) )
+echosounder <- ( subset(hac,echosounder==channel$echosounder & type==901) )
+
+## Step 3. Parse the binary data
+print( parseHAC(pingdata) )
+info <- parseHAC(channel)[5:7]
+s <- ( parseHAC(pingdata)$"Sample value" )
+s[s>0] <- NA  ## discard positive dB values
+sec <- parseHAC(pingdata)$"Time CPU ANSI";sec <- sec-min(sec)
+flip <- function(x)t(x[nrow(x):1,])
+image(sec,1:nrow(s),flip(s),axes=FALSE,ylab="sample")
+axis(1)
+at <- seq(nrow(s),1,by=-100)
+axis(2,at=at,labels=nrow(s)-at)
+box()
+legend("topright",legend=paste(names(info),unlist(info)))
+}
+\author{
+  Kasper Kristensen and Casper Berg
+
+  Maintainer: <kaskr@imm.dtu.dk> <cbe@aqua.dtu.dk>
+}
+\references{
+  \url{http://biblio.uqar.qc.ca/archives/30005500.pdf}
+}
+

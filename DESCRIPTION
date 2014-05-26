@@ -1,0 +1,15 @@
+Package: HAC
+Type: Package
+Title: Read acoustic HAC format.
+Version: 1.0
+Date: 2013-01-01
+Author: Kasper Kristensen and Casper Berg
+Maintainer: <kaskr@imm.dtu.dk>
+Description: Read acoustic HAC format.
+Suggests:
+    Matrix
+License: GPL
+LazyLoad: yes
+Collate:
+    'hac.R'
+    'HAC.R'

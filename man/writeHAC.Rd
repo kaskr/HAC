@@ -1,0 +1,24 @@
+\name{writeHAC}
+\alias{writeHAC}
+\title{Write HAC binary data.}
+\usage{
+  writeHAC(x, file)
+}
+\arguments{
+  \item{x}{HAC object}
+
+  \item{file}{File to write to.}
+}
+\value{
+  NULL
+}
+\description{
+  Write raw HAC data file
+}
+\details{
+  This function writes the binary HAC format. The output
+  file begins with "ac 00 00 00" followed by the binary
+  tuples defined by the HAC object \code{x}. Note that the
+  function does not perform a check for mandatory tuples.
+}
+

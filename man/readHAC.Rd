@@ -1,0 +1,20 @@
+\name{readHAC}
+\alias{readHAC}
+\title{Read HAC data into R.}
+\usage{
+  readHAC(file)
+}
+\arguments{
+  \item{file}{File to read.}
+}
+\value{
+  HAC object.
+}
+\description{
+  Read raw HAC data file
+}
+\details{
+  This function reads the binary HAC format, locate tuples
+  and extract certain tuple information.
+}
+

@@ -1,0 +1,31 @@
+\name{parseHAC}
+\alias{parseHAC}
+\title{Parse binary HAC.}
+\usage{
+  parseHAC(hac, split = FALSE,
+    split.by = paste(type, length), units = TRUE)
+}
+\arguments{
+  \item{hac}{Object of class \code{HAC} to be parsed.}
+
+  \item{split}{Force parsing of incompatiple tuples by
+  first splitting the raw data?}
+
+  \item{split.by}{If \code{split=TRUE} then split by this
+  factor.}
+
+  \item{units}{Convert to human readable units?}
+}
+\value{
+  Object of class \code{tuple}.
+}
+\description{
+  Parse binary HAC to a list of data values.
+}
+\details{
+  HAC parsing can be performed for one or multiple tuples
+  of the same type and length. The binary tuples are
+  translated to data values according to the definition
+  document.
+}
+

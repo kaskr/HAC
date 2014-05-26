@@ -1,0 +1,5167 @@
+header: Table 2. Position tuple (20).
+offset: 0
+field: Tuple size
+length: 4
+format: ULONG
+content: Tuple data size: 26 bytes
+unit: byte
+range: 26
+
+offset: 4
+field: Tuple type
+length: 2
+format: USHORT
+content: Tuple type code: 20
+unit: unitless
+range: 20
+
+offset: 6
+field: Time fraction
+length: 2
+format: USHORT
+content: Fraction of a second to add to the following CPU ANSI C time
+        to get a time precision of 0.0001 s (Local time at which the
+        position was taken by the positioning system).
+unit: 0.0001 s
+range: [0 , 6.5535 s] Practical range: [0 , 0.9999 s]
+
+offset: 8
+field: Time CPU ANSI C Standard time
+length: 4
+format: ULONG
+content: Local time at which the position was taken by the positioning
+        system. ANSI C time given by the CPU clock, in seconds. Usually
+        the CPU clock is set to local time. The difference with the GPS
+        time gives the lag of the local time relative to the universal
+        time.
+unit: s
+range: [0 , 4294967295 s] i.e.: [up to year 2106]
+
+offset: 12
+field: GPS time (GMT)
+length: 4
+format: ULONG
+content: Universal time (GMT), given by the GPS, at which the position
+        was taken by the positioning system. Absolute time, in seconds,
+        elapsed since midnight (00:00:00) 1 January 1970.
+unit: s
+range: [0 , 4294967295 s] i.e.: [up to year 2106]
+
+offset: 16
+field: Positioning system
+length: 2
+format: USHORT
+content: Positioning system used: 0 = Loran C 1 = GPS 2 = DGPS Other
+        systems to be coded.
+unit: unitless
+range: [0 , 65535] Presently: [0; 1; 2]
+
+offset: 18
+field: Space
+length: 2
+format: USHORT
+content: Space to allow the next field to be aligned on an address that
+        is a multiple of 4.
+unit: unitless
+range: 0
+
+offset: 20
+field: Latitude
+length: 4
+format: LONG
+content: Latitude, in degrees. Negative values are in the southern
+        hemisphere.
+unit: 0.000001 deg precision: ~ 2 cm
+range: [-214.7483648 , 214.7483647 deg] Practical range: [-90.000000 ,
+        90.000000 deg]
+
+offset: 24
+field: Longitude
+length: 4
+format: LONG
+content: Longitude, in degrees. Negative values are western
+        coordinates.
+unit: 0.000001 deg precision: ~ 2 cm
+range: [-214.7483648 , 214.7483647 deg] Practical range: [-180.000000 ,
+        180.000000 deg]
+
+offset: 28
+field: Tuple attribute
+length: 4
+format: LONG
+content: Attribute of the tuple according to Annex 3. 0 = original 1 =
+        edited 2 = temporary 3 = temporary + edited 4 = patched 5 =
+        patched + edited ...
+unit: unitless
+range: [-2147483648 , 2147483647]
+
+offset: 32
+field: Backlink
+length: 4
+format: ULONG
+content: Tuple size: 36 bytes
+unit: byte
+range: 36
+
+header: Table 3. Platform attitude parameters tuple (41).
+offset: 0
+field: Tuple size
+length: 4
+format: ULONG
+content: Tuple data size: 54 bytes
+unit: byte
+range: 54
+
+offset: 4
+field: Tuple type
+length: 2
+format: USHORT
+content: Tuple type code: 41
+unit: unitless
+range: 41
+
+offset: 6
+field: Time fraction
+length: 2
+format: USHORT
+content: Fraction of a second to add to the following CPU ANSI C time
+        to get a time precision of 0.0001 s (Local time at which the
+        platform attitude reading was taken).
+unit: 0.0001 s
+range: [0 , 6.5535 s] Practical range: [0 , 0.9999 s]
+
+offset: 8
+field: Time CPU ANSI C Standard time
+length: 4
+format: ULONG
+content: Local time at which the platform attitude reading was taken.
+        ANSI C time given by the CPU clock, in seconds. Usually the CPU
+        clock is set to local time.
+unit: s
+range: [[0 , 4294967295 s ] i.e.: [up to year 2106]
+
+offset: 12
+field: Dependent attitude sensor identifier
+length: 2
+format: USHORT
+content: Unique identifier of the dependent attitude sensor.
+unit: unitless
+range: [0 , 65535]
+
+offset: 14
+field: Transceiver channel number
+length: 2
+format: USHORT
+content: Transceiver channel number from the parent channel tuple to
+        which these parameters refer.
+unit: unitless
+range: [0 , 65535]
+
+offset: 16
+field: Platform type
+length: 2
+format: USHORT
+content: The platform type in which the attitude sensor is installed: 0
+        = ship 1 = towed body 1 2 = towed body 2 3 = AUV 4 = ROV 5 =
+        pelagic trawl 6 = bottom trawl
+unit: unitless
+range: [0 , 65535] Presently: [0; 1; 2; 3; 4; 5; 6]
+
+offset: 18
+field: Alongship offset
+length: 2
+format: SHORT
+content: Distance between the center of the transducer and the
+        reference point of the attitude sensor in the fore and aft
+        direction (X). Positive values are on the foreword side of the
+        reference point of the attitude sensor.
+unit: 0.01 m
+range: [-327.68 , 327.67 m]
+
+offset: 20
+field: Athwartship offset
+length: 2
+format: SHORT
+content: Distance between the center of the transducer and the
+        reference point of the attitude sensor in the starboard and
+        port direction (Y). Positive values are on the port side of the
+        reference point of the attitude sensor.
+unit: 0.01 m
+range: [-327.68 , 327.67 m]
+
+offset: 22
+field: Elevation offset
+length: 2
+format: SHORT
+content: Distance between the transducer face and the reference point
+        of the attitude sensor in the vertical direction (Z). Positive
+        values are below the reference point of the attitude sensor.
+unit: 0.01 m
+range: [-327.68 , 327.67 m]
+
+offset: 24
+field: Remarks
+length: 30
+format: CHAR
+content: Character string comment, up to 30 characters. This field
+        could be used to store the sensor type and serial number.
+unit: ASCII char.
+range: 30 characters
+
+offset: 54
+field: Space
+length: 2
+format: USHORT
+content: Space to allow the next field to be aligned on an address that
+        is a multiple of 4.
+unit: unitless
+range: 0
+
+offset: 56
+field: Tuple attribute
+length: 4
+format: LONG
+content: Attribute of the tuple according to Annex 3. 0 = original 1 =
+        edited 2 = temporary 3 = temporary + edited 4 = patched 5 =
+        patched + edited ...
+unit: unitless 
+range: [-2147483648 ,2147483647]
+
+offset: 60
+field: Backlink
+length: 4
+format: ULONG
+content: Tuple size: 64 bytes
+unit: byte
+range: 64
+
+header: Table 4. Dynamic platform position parameters tuple (42).
+offset: 0
+field: Tuple size
+length: 4
+format: ULONG
+content: Tuple data size: 62 bytes
+unit: byte
+range: 62
+
+offset: 4
+field: Tuple type
+length: 2
+format: USHORT
+content: Tuple type code: 42.
+unit: unitless
+range: 42
+
+offset: 6
+field: Time fraction
+length: 2
+format: USHORT
+content: Fraction of a second to add to the following CPU ANSI C time
+        to get a time precision of 0.0001 s (Local time at which the
+        platform position reading was taken).
+unit: 0.0001 s
+range: [0 , 6.5535 s] Practical range: [0 , 0.9999 s]
+
+offset: 8
+field: Time CPU ANSI C Standard time
+length: 4
+format: ULONG
+content: Local time at which the platform position was taken. ANSI C
+        time given by the CPU clock, in seconds. Usually the CPU clock
+        is set to local time.
+unit: s
+range: [0 , 4294967295 s ] i.e.: [up to year 2106]
+
+offset: 12
+field: Dependent distance sensor identifier
+length: 2
+format: USHORT
+content: Unique identifier of the dependent sensor to which all
+        distances (X and Y in tuple 10142) are referenced.
+unit: unitless
+range: [0 - 65535 ]
+
+offset: 14
+field: Dependent depth sensor identifier
+length: 2
+format: USHORT
+content: Unique identifier of the dependent sensor to which all depths
+        (Z in tuple 10142) are referenced.
+unit: unitless
+range: [0 , 65535 ]
+
+offset: 16
+field: Transceiver channel identifier
+length: 2
+format: USHORT
+content: Transceiver channel identifier from the parent channel tuple
+        to which these parameters refer.
+unit: unitless
+range: [0 - 65535 ]
+
+offset: 18
+field: Platform type
+length: 2
+format: USHORT
+content: Platform type in which the transducer/echosounder is
+        installed: 0 = ship 1 = towed body 1 2 = towed body 2 3 = AUV 4
+        = ROV 5 = Pelagic trawl 6 = Bottom trawl
+unit: unitless
+range: [0 , 65535 ] Presently: [0, 1, 2, 3, 4, 5, 6]
+
+offset: 20
+field: Distance sensor type
+length: 2
+format: USHORT
+content: Distance sensor type: 0 = acoustic positioning 1 = cable
+        length 2 = combining cable length and angle measurement 3 =
+        other
+unit: unitless
+range: [0 , 65535 ] Presently: [0, 1, 2, 3]
+
+offset: 22
+field: Depth sensor type
+length: 2
+format: USHORT
+content: Position sensor type: 0 = acoustic positioning (phase
+        measurement) 1 = pressure sensor 2 = acoustic depth measurement
+        3 = acoustic bottom altitude measurement (including pinger) 4 =
+        other
+unit: unitless
+range: [0 , 65535 ] Presently: [0, 1, 2, 3, 4]
+
+offset: 24
+field: Alongship offset
+length: 2
+format: SHORT
+content: Distance between the position sensor and the attitude sensor
+        in the fore and aft direction (X). Positive values are on the
+        foreward side of the reference point of the attitude sensor.
+unit: 0.01 m
+range: [-327.68 , 327.67 m]
+
+offset: 26
+field: Athwartship offset
+length: 2
+format: SHORT
+content: Distance between the position sensor and the attitude sensor
+        in the starboard and port direction (Y). Positive values are on
+        the starboard side of the reference point of the attitude
+        sensor.
+unit: 0.01 m
+range: [-327.68 , 327.67 m]
+
+offset: 28
+field: Vertical offset
+length: 2
+format: SHORT
+content: Distance between the sea surface and the attitude sensor in
+        the vertical direction (Z). Positive values are below the
+        surface.
+unit: 0.01 m
+range: [-327.68 , 327.67 m]
+
+offset: 30
+field: Space
+length: 2
+format: USHORT
+content: Space to allow the next field to be aligned on an address that
+        is a multiple of 4.
+unit: unitless
+range: 0
+
+offset: 32
+field: Remarks
+length: 30
+format: CHAR
+content: Character string comment, up to 30 characters. This field
+        could be used to store the sensor type and serial number.
+unit: ASCII char.
+range: 30 characters
+
+offset: 62
+field: Space
+length: 2
+format: USHORT
+content: Space to allow the next field to be aligned on an address that
+        is a multiple of 4.
+unit: unitless
+range: 0
+
+offset: 64
+field: Tuple attribute
+length: 4
+format: LONG
+content: Attribute of the tuple according to Annex 3. 0 = original 1 =
+        edited 2 = temporary 3 = temporary + edited 4 = patched 5 =
+        patched + edited ...
+unit: unitless
+range: [-2147483648 , 2147483647]
+
+offset: 68
+field: Backlink
+length: 4
+format: ULONG
+content: Tuple size: 72 bytes
+unit: byte
+range: 72
+
+header: Table 5. Biosonics Model 102 Echosounder tuple (100).
+offset: 0
+field: Tuple size
+length: 4
+format: ULONG
+content: Tuple data size: 62 bytes
+unit: byte
+range: 62
+
+offset: 4
+field: Tuple type
+length: 2
+format: USHORT
+content: Tuple type code: 100. This is the tuple type code for the
+        Biosonics Model 102 echosounder. (Tuples 100 , 199 are reserved
+        for Biosonics echosounders).
+unit: unitless
+range: 100
+
+offset: 6
+field: Number of software channels
+length: 2
+format: USHORT
+content: Number of software channels associated with this echosounder.
+unit: unitless
+range: [1 , 65535]
+
+offset: 8
+field: Echosounder document identifier
+length: 4
+format: ULONG
+content: Unique identification number for the echosounder document
+        (i.e. the group of channels). The channels are tied to the
+        echosounder by the echosounder document identifier, which is
+        repeated in the channel tuples.
+unit: unitless
+range: [0 , 4294967295]
+
+offset: 12
+field: Sound speed
+length: 2
+format: USHORT
+content: Speed of sound. Note: Sound speed and sound speed profiles
+        could also be computed from environmental tuples. 0.0 = profile
+        used
+unit: 0.1 m/s
+range: [0 , 6553.5 m/s ] In water: [1450.0 , 1550.0 m/s ]
+
+offset: 14
+field: Ping interval
+length: 2
+format: USHORT
+content: Interval between 2 pings. In the multifrequency mode of the
+        Biosonics 102, the acoustic frequency is alternating every
+        ping.
+unit: 0.01 s
+range: [0 , 655.35 s] i.e.: [up to 10.92 min]
+
+offset: 16
+field: Transmitter attenuation setting
+length: 2
+format: SHORT
+content: The attenuation factor of the transmitter corresponding to the
+        echosounder setting. This setting corresponds to a given source
+        level recorded in the source level field of the channel tuple.
+unit: 0.1 dB
+range: [-3276.8 , 3276.7 dB] Biosonics 102 options: [-13, -10, -6, -3,
+        0 dB]
+
+offset: 18
+field: Multiplexing mode
+length: 2
+format: USHORT
+content: The operating transmitter mode of the echosounder. 0 = F1/X1
+        (frequency 1 on transducer 1) 1 = F2/X2 (frequency 2 on
+        transducer 2) 2 = Ext. (transmitter and transducer controlled
+        externally) 3 = F1/F2 multiplexed F1/X1 and F2/X2 4 = F1/X2
+        (frequency 1 on transducer 2) 5 = F2/X1 (frequency 2 on
+        transducer 1)
+unit: unitless
+range: [0 , 65535] Biosonics 102 options: [0, 1, 2, 3, 4, 5]
+
+offset: 20
+field: Blanking at TVG max. range
+length: 2
+format: USHORT
+content: The gain operating mode after the TVG max. range, from the
+        blank at range switch. 0 = normal mode, the gain is maintained
+        constant at the value reached at the TVG max. range. 1 = blank
+        at range mode: the gain drops to zero at the TVG max. range.
+unit: unitless
+range: [0 , 65535] Biosonics 102 options: [0, 1]
+
+offset: 22
+field: TVG max. range
+length: 2
+format: USHORT
+content: The range up to which the TVG is applied. Biosonics 102
+        echosounders normally apply TVG over the following two decade
+        ranges: 1.25 , 125 m, 2.5 , 250 m, 5 , 500 m or 10 , 999.9 m,
+        depending on hardware setting. TVG is computed from the
+        transducer face and applied from the min. range up to the max.
+        range. This max. range can, however, be limited to a smaller
+        range by a range switch, whose setting would give the value of
+        the present field. After this TVG max. range the gain is either
+        maintained constant at the value reached at this range or
+        dropped to zero if the TVG blank at range switch is on.
+unit: 0.1 m
+range: [0 , 6553.5 m] Biosonics 102 options: [0 , 999.9 m]
+
+offset: 24
+field: Blanking up to range
+length: 2
+format: USHORT
+content: Blanking range up to which the receiver output is blanked to
+        zero. It is often set to the TVG min. range of either, 1.25,
+        2.5, 5.0 or 10.0 m. A blanking range of 0 sets the TVG off.
+unit: 0.1 m
+range: [0 , 6553.5 m] Biosonics 102 options: [0 , 999.9 m]
+
+offset: 26
+field: Calibrator signal
+length: 2
+format: SHORT
+content: Calibrator signal sent to the receiver from the echosounder
+        setting: 0 = off, no calibrator signal is sent (This is the
+        usual setting when echosounding).
+unit: dB
+range: [-32768 , 32767 dB] Biosonics 102 options: [-40, -20, 0, 20 dB]
+
+offset: 28
+field: Calibrator mode
+length: 2
+format: USHORT
+content: Type of sound wave sent to the receiver: 0 = pulse, a pulse
+        repeated at the interval given by the separation field below 1
+        = constant wave
+unit: unitless
+range: [0 , 65535] Biosonics 102 options: [0, 1]
+
+offset: 30
+field: Calibrator separator
+length: 2
+format: USHORT
+content: Separation distance for the calibrator sound pulse when this
+        mode is selected (previous field).
+unit: 0.1 m
+range: [0 , 6553.5 m] Biosonics 102 options: [0 , 99.9 m]
+
+offset: 32
+field: Remarks
+length: 30
+format: CHAR
+content: Character string comment, up to 30 characters. This field
+        could be used to store the echosounder serial number.
+unit: ASCII char.
+range: 30 characters
+
+offset: 62
+field: Space
+length: 2
+format: USHORT
+content: Space to allow the next field to be aligned on an address that
+        is a multiple of 4.
+unit: unitless
+range: 0
+
+offset: 64
+field: Tuple attribute
+length: 4
+format: LONG
+content: Attribute of the tuple according to Annex 3. 0 = original 1 =
+        edited 2 = temporary 3 = temporary + edited 4 = patched 5 =
+        patched + edited ...
+unit: unitless
+range: [-2147483648 , 2147483647]
+
+offset: 68
+field: Backlink
+length: 4
+format: ULONG
+content: Tuple size: 72 bytes
+unit: byte
+range: 72
+
+header: Table 6. Simrad EK500 Echosounder tuple (200).
+offset: 0
+field: Tuple size
+length: 4
+format: ULONG
+content: Tuple data size: 70 bytes
+unit: byte
+range: 70
+
+offset: 4
+field: Tuple type
+length: 2
+format: USHORT
+content: Tuple type code: 200. This is the tuple type code for the
+        Simrad EK500. (Tuples 200 , 299 are reserved for Simrad
+        echosounders).
+unit: unitless
+range: 200
+
+offset: 6
+field: Number of software channels
+length: 2
+format: USHORT
+content: Number of software channels associated with this echosounder.
+unit: unitless
+range: [1 , 65535]
+
+offset: 8
+field: Echosounder document identifier
+length: 4
+format: ULONG
+content: Unique identification number for the echosounder document
+        (i.e. the group of channels).
+unit: unitless
+range: [0 , 4294967295]
+
+offset: 12
+field: Sound speed
+length: 2
+format: USHORT
+content: Speed of sound. Note: Sound speed and sound speed profiles
+        could also be computed from environmental tuples. 0.0 = profile
+        used
+unit: 0.1 m/s
+range: [0 , 6553.5 m/s] In water: [1450.0 m/s , 1550.0 m/s ]
+
+offset: 14
+field: Ping mode
+length: 2
+format: USHORT
+content: Ping mode: 1 = normal 2 = external (trigged from an external
+        source) 3 = synchronized
+unit: unitless
+range: [0 , 65535] EK500 options: [0, 1, 2, 3]
+
+offset: 16
+field: Ping interval
+length: 2
+format: USHORT
+content: Interval between 2 pings. 0.00 = not known or variable
+unit: 0.01 s
+range: [0 , 655.35 s] i.e.: [up to 10.92 min]
+
+offset: 18
+field: Transmit power
+length: 2
+format: USHORT
+content: Nominal output power: 0 = normal 1 = reduced (The transmit
+        power is reduced from its nominal value by 20 dB on all
+        transceiver channels).
+unit: unitless
+range: [0 , 65535] EK500 options: [0 or 1]
+
+offset: 20
+field: Noise margin
+length: 2
+format: USHORT
+content: The margin to add to the system noise to threshold out the
+        samples.
+unit: dB
+range: [0 , 65535 dB] EK500 options: [ 0 , 40 dB]
+
+offset: 22
+field: Sample range
+length: 2
+format: USHORT
+content: Range for the sample angle and sample power telegrams.
+unit: m
+range: [0 m , 65535 m] EK500 options: [0 , 10000]
+
+offset: 24
+field: Super layer: Type
+length: 2
+format: USHORT
+content: Super layer type: 0 = off 1 = surface 2 = bottom 3 = pelagic
+        (This layer type must be chosen to get values from the Ethernet
+        port when the bottom is not found [e.g. for passive acoustics])
+unit: unitless
+range: [0 , 65535] EK500 options: [0, 1, 2, 3]
+
+offset: 26
+field: Super layer: Number
+length: 2
+format: USHORT
+content: Layer number for the super layer.
+unit: unitless
+range: [0 , 65535] EK500 options: [1, 10]
+
+offset: 28
+field: Super layer: Range
+length: 2
+format: USHORT
+content: Super layer thickness.
+unit: 0.1 m
+range: [0 , 6553.5 m] EK500 options: [0 , 1000.0 m]
+
+offset: 30
+field: Super layer: Start
+length: 4
+format: LONG
+content: Beginning depth of super layer relative to the transducer
+        depth or the detected bottom. Negative values indicate starting
+        depth below the reference depth.
+unit: 0.1 m
+range: [-214748364.8 , 214748364.7 m] EK500 options: [-10.0 , 9999.9 m]
+
+offset: 34
+field: Super layer: Margin
+length: 2
+format: USHORT
+content: Margin relative to the transducer depth or the bottom, to stop
+        the super layer.
+unit: 0.1 m
+range: [0 , 6553.5 m] EK500 options: [0 , 10.0 m]
+
+offset: 36
+field: Super layer: Sv threshold
+length: 2
+format: SHORT
+content: Threshold to accept Sv samples.
+unit: dB
+range: [-32768 , 32767 dB] EK500 options: [-100 , 0 dB]
+
+offset: 38
+field: EK500 version
+length: 4
+format: ULONG
+content: EK500 version number.
+unit: unitless
+range: [0 , 42949672.95] Present range: [0 , 5.39]
+
+offset: 42
+field: Remarks
+length: 30
+format: CHAR
+content: Character string comment, up to 30 characters. This field
+        could be used to store the echosounder serial number.
+unit: ASCII char.
+range: 30 characters
+
+offset: 72
+field: Tuple attribute
+length: 4
+format: LONG
+content: Attribute of the tuple according to Annex 3: 0 = original 1 =
+        edited 2 = temporary 3 = temporary + edited 4 = patched 5 =
+        patched + edited ...
+unit: unitless
+range: [-2147483648 , 2147483647]
+
+offset: 76
+field: Backlink
+length: 4
+format: ULONG
+content: Tuple size: 80 bytes
+unit: byte
+range: 80
+
+header: Table 7. Simrad EK 60 Echosounder tuple (210).
+offset: 0
+field: Tuple size
+length: 4
+format: ULONG
+content: Tuple data size: 58 bytes
+unit: byte
+range: 58
+
+offset: 4
+field: Tuple type
+length: 2
+format: USHORT
+content: Tuple type code: 210. Tuple type code for the Simrad EK 60.
+unit: unitless
+range: 210
+
+offset: 6
+field: Number of software channels
+length: 2
+format: USHORT
+content: Number of software channels associated with this sounder.
+unit: unitless
+range: [1 , 65535]
+
+offset: 8
+field: Echo sounder document identifier
+length: 4
+format: ULONG
+content: Unique identification number for the echosounder document
+        (i.e. the group of channels).
+unit: unitless
+range: [0 , 4294967295]
+
+offset: 12
+field: Sound speed
+length: 2
+format: USHORT
+content: Mean speed of sound. 0.0 = Profile used
+unit: 0.1 m/s
+range: [0 , 6553.5 m/s] EK 60 range: [1400.0 , 1700.0 m/s]
+
+offset: 14
+field: Ping mode
+length: 2
+format: USHORT
+content: Ping mode. 1 = normal 2 = external
+unit: unitless
+range: [0 , 65535]
+
+offset: 16
+field: Ping interval
+length: 2
+format: USHORT
+content: Interval between 2 pings. 0.00 = not known or variable
+unit: 0.01 s
+range: [0 , 655.35 s]
+
+offset: 18
+field: Space
+length: 2
+format: USHORT
+content: Space to allow the next field to be aligned on an address that
+        is a multiple of 4.
+unit: unitless
+
+offset: 20
+field: Remarks
+length: 40
+format: CHAR
+content: Software version (example: “1.2.34.5678”)
+unit: ASCII
+range: 40 characters
+
+offset: 60
+field: Tuple attribute
+length: 4
+format: LONG
+content: Attribute of the tuple according to Annex 3. 0 = original 1 =
+        edited 2 = temporary 3 = temporary + edited 4 = patched 5 =
+        patched + edited ...
+unit: unitless
+range: [-2147483648 , 2147483647]
+
+offset: 64
+field: Backlink
+length: 4
+format: ULONG
+content: Tuple size: 68 bytes
+unit: byte
+range: 68
+
+header: Table 8. Generic Echosounder tuple (901) used with echosounders
+        for which no Echosounder tuple has been described in the HAC
+        standard data format.
+offset: 0
+field: Tuple size
+length: 4
+format: ULONG
+content: Tuple data size: 118 bytes
+unit: byte
+range: 118
+
+offset: 4
+field: Tuple type
+length: 2
+format: USHORT
+content: Tuple type code: 901. This is the tuple type code for the
+        generic echosounder.
+unit: unitless
+range: 901
+
+offset: 6
+field: Number of software channels
+length: 2
+format: USHORT
+content: Number of software channels associated with this echosounder.
+unit: unitless
+range: [1 , 65535]
+
+offset: 8
+field: Echosounder document identifier
+length: 4
+format: ULONG
+content: Unique identification number for the echosounder document
+        (i.e. the group of channels). The channels are tied to the
+        echosounder by the echosounder document identifier, which is
+        repeated in the channel tuples.
+unit: unitless
+range: [0 , 4294967295 ]
+
+offset: 12
+field: Sound speed
+length: 2
+format: USHORT
+content: Mean sound speed used in the sounder. Mean sound speed should
+        be calculated over the range of the sample data. 0.0 = profile
+        used
+unit: 0.1 m/s
+range: [0 , 6553.5 m/s] In water: [1450.0,1550.0 m/s]
+
+offset: 14
+field: Ping interval
+length: 2
+format: USHORT
+content: Interval between 2 pings. If a multiplexing echosounder
+        triggers the various transducers in sequence, the recorded ping
+        interval is the master trigger interval. 0 = not known or
+        variable (the interval can be obtained from the time difference
+        between pings)
+unit: 0.01 s
+range: [0 , 655.35 s] i.e.: [up to 10.92 min]
+
+offset: 16
+field: Trigger mode
+length: 2
+format: USHORT
+content: The source characteristics of the trigger. 1 = normal 2 =
+        external 3 = synchronized
+unit: unitless
+range: [0 , 65535] Presently: [0, 1, 2, 3]
+
+offset: 18
+field: Space
+length: 2
+format: USHORT
+content: Space to allow the next field to be aligned on an address that
+        is a multiple of 4.
+unit: unitless
+range: 0
+
+offset: 20
+field: Remarks
+length: 100
+format: CHAR
+content: Character string comment. This field could be used to store
+        the echosounder brand, its properties and the serial number.
+unit: ASCII char.
+range: 100 characters
+
+offset: 120
+field: Tuple attribute
+length: 4
+format: LONG
+content: Attribute of the tuple according to Annex 3. 0 = original 1 =
+        edited 2 = temporary 3 = temporary + edited 4 = patched 5 =
+        patched + edited ...
+unit: unitless
+range: [-2147483648 , 2147483647]
+
+offset: 124
+field: Backlink
+length: 4
+format: ULONG
+content: Tuple size: 128 bytes
+unit: byte
+range: 128
+
+header: Table 9. Biosonics Model 102 Channel tuple (1000).
+offset: 0
+field: Tuple size
+length: 4
+format: ULONG
+content: Tuple data size: 98 bytes.
+unit: byte
+range: 98
+
+offset: 4
+field: Tuple type
+length: 2
+format: USHORT
+content: Tuple type code: 1000. This is the tuple type code for the
+        Biosonics 102.
+unit: unitless
+range: 1000
+
+offset: 6
+field: Software channel identifier
+length: 2
+format: USHORT
+content: Unique identifier for this software data channel This
+        identifier must be unique for the whole file in order to
+        associate the pings to their proper parent channel. Note: This
+        is not the hardware channel number.
+unit: unitless
+range: [0 , 65535]
+
+offset: 8
+field: Echosounder document identifier
+length: 4
+format: ULONG
+content: Identification number for the parent echosounder document
+        (i.e. the group of channels) to which this data channel
+        belongs. It is the echosounder document identifier field of the
+        echosounder tuple.
+unit: unitless
+range: [0 , 4294967295] 
+
+offset: 12
+field: Sampling rate
+length: 4
+format: ULONG
+content: Digitization rate for this channel.
+unit: 1/s
+range: [0 , 4294967295 sample 1/s]
+
+offset: 16
+field: Type of data sample
+length: 2
+format: USHORT
+content: Type of data sample: 0 = volts 1 = Sv (Scattering volume in
+        dB) 2 = TS (Target strength of single targets in dB) 3 =
+        Offaxis mechanical angles of single targets Others to be
+        defined.
+unit: unitless
+range: [0 , 65535] Biosonics 102 options: [0, 1, 2, 3]
+
+offset: 18
+field: Time varied gain mode
+length: 2
+format: USHORT
+content: Time-varied gain (TVG) applied for this channel: 0 = 20 log R
+        TVG 1 = 40 log R TVG Note: This TVG is applied from a min.
+        range up to the TVG max. range field of the echosounder tuple.
+        When this TVG max. range is null or smaller than the blanking
+        up to range, or the blanking up to range is set to zero, no TVG
+        is applied. See pertinent fields in Biosonics Model 102
+        Echosounder tuple.
+unit: unitless
+range: [0 , 65535] Biosonics 102 options: [0, 1]
+
+offset: 20
+field: Transceiver channel number
+length: 2
+format: USHORT
+content: Hardware channel number from which the data are coming. It is
+        convenient to use the same channel numbers as from the
+        echosounder. The Biosonics 102 has the narrow-beam signal on
+        channel 1, the wide-beam signal on channel 2, and the
+        simultaneous 20 log R narrow-beam on channel 3. When the 40 log
+        R TVG switch is on, channels 1 and 2 are the 40 log R signals.
+        Note: This field is not the software channel number.
+unit: unitless
+range: [0 , 65535] CH1 DSP-A/D options: [1, 2, 3]
+
+offset: 22
+field: Space
+length: 2
+format: USHORT
+content: Space to allow the next field to be aligned on an address that
+        is a multiple of 4.
+unit: unitless
+range: 0
+
+offset: 24
+field: Acoustic frequency
+length: 4
+format: ULONG
+content: Acoustic frequency.
+unit: Hz
+range: [0 , 4294967295 Hz] Fisheries acoustics range: [100 , 1000000
+        Hz]
+
+offset: 28
+field: Installation depth of transducer
+length: 4
+format: ULONG
+content: Installation depth of transducer relative to the sea surface.
+unit: 0.01 m
+range: [0 , 42949672.95 m] Working range: [0 , 999.99 m]
+
+offset: 32
+field: Alongship angle offset of the transducer face
+length: 2
+format: SHORT
+content: Mechanical offset angle of the transducer face relative to the
+        horizontal in the alongship plane of the attitude sensor
+        coordinate system (XY). Positive angles indicate the foreward
+        side is above the horizontal.
+unit: 0.1 deg
+range: [-3276.8 , 3276.7 deg] Working range: [-360.0 , 360.0 deg]
+
+offset: 34
+field: Athwartship angle offset of the transducer face
+length: 2
+format: SHORT
+content: Mechanical offset angle of the transducer face relative to the
+        horizontal in the athwartship plane of the attitude sensor
+        coordinate system (YZ). Positive angles indicate the port side
+        is above the horizontal.
+unit: 0.1 deg
+range: [-3276.8 , 3276.7 deg] Working range: [-360.0 , 360.0 deg]
+
+offset: 36
+field: Alongship angle offset of the main axis of the acoustic beam
+length: 2
+format: SHORT
+content: Mechanical offset angle of the main axis of the acoustic beam
+        in the alongship plane relative to the perpendicular to the
+        transducer face (XY). Zero (0) is perpendicular to the
+        transducer face. Positive angles indicate the down-propagating
+        sonar beam is oriented foreward.
+unit: 0.1 deg
+range: [-3276.8 , 3276.7 deg] Working range: [-20.0 , 20.0 deg]
+
+offset: 38
+field: Athwartship angle offset of the main axis of the acoustic beam
+length: 2
+format: SHORT
+content: Mechanical offset angle of the main axis of the acoustic beam
+        in the athwartship plane relative to the perpendicular to the
+        transducer face (YZ). Zero (0) is perpendicular to the
+        transducer face. Positive angles indicate the down-propagating
+        sonar beam is oriented to starboard.
+unit: 0.1 deg
+range: [-3276.8 , 3276.7 deg] Working range: [-20.0 , 20.0 deg]
+
+offset: 40
+field: Absorption of sound
+length: 2
+format: USHORT
+content: Absorption of sound (α) in the propagation medium.
+unit: 0.01 dB/km
+range: [0 , 655.35 dB/km] Practical range: [0 , 300.00 dB/km]
+
+offset: 42
+field: Pulse length
+length: 2
+format: USHORT
+content: Duration of the transmitted pulse.
+unit: 0.1 ms
+range: [0 , 6553.5 ms] Biosonics 102 range: [0.1 , 9.9 ms]
+
+offset: 44
+field: Bandwidth
+length: 2
+format: USHORT
+content: Transceiver specific bandwidth.
+unit: 0.01 kHz
+range: [0 , 655.35 kHz] Biosonics 102 options: [1.25, 2.50, 5.00, 10.00
+        kHz]
+
+offset: 46
+field: Calibration source level
+length: 2
+format: USHORT
+content: Source level (SL). Note: The attenuation factor of the
+        transmitter, given in the echosounder tuple, is added to this
+        field to get the effective source level.
+unit: 0.01 dB 
+range: [0 , 655.35 dB] Practical range: [150.00 , 250.00 dB]
+
+offset: 48
+field: 3 dB beam width of the transducer beam
+length: 2
+format: USHORT
+content: Half power (3 dB) beam width of the transducer beam (narrow or
+        wide).
+unit: 0.1 deg
+range: [0 , 6553.5 deg] Practical range: [1.0 , 50.0 deg]
+
+offset: 50
+field: Beam pattern
+length: 2
+format: USHORT
+content: Beam pattern factor (expected value of b2) for this transducer
+        beam (narrow or wide). (unitless). N. B. The directivity index
+        (DI) in dB is 10 log the present field and 10 log ψ = -DI +
+        7.7 dB.
+unit: 0.000001
+range: [0 , 0.065535] Practical range: [0.000100 , 0.009000]
+
+offset: 52
+field: Wide-beam drop-off
+length: 2
+format: USHORT
+content: The wide-beam drop-off (d) is the factor relating the
+        narrow-beam directivity in dB (Bn) to the difference between
+        the narrow-beam and wide-beam (Bw) directivities in dB: Bn = d
+        (Bn-Bw). It describes the decrease in wide-beam directivity
+        over the angular range of the narrow beam.
+unit: 0.0001
+range: [0 , 6.5535] Practical range: [1.0000 , 1.5000]
+
+offset: 54
+field: Calibration receiving sensitivity
+length: 2
+format: SHORT
+content: Calibration receiving sensitivity of the transducer for this
+        TVG-amplified data channel. Note: The receiver gain is included
+        in the value of this field, which is the VR of the sonar
+        equation.
+unit: 0.01 dBv /µPa @ 1 m
+range: [-327.68 , 327.67 dB] Practical range: [-200.00 , -100.00 dB]
+
+offset: 56
+field: Receiver gain
+length: 2
+format: SHORT
+content: Receiver gain of the echosounder. Note: The receiver gain is
+        included in the receiving sensitivity value to get the VR of
+        the sonar equation.
+unit: 0.01 dB
+range: [-327.68 , 327.67 dB] Biosonics 102 options: [-18, -12, -6, 0,
+        6, 12, 18, 24]
+
+offset: 58
+field: Bottom detection: minimum level
+length: 2
+format: SHORT
+content: Level for the bottom detection in the units selected in the
+        above field “Type of sample data [0, 1 or 2]”.
+unit: 0.001 volts Sv and TS: 0.01 dB
+range: For volts: [-32.768 , 32.767 volts] Practical range: [2.500 ,
+        15.000 volts]; For Sv and TS: [-327.68 , 327.67 dB] Practical
+        range: [-150.00 , 0.00 dB]
+
+offset: 60
+field: Bottom window min.
+length: 4
+format: ULONG
+content: Minimum depth for bottom detection window.
+unit: 0.01 m
+range: [0 , 42949672.95 m] Working range: [0 , 999.99 m]
+
+offset: 64
+field: Bottom window max.
+length: 4
+format: ULONG
+content: Maximum depth for bottom detection window in m. For the CH1
+        software this is also the maximum depth up to which data will
+        be acquired.
+unit: 0.01 m
+range: [0 , 42949672.95 m] Working range: [0 , 999.99 m]
+
+offset: 68
+field: Remarks
+length: 30
+format: CHAR
+content: Character string comment, up to 30 characters. This field
+        could be used to store the transducer serial number.
+unit: ASCII char.
+range: 30 characters
+
+offset: 98
+field: Space
+length: 2
+format: USHORT
+content: Space to allow the next field to be aligned on an address that
+        is a multiple of 4.
+unit: unitless
+range: 0
+
+offset: 100
+field: Tuple attribute
+length: 4
+format: LONG
+content: Attribute of the tuple according to Annex 3. 0 = original 1 =
+        edited 2 = temporary 3 = temporary + edited 4 = patched 5 =
+        patched + edited ...
+unit: unitless
+range: [-2147483648 , 2147483647]
+
+offset: 104
+field: Backlink
+length: 4
+format: ULONG
+content: Tuple size: 108 bytes.
+unit: byte
+range: 108
+
+header: Table 10. Biosonics Model 102 Channel tuple (1001).
+offset: 0
+field: Tuple size
+length: 4
+format: ULONG
+content: Tuple data size: 98 bytes.
+unit: byte
+range: 98
+
+offset: 4
+field: Tuple type
+length: 2
+format: USHORT
+content: Tuple type code: 1001. This is the tuple type code for the
+        Biosonics 102.
+unit: unitless
+range: 1001
+
+offset: 6
+field: Software channel identifier
+length: 2
+format: USHORT
+content: Unique identifier for this software data channel. This
+        identifier must be unique for the whole file in order to
+        associate the pings to their proper parent channel. Note: This
+        is not the hardware channel number.
+unit: unitless
+range: [0 , 65535]
+
+offset: 8
+field: Echosounder document identifier
+length: 4
+format: ULONG
+content: Identification number for the parent echosounder document
+        (i.e. the group of channels) to which this data channel
+        belongs. It is the echosounder document identifier field of the
+        echosounder tuple.
+unit: unitless
+range: [0 , 4294967295]
+
+offset: 12
+field: Sampling rate
+length: 4
+format: ULONG
+content: Digitization rate for this channel.
+unit: 1/s
+range: [0 , 4294967295 1/s]
+
+offset: 16
+field: Type of data sample
+length: 2
+format: USHORT
+content: Type of data sample: 0 = volts 1 = Sv (Scattering volume in
+        dB) 2 = TS (Target strength of single targets in dB) 3 =
+        Off-axis mechanical angles of single targets
+unit: unitless
+range: [0 , 65535] Biosonics 102 options: [0, 1, 2, 3]
+
+offset: 18
+field: Time varied gain multiplier
+length: 2
+format: USHORT
+content: Time-varied gain (TVG) multiplier applied for this channel
+        (e.g. a value of 28.00 = 28.00(log R) + 2αR). Note: This TVG
+        is applied from the TVG minimum range up to the TVG maximum
+        range field of the echosounder tuple. When the TVG maximum
+        range is null or smaller than the blanking up to range, or the
+        blanking up to range is set to 0, no TVG is applied. See
+        pertinent fields in “Echosounder tuple for the Biosonics
+        Model 102”. Other components in the TVG (e.g. α) are dealt
+        with elsewhere. 0.00 = no TVG applied
+unit: unitless 0.01
+range: [0 , 655.35] Biosonics 102 options: [20.00, 40.00]
+
+offset: 20
+field: Transceiver channel number
+length: 2
+format: USHORT
+content: Hardware channel number from which the data are coming. It is
+        convenient to use the same channel numbers as from the
+        echosounder. The Biosonics 102 has the narrow-beam signal on
+        channel 1, the wide-beam signal on channel 2, and the
+        simultaneous 20 log R narrow-beam on channel 3. When the 40 log
+        R TVG switch is on, channels 1 and 2 are the 40 log R signals.
+        Note: This field is not the software channel number.
+unit: unitless
+range: [0 , 65535] CH1 DSP-A/D options: [1, 2, 3]
+
+offset: 22
+field: Platform identifier
+length: 2
+format: USHORT
+content: Unique identifier of the installation platform of the
+        transducer.
+unit: unitless
+range: 0 , 65535
+
+offset: 24
+field: Acoustic frequency
+length: 4
+format: ULONG
+content: Acoustic frequency.
+unit: Hz
+range: [0 , 4294967295 Hz] Fisheries acoustics range: [100 , 1000000
+        Hz]
+
+offset: 28
+field: Installation depth of transducer
+length: 4
+format: ULONG
+content: Installation depth of transducer relative to the sea surface.
+        42949672.94 = dynamic platform
+unit: 0.01 m
+range: [0 , 42949672.95 m] Working range: [0 , 9999.99 m]
+
+offset: 32
+field: Alongship angle offset of the transducer face
+length: 2
+format: SHORT
+content: Mechanical offset angle of the transducer face relative to the
+        horizontal in the alongship plane of the attitude sensor
+        coordinate system (XY). Positive angles indicate the foreward
+        side is above the horizontal.
+unit: 0.1 deg
+range: [-3276.8 , 3276.7 deg] Working range: [-360.0 , 360.0 deg]
+
+offset: 34
+field: Athwartship angle offset of the transducer face
+length: 2
+format: SHORT
+content: Mechanical offset angle of the transducer face relative to the
+        horizontal in the athwartship plane of the attitude sensor
+        coordinate system (YZ). Positive angles indicate the port side
+        is above the horizontal.
+unit: 0.1 deg
+range: [-3276.8 , 3276.7 deg] Working range: [-360.0 , 360.0 deg]
+
+offset: 36
+field: Alongship angle offset of the main axis of the acoustic beam
+length: 2
+format: SHORT
+content: Mechanical offset angle of the main axis of the acoustic beam
+        in the alongship plane relative to the perpendicular to the
+        transducer face (XY). Zero (0) is perpendicular to the
+        transducer face. Positive angles indicate the down-propagating
+        sonar beam is oriented foreward.
+unit: 0.1 deg
+range: [-3276.8 , 3276.7 deg] Working range: [-20.0 , 20.0 deg]
+
+offset: 38
+field: Athwartship angle offset of the main axis of the acoustic beam
+length: 2
+format: SHORT
+content: Mechanical offset angle of the main axis of the acoustic beam
+        in the athwartship plane relative to the perpendicular to the
+        transducer face (YZ). Zero (0) is perpendicular to the
+        transducer face. Positive angles indicate the down-propagating
+        sonar beam is oriented to starboard.
+unit: 0.1 deg
+range: [-3276.8 , 3276.7 deg] Working range: [-20.0 , 20.0 deg]
+
+offset: 40
+field: Absorption of sound
+length: 2
+format: USHORT
+content: Absorption of sound (α) in the propagation medium used for
+        TVG compensation.
+unit: 0.01 dB/km
+range: [0 , 655.35 dB/km] Practical range: [0 , 300.00 dB/km]
+
+offset: 42
+field: Pulse duration
+length: 2
+format: USHORT
+content: Duration of the transmitted pulse.
+unit: 0.1 ms
+range: [0 , 6553.5 ms] Biosonics 102 range: [0.1 , 9.9 ms]
+
+offset: 44
+field: Bandwidth
+length: 2
+format: USHORT
+content: Transceiver specific bandwidth.
+unit: 0.01 kHz
+range: [0 , 655.35 kHz] Biosonics 102 options: [1.25, 2.50, 5.00, 10.00
+        kHz]
+
+offset: 46
+field: Calibration source level
+length: 2
+format: USHORT
+content: Source level (SL). Note: The attenuation factor of the
+        transmitter, given in the echosounder tuple, is added to this
+        field to get the effective source level.
+unit: 0.01 dB µPa @ 1 m
+range: [0 , 655.35 dB] Practical range: [150.00 , 250.00 dB]
+
+offset: 48
+field: 3 dB beam width of the transducer beam
+length: 2
+format: USHORT
+content: Half power (3 dB) beam width of the transducer beam (narrow or
+        wide).
+unit: 0.1 deg
+range: [0 , 6553.5 deg] Practical range: [1.0 , 50.0 deg]
+
+offset: 50
+field: Beam pattern factor
+length: 2
+format: USHORT
+content: Beam pattern factor (expected value of b2) for this transducer
+        beam (see MacLennan and Simmonds, 1992, Section 2.3 for a
+        definition of b). Note: The directivity index (DI) in dB is -10
+        log this field for a circular beam. For an asymmetric beam, DI
+        = 10 log (2.5/ (sin(ß /2) * sin(ß /2))), where ß and ß are
+        the 1 2 1 2 longitudinal and transversal beam widths (radians),
+        respectively.
+unit: unitless
+range: [0 , 0.065535] Practical range: [0.000100 , 0.009000]
+
+offset: 52
+field: Transducer shape
+length: 2
+format: USHORT
+content: 0 = other 1 = oval (which includes circular transducer) 2 =
+        rectangular 3 = cross array 4 = ring
+unit: unitless
+range: [0 , 65535] Presently: [0 , 4]
+
+offset: 54
+field: Wide-beam drop-off
+length: 2
+format: USHORT
+content: The wide-beam drop-off (d) is the factor relating the
+        narrow-beam directivity in dB (Bn) to the difference between
+        the narrow-beam and wide-beam (Bw) directivities in dB: Bn = d
+        (Bn-Bw). It describes the decrease in wide-beam directivity
+        over the angular range of the narrow beam.
+unit: 0.0001
+range: [0 , 6.5535] Practical range: [1.0000 , 1.5000]
+
+offset: 56
+field: Calibration receiving sensitivity
+length: 2
+format: SHORT
+content: Calibration receiving sensitivity of the transducer for this
+        TVG-amplified data channel. Note: The receiver gain is included
+        in the value of this field, which is the VR of the sonar
+        equation.
+unit: 0.01 dBv /µPa @ 1 m
+range: [-327.68 , 327.67 dB] Practical range: [-200.00 , -100.00 dB]
+
+offset: 58
+field: Receiver gain
+length: 2
+format: SHORT
+content: Receiver gain of the echosounder. Note: The receiver gain is
+        included in the receiving sensitivity value to get the VR of
+        the sonar equation.
+unit: 0.01 dB
+range: [-327.68 , 327.67 dB] Biosonics 102 options: [-18, -12, -6, 0,
+        6, 12, 18, 24]
+
+offset: 60
+field: Bottom window minimum
+length: 4
+format: ULONG
+content: Minimum depth for bottom detection window.
+unit: 0.01 m
+range: [0 , 42949672.95 m] Working range: [0 , 999.99 m]
+
+offset: 64
+field: Bottom window maximum
+length: 4
+format: ULONG
+content: Maximum depth for bottom detection window in m. For the CH1
+        software this is also the maximum depth up to which data will
+        be acquired.
+unit: 0.01 m
+range: [0 , 42949672.95 m] Working range: [0 , 999.99 m]
+
+offset: 68
+field: Bottom detection: minimum level
+length: 2
+format: SHORT
+content: Level for the bottom detection in the units selected in the
+        above field “Type of sample data [0, 1 or 2]”. For volts:
+        -32.768 = not available For Sv or TS: -327.68 = not available
+unit: 0.001 volts Sv or TS: 0.01 dB
+range: For volts: [-32.768 , 32.767 volts] Practical range: [2.500 ,
+        15.000 volts]; For Sv and TS: [-327.68 , 327.67 dB] Practical
+        range: [-150.00 , 0.00 dB]
+
+offset: 70
+field: Remarks
+length: 30
+format: CHAR
+content: Character string comment, up to 30 characters. This field
+        could be used to store the transducer serial number.
+unit: ASCII char.
+range: 30 characters
+
+offset: 100
+field: Tuple attribute
+length: 4
+format: LONG
+content: Attribute of the tuple according to Annex 3. 0 = original 1 =
+        edited 2 = temporary 3 = temporary + edited 4 = patched 5 =
+        patched + edited ...
+unit: unitless
+range: [-2147483648 , 2147483647]
+
+offset: 104
+field: Backlink
+length: 4
+format: ULONG
+content: Tuple size: 108 bytes.
+unit: byte
+range: 108
+
+header: Table 11. Simrad EK500 Channel tuple (2000).
+offset: 4
+field: Tuple type
+length: 2
+format: USHORT
+content: Tuple type code: 2000. This is the tuple type code for the
+        Simard EK 500- raw data.
+unit: Unitless
+range: 2000
+
+offset: 6
+field: Software channel identified
+length: 2
+format: USHORT
+content: Unique identifier for this software data channel. This
+        identifier must be unique for the whole file in order to
+        associate the pings to their proper parent channel. Note: This
+        is not the hardware channel number.
+unit: Unitless
+range: [0,75535]
+
+offset: 8
+field: Echosounder document identifier
+length: 4
+format: ULONG
+content: Identification number for the parent echosounder document
+        (i.e. the group of channels) to which this data channel
+        belongs. It is the echosounder document identifier field of the
+        echosounder tuple.
+unit: Unitless
+range: [0,4294967295]
+
+offset: 12
+field: Sampling rate
+length: 4
+format: ULONG
+content: Digitization rate for this channel. Fixed according to
+        acoustic frequency.
+unit: 1/s
+range: [0,4294967295 1/s]
+
+offset: 16
+field: Type of data sample
+length: 2
+format: USHORT
+content: Type of data sample: 0= electric phase angle from the
+        split-beam analysis 1= power (raw Sv before the TVG) 2= Sv
+        (Scattering volume) 3= TX (Target strength)
+unit: Unitless
+range: [0,65535] Presently: [0, 1, 2, 3]
+
+offset: 18
+field: Transceiver channel number
+length: 2
+format: USHORT
+content: EK500 transceiver (1, 2 or 3).
+unit: Unitless
+range: [0,65535] Presently: [1, 2, 3]
+
+offset: 20
+field: Acoustic frequency
+length: 4
+format: ULONG
+content: Acoustic frequency.
+unit: Hz
+range: [0 , 4294967295 Hz] Fisheries acoustics range: [100 , 1000000
+        Hz]
+
+offset: 24
+field: Installation depth of transducer
+length: 4
+format: ULONG
+content: Installation depth of transducer relative to the sea surface.
+unit: 0.01 m
+range: [0 , 42949672.95 m] EK500 range: [0 , 999.99 m]
+
+offset: 28
+field: Alongship angle offset of the transducer face
+length: 2
+format: SHORT
+content: Mechanical offset angle of the transducer face relative to the
+        horizontal in the alongship plane of the attitude sensor
+        coordinate system (XY). Positive angles indicate the foreward
+        side is above the horizontal.
+unit: 0.1 deg
+range: [-360.0 , 360.0 deg]
+
+offset: 30
+field: Athwartship angle offset of the transducer face
+length: 2
+format: SHORT
+content: Mechanical offset angle of the transducer face relative to the
+        horizontal in the athwartship plane of the attitude sensor
+        coordinate system (YZ). Positive angles indicate the port side
+        is above the horizontal.
+unit: 0.1 deg
+range: [-3276.8 , 3276.7 deg] Working range: [-360.0 , 360.0 deg]
+
+offset: 32
+field: Alongship angle offset of the main axis of the acoustic beam
+length: 2
+format: SHORT
+content: Mechanical offset angle of the main axis of the acoustic beam
+        in the alongship plane relative to the perpendicular to the
+        transducer face (XY). Zero (0) is perpendicular to the
+        transducer face. Positive angles indicate the down-propagating
+        sonar beam is oriented foreward.
+unit: 0.1 deg
+range: [-3276.8 , 3276.7 deg] EK500 range: [-20.0 , 20.0 deg]
+
+offset: 34
+field: Athwartship angle offset of the main axis of the acoustic beam
+length: 2
+format: SHORT
+content: Mechanical offset angle of the main axis of the acoustic beam
+        in the athwartship plane relative to the perpendicular to the
+        transducer face (YZ). Zero (0) is perpendicular to the
+        transducer face. Positive angles indicate the down-propagating
+        sonar beam is oriented to starboard.
+unit: 0.1 deg
+range: [-3276.8 , 3276.7 deg] EK500 range: [-20.0 , 20.0 deg]
+
+offset: 36
+field: Absorption of sound
+length: 2
+format: USHORT
+content: Absorption of sound (α) in the propagation medium.
+unit: 0.01 dB/km
+range: [0 , 655.35 dB km-1] Practical range: [0 , 300.00 dB km-1]
+
+offset: 38
+field: Pulse length mode
+length: 2
+format: USHORT
+content: This field indicates the selected transceiver specific
+        duration of the transmitted pulse: 0 = short 1 = medium 2 =
+        long
+unit: unitless
+range: [0 , 65535] EK500 options: [0, 1, 2]
+
+offset: 40
+field: Bandwidth mode
+length: 2
+format: USHORT
+content: This field indicates the selected transceiver specific
+        bandwidth: 0 = narrow 1 = wide Note: The mode “auto” is not
+        coded because the choice (narrow or wide) made by the EK500 is
+        indicated in the EK500 telegram that the acquisition program
+        reads.
+unit: unitless
+range: [0 , 65535] EK500 options: [0, 1]
+
+offset: 42
+field: Max. power
+length: 2
+format: USHORT
+content: Transmit power referred to the transducer terminals.
+unit: watt
+range: [0 , 65535] EK500 range: [1 watt , 10000 watt]
+
+offset: 44
+field: Alongship angle sensitivity
+length: 2
+format: USHORT
+content: The electrical phase angle in degrees for one mechanical phase
+        angle in degrees in the fore-and-aft direction, specific to the
+        split-beam transducer. A value of 1.0 indicates that the
+        electrical angles are in units of mechanical angles.
+unit: unitless
+range: [0 , 6553.5] EK500 range: [0 , 100.0]
+
+offset: 46
+field: Athwartship angle sensitivity
+length: 2
+format: USHORT
+content: The electrical phase angle in degrees for one mechanical phase
+        angle in degrees in the starboard-and-port direction, specific
+        to the split-beam transducer. A value of 1.0 indicates that the
+        electrical angles are in units of mechanical angles.
+unit: unitless
+range: [0 , 6553.5] EK500 range: [0 , 100.0]
+
+offset: 48
+field: Alongship 3 dB beam width of the transducer
+length: 2
+format: USHORT
+content: Half power (3dB) beam width of the transducer in the alongship
+        plane.
+unit: 0.1 deg
+range: [0 , 6553.5 deg] EK500 range: [1.0 , 50.0 deg]
+
+offset: 50
+field: Athwartship 3 dB beam width of the transducer
+length: 2
+format: USHORT
+content: Half power (3dB) beam width off the transducer in the
+        athwartship plane.
+unit: 0.1 deg
+range: [0 , 6553.5 deg] EK500 range: [1.0 , 50.0 deg]
+
+offset: 52
+field: Two-way beam angle
+length: 2
+format: SHORT
+content: Equivalent two-way beam opening solid angle: [=10 log ((β
+        ∗β ) / 5800)], where β is 1 2 the longitudinal beamwidth in
+        degrees and β is the transversal beam width in degrees). 2 NB:
+        Directivity index in dB: DI = 10 log (2.5/ (sin(β / 2) ∗
+        sin(β / 2))). (see EK500 1 2 user manual).
+unit: 0.01 dB
+range: [-327.68 , 327.67 dB] EK500 range: [-99.90 , 0.00 dB]
+
+offset: 54
+field: Calibration transducer gain
+length: 2
+format: USHORT
+content: Peak transducer gain used during computation of the data
+        sample corresponding to the above-selected “type of data
+        sample” (either Sv or TS) (see EK500 user manual).
+unit: 0.01 dB
+range: [0 , 655.35 dB] EK500 range: [0 , 99.90 dB]
+
+offset: 56
+field: Bottom detection: minimum level
+length: 2
+format: SHORT
+content: Volume backscattering level for the bottom detector’s back
+        search function.
+unit: 0.01 dB
+range: [-327.68 , 327.67 dB] EK500 range: [-80.00 , 0.00 dB]
+
+offset: 58
+field: Space
+length: 2
+format: USHORT
+content: Space to allow the next field to be aligned on an address that
+        is a multiple of 4.
+unit: unitless
+range: 0
+
+offset: 60
+field: Bottom window min. depth
+length: 4
+format: ULONG
+content: Minimum depth for bottom detection window.
+unit: 0.01 m
+range: [0 , 42949672.95 m] EK500 range: [0 , 10000.00 m]
+
+offset: 64
+field: Bottom window max. depth
+length: 4
+format: ULONG
+content: Maximum depth for bottom detection window.
+unit: 0.01 m
+range: [0 , 42949672.95 m] EK500 range: [0 , 15000.00 m]
+
+offset: 68
+field: Remarks
+length: 30
+format: CHAR
+content: Character string comment, up to 30 characters. This field
+        could be used to store the transducer serial number.
+unit: ASCII char.
+range: 30 characters
+
+offset: 98
+field: Space
+length: 2
+format: USHORT
+content: Space to allow the next field to be aligned on an address that
+        is a multiple of 4.
+unit: unitless
+range: 0
+
+offset: 100
+field: Tuple attribute
+length: 4
+format: LONG
+content: Attribute of the tuple according to Annex 3. 0 = original 1 =
+        edited 2 = temporary 3 = temporary + edited 4 = patched 5 =
+        patched + edited ...
+unit: unitless
+range: [-2147483648 , 2147483647]
+
+offset: 104
+field: Backlink
+length: 4
+format: ULONG
+content: Tuple size: 108 bytes.
+unit: byte
+range: 108
+
+header: Table 12. Simrad EK500 Channel tuple (2001).
+offset: 0
+field: Tuple size
+length: 4
+format: ULONG
+content: Tuple data size: 106 bytes.
+unit: byte
+range: 106
+
+offset: 4
+field: Tuple type
+length: 2
+format: USHORT
+content: Tuple type code: 2001. This is the tuple type code for the
+        Simrad EK500 raw data.
+unit: unitless
+range: 2001
+
+offset: 6
+field: Software channel identifier
+length: 2
+format: USHORT
+content: Unique identifier for this software data channel. This
+        identifier must be unique for the whole file in order to
+        associate the pings to their proper parent channel Note: This
+        is not the hardware channel number.
+unit: unitless
+range: [0 , 65535]
+
+offset: 8
+field: Echosounder document identifier
+length: 4
+format: ULONG
+content: Identification number for the parent echosounder document
+        (i.e. the group of channels) to which this data channel
+        belongs. It is the echosounder document identifier field of the
+        echosounder tuple.
+unit: unitless
+range: [0 , 4294967295]
+
+offset: 12
+field: Sampling interval
+length: 4
+format: ULONG
+content: Sampling interval for this channel. The nominal sampling rate
+        can be derived from this field and the mean sound speed.
+unit: 0.000001 m
+range: [0 , 4294.967295 m]
+
+offset: 16
+field: Type of data sample
+length: 2
+format: USHORT
+content: Type of data sample: 0 = off-axis angles from the split-beam
+        analysis 1 = power (raw Sv before the TVG) 2 = Sv (volume
+        backscattering strength in dB) 3 = TS (point target strength in
+        dB)
+unit: unitless
+range: [0 , 65535] Presently: [0, 1, 2, 3]
+
+offset: 18
+field: Transceiver channel number
+length: 2
+format: USHORT
+content: EK500 transceiver (1, 2 or 3).
+unit: unitless
+range: [0 , 65535] Presently: [1, 2, 3]
+
+offset: 20
+field: Acoustic frequency
+length: 4
+format: ULONG
+content: Acoustic frequency.
+unit: Hz
+range: [0 , 4294967295 Hz] Fisheries acoustics range: [100 , 1000000
+        Hz]
+
+offset: 24
+field: Installation depth of transducer
+length: 4
+format: ULONG
+content: Installation depth of transducer relative to the sea surface.
+        42949672.94 = dynamic platform
+unit: 0.01 m
+range: [0 , 42949672.95 m] EK500 range: [0 , 9999.99 m]
+
+offset: 28
+field: Blanking range
+length: 4
+format: ULONG
+content: Blanking range from the transducer face up to which the
+        receiver output is blanked to zero or the range at which the
+        data started to be collected.
+unit: 0.0001 m
+range: [0 , 29496.7295 m]
+
+offset: 32
+field: Platform identifier
+length: 2
+format: USHORT
+content: Unique identifier of the installation platform of the
+        transducer.
+unit: unitless
+range: [0 , 65535]
+
+offset: 34
+field: Transducer shape
+length: 2
+format: USHORT
+content: 0 = other 1 = oval (which includes circular transducer) 2 =
+        rectangular 3 = cross array 4 = ring
+unit: unitless
+range: [0 , 65535] Presently: [0 , 4]
+
+offset: 36
+field: Alongship angle offset of the transducer face
+length: 2
+format: SHORT
+content: Mechanical offset angle of the transducer face relative to the
+        horizontal in the alongship plane of the attitude sensor
+        coordinate system (XY). Positive angles indicate the foreward
+        side is above the horizontal.
+unit: 0.1 deg
+range: [-3276.8 , 3276.7 deg] Working range: [-180.0 , 180.0 degree]
+
+offset: 38
+field: Athwartship angle offset of the transducer face
+length: 2
+format: SHORT
+content: Mechanical offset angle of the transducer face relative to the
+        horizontal in the athwartship plane of the attitude sensor
+        coordinate system (YZ). Positive angles indicate the port side
+        is above the horizontal.
+unit: 0.1 deg
+range: [-3276.8 , 3276.7 deg] Working range: [-180.0 , 180.0 degree]
+
+offset: 40
+field: Rotation angle of transducer
+length: 2
+format: SHORT
+content: Mechanical angle of rotation of alongship axis of transducer
+        relative to alongship axis of attitude sensor coordinate
+        system. Positive angles are clockwise rotation (to starboard).
+unit: 0.01 deg
+range: [-327.68 , 327.67 deg] Working range: [-180.00 , 180.00 deg]
+
+offset: 42
+field: Alongship angle offset of the main axis of the acoustic beam
+length: 2
+format: SHORT
+content: Mechanical offset angle of the main axis of the acoustic beam
+        in the alongship plane relative to the perpendicular to the
+        transducer face (XY). Zero (0) is perpendicular to the
+        transducer face. Positive angles indicate the down-propagating
+        sonar beam is oriented foreward.
+unit: 0.01 deg
+range: [-327.68 , 327.67 deg] EK500 range: [-20.00 , 20.00 deg]
+
+offset: 44
+field: Athwartship angle offset of the main axis of the acoustic beam
+length: 2
+format: SHORT
+content: Mechanical offset angle of the main axis of the acoustic beam
+        in the athwartship plane relative to the perpendicular to the
+        transducer face (YZ). Zero (0) is perpendicular to the
+        transducer face. Positive angles indicate the down-propagating
+        sonar beam is oriented to starboard.
+unit: 0.01 deg
+range: [-327.68 , 327.67 deg] EK500 range: [-20.00 , 20.00 deg]
+
+offset: 46
+field: Absorption of sound
+length: 2
+format: USHORT
+content: Absorption of sound (alpha) in the propagation medium used for
+        TVG compensation.
+unit: 0.01 dB/km
+range: [0 , 655.35 dB km-1] Practical range: [0 , 300.00 dB km-1]
+
+offset: 48
+field: Pulse length mode
+length: 2
+format: USHORT
+content: This field indicates the selected transceiver specific
+        duration of the transmitted pulse: 0 = short 1 = medium 2 =
+        long
+unit: unitless
+range: [0 , 65535] EK500 options: [0, 1, 2]
+
+offset: 50
+field: Bandwidth mode
+length: 2
+format: USHORT
+content: This field indicates the selected transceiver specific
+        bandwidth: 0 = narrow 1 = wide Note: the mode “auto” is not
+        coded because the choice (narrow or wide) made by the EK500 is
+        indicated in the EK500 telegram that the acquisition program
+        reads.
+unit: unitless
+range: [0 , 65535] EK500 options: [0, 1]
+
+offset: 52
+field: Maximum power
+length: 2
+format: USHORT
+content: Transmit power referred to the transducer terminals.
+unit: watt
+range: [0 , 65535] EK500 range: [1 , 10000 watt]
+
+offset: 54
+field: Alongship angle sensitivity
+length: 2
+format: USHORT
+content: The electrical phase angle in degrees for one mechanical phase
+        angle in degrees in the fore-and- aft direction, specific to
+        the split-beam transducer. A value of 1.0 indicates that the
+        electrical angles are in units of mechanical angles.
+unit: 0.1
+range: [0 , 6553.5] EK500 range: [0 , 100.0]
+
+offset: 56
+field: Athwartship angle sensitivity
+length: 2
+format: USHORT
+content: The electrical phase angle in degrees for one mechanical phase
+        angle in degrees in the starboard-and-port direction, specific
+        to the split-beam transducer. A value of 1.0 indicates that the
+        electrical angles are in units of mechanical angles.
+unit: 0.1
+range: [0 , 6553.5] EK500 range: [0 , 100.0]
+
+offset: 58
+field: Alongship 3 dB beam width of the transducer
+length: 2
+format: USHORT
+content: Half power (3dB) beam width of the transducer in the alongship
+        plane.
+unit: 0.01 deg
+range: [0 , 655.35 deg] EK500 range: [0 , 99.90 deg]
+
+offset: 60
+field: Athwartship 3 dB beam width of the transducer
+length: 2
+format: USHORT
+content: Half power (3dB) beam width of the transducer in the
+        athwartship plane.
+unit: 0.01 deg
+range: [0 , 655.35 deg] EK500 range: [0 , 99.90 deg]
+
+offset: 62
+field: Two-way beam angle
+length: 2
+format: SHORT
+content: Equivalent two-way beam opening solid angle: [=10 log ((ß *ß
+        )/ 5800)], where ß and ß are the longitudinal and transversal
+        beam width (degrees), respectively. Note: Directivity index in
+        dB: DI = 10 log (2.5/(sin(ß /2) * sin(ß /2)). (See EK500 user
+        manual). 1 2
+unit: 0.01 dB
+range: [-327.68 , 327.67 dB] EK500 range: [-99.90 , 0.00 dB]
+
+offset: 64
+field: Calibration transducer gain
+length: 2
+format: USHORT
+content: Peak transducer gain used during computation of the data
+        sample corresponding to the above- selected “type of data
+        sample” (either Sv or TS) (see EK500 user manual).
+unit: 0.01 dB
+range: [0 , 655.35 dB] EK500 range: [0 , 99.90 dB]
+
+offset: 66
+field: Bottom detection minimum level
+length: 2
+format: SHORT
+content: Volume backscattering level for the bottom detector’s back
+        search function.
+unit: 0.01 dB
+range: [-327.68 to 327.67 dB] EK500 range: [-80.00 , 0.00 dB]
+
+offset: 68
+field: Bottom window minimum depth
+length: 4
+format: ULONG
+content: Minimum depth for bottom detection window.
+unit: 0.01 m
+range: [0 , 42949672.95 m] EK500 range: [0 , 9999.90 m]
+
+offset: 72
+field: Bottom window maximum depth
+length: 4
+format: ULONG
+content: Maximum depth for bottom detection window.
+unit: 0.01 m
+range: [0 , 42949672.95 m] EK500 range: [0 , 12000.00 m]
+
+offset: 76
+field: Remarks
+length: 30
+format: CHAR
+content: Character string comment, up to 30 characters. This field
+        could be used to store the transducer serial number.
+unit: ASCII char.
+range: 30 characters
+
+offset: 106
+field: Space
+length: 2
+format: USHORT
+content: Space to allow the next field to be aligned on an address that
+        is a multiple of 4.
+unit: unitless
+range: 0
+
+offset: 108
+field: Tuple attribute
+length: 4
+format: LONG
+content: Attribute of the tuple according to Annex 3. 0 = original 1 =
+        edited 2 = temporary 3 = temporary + edited 4 = patched 5 =
+        patched + edited ...
+unit: unitless
+range: [-2147483648 , 2147483647]
+
+offset: 112
+field: Backlink
+length: 4
+format: ULONG
+content: Tuple size: 116 bytes.
+unit: byte
+range: 116
+
+header: Table 13. Simrad EK500 Channel patch tuple (2002).
+offset: 0
+field: Tuple size
+length: 4
+format: ULONG
+content: Tuple data size: 34 bytes
+unit: byte
+range: 34
+
+offset: 4
+field: Tuple type
+length: 2
+format: USHORT
+content: Tuple type code: 2002.
+unit: unitless
+range: 2002
+
+offset: 6
+field: Software channel identifier
+length: 2
+format: USHORT
+content: Unique identifier for this software data channel. This
+        identifier must be unique for the whole file in order to
+        associate the pings to their proper parent channel. Note: This
+        is not the hardware channel number.
+unit: unitless
+range: [0 , 65535]
+
+offset: 8
+field: Echosounder document identifier
+length: 4
+format: ULONG
+content: Identification number for the parent echosounder document
+        (i.e. the group of channels) to which this data channel
+        belongs. It is the echosounder document identifier field of the
+        echosounder tuple.
+unit: unitless
+range: [0 , 4294967295]
+
+offset: 12
+field: Sv transducer gain
+length: 2
+format: USHORT
+content: Peak transducer gain used during computation of the Sv data
+        sample.
+unit: 0.01 dB
+range: [0 , 655.35 dB] EK500 range: [0 , 99.90 dB]
+
+offset: 14
+field: TS transducer gain
+length: 2
+format: USHORT
+content: Peak transducer gain used during computation of the TS data
+        sample.
+unit: 0.01 dB
+range: [0 , 655.35 dB] EK500 range: [0 , 99.90 dB]
+
+offset: 16
+field: Remarks
+length: 20
+format: CHAR
+content: Character string comment. The string must be space filled to
+        the 4-byte boundary. The Remarks field can be missing if there
+        are no comments.
+unit: ASCII char.
+range: 20 characters
+
+offset: 36
+field: Tuple attribute
+length: 4
+format: LONG
+content: Attribute of the tuple according to Annex 3. 0 = original 1 =
+        edited 2 = temporary 3 = temporary + edited 4 = patched 5 =
+        patched + edited ...
+unit: unitless
+range: [-2147483648 , 2147483647]
+
+offset: 40
+field: Backlink
+length: 4
+format: ULONG
+content: Tuple size: 44 bytes
+unit: byte
+range: 44
+
+header: Table 14. Simrad EK60 Channel tuple (2100).
+offset: 0
+field: Tuple size
+length: 4
+format: ULONG
+content: Tuple data size: 258 bytes
+unit: byte
+range: 258
+
+offset: 4
+field: Tuple type
+length: 2
+format: USHORT
+content: Tuple type code: 2100. Tuple type code for the Simrad EK 60.
+unit: unitless
+range: 2100
+
+offset: 6
+field: Software channel identifier
+length: 2
+format: USHORT
+content: Unique identifier for this software data channel.
+unit: unitless
+range: [0 , 65535]
+
+offset: 8
+field: Echosounder document identifier
+length: 4
+format: ULONG
+content: Identification number for the parent echosounder document.
+unit: unitless
+range: [0 , 4294967295]
+
+offset: 12
+field: Frequency channel name
+length: 48
+format: CHAR
+content: Example: “GPT 38 kHz 0090720171d3 1 ES38B”
+unit: ASCII
+range: 50 characters
+
+offset: 60
+field: Transceiver software version
+length: 30
+format: CHAR
+content: Example: “020221”
+unit: ASCII
+range: 30 characters
+
+offset: 90
+field: Transducer name
+length: 30
+format: CHAR
+content: Example: “ES38B”
+unit: ASCII
+range: 30 characters
+
+offset: 120
+field: Time sample interval
+length: 4
+format: ULONG
+content: Time between each sample.
+unit: µs
+range: [0 , 4294967295 µs] EK 60 range:[1 , 65536 µs]
+
+offset: 124
+field: Data type
+length: 2
+format: USHORT
+content: Type of data sampled: 0 = Electrical phase angles [Units:
+        180/128 degree] 1 = Electrical power [Units: dB re 1W] 2 = Sv
+        [Volume backscattering strength in dB] 3 = TS [point target
+        strength in dB] 4 = Complex voltage [Complex voltage from split
+        beam quadrants]
+unit: unitless
+range: [0 , 65535]
+
+offset: 126
+field: Transducer beam type
+length: 2
+format: USHORT
+content: 0 = single 1 = split
+unit: unitless
+range: [0 , 65535]
+
+offset: 128
+field: Acoustic frequency
+length: 4
+format: ULONG
+content: Acoustic frequency.
+unit: Hz
+range: [0 , 4294967295 Hz] EK 60 range: [1000 , 1000000 Hz]
+
+offset: 132
+field: Transducer installation depth
+length: 4
+format: ULONG
+content: Installation depth of transducer relative to the sea surface.
+        429496.7294 = dynamic platform
+unit: 0.0001 m
+range: [0 , 429496.7295 m] EK 60 range: [0 , 10000.0000 m]
+
+offset: 136
+field: Start sample
+length: 4
+format: ULONG
+content: Number of samples offset from transducer face. 0 = no offset
+unit: unitless
+range: [0 , 4294967295]
+
+offset: 140
+field: Platform identifier
+length: 2
+format: USHORT
+content: Unique identifier of the installation platform of the
+        transducer.
+unit: unitless
+range: [0 , 65535]
+
+offset: 142
+field: Transducer shape
+length: 2
+format: USHORT
+content: 0 = other 1 = oval (which includes circular transducer) 2 =
+        rectangular 3 = cross array 4 = ring
+unit: unitless
+range: [0 , 65535] Presently: [0 , 4]
+
+offset: 144
+field: Transducer face alongship angle offset
+length: 4
+format: LONG
+content: Mechanical offset angle of the transducer face relative to the
+        horizontal in the alongship plane of the attitude sensor
+        coordinate system. Positive angles indicate the forward side is
+        above the horizontal.
+unit: 0.0001 deg
+range: [-214748.3648 , 214748.3647 deg] EK 60 range: [-180.0000 ,
+        180.0000 deg]
+
+offset: 148
+field: Transducer face athwartship angle offset
+length: 4
+format: LONG
+content: Mechanical offset angle of the transducer face relative to the
+        horizontal in the athwartship plane of the attitude sensor
+        coordinate system. Positive angles indicate the starboard side
+        is above the horizontal.
+unit: 0.0001 deg
+range: [-214748.3648 , 214748.3647 deg] EK 60 range: [-180.0000 ,
+        180.0000 deg]
+
+offset: 152
+field: Transducer rotation angle
+length: 4
+format: LONG
+content: Mechanical angle of rotation of alongship axis of transducer
+        relative to alongship axis of attitude sensor coordinate
+        system. Positive angles are clockwise rotation (to starboard).
+unit: 0.0001 deg
+range: [-214748.3648 , 214748.3647 deg] EK 60 range: [-180.0000 ,
+        180.0000 deg]
+
+offset: 156
+field: Transducer main beam axis alongship angle offset
+length: 4
+format: LONG
+content: Mechanical offset angle of the main axis of the acoustic beam
+        in the alongship plane relative to the perpendicular to the
+        transducer face. Zero (0) is perpendicular to the transducer
+        face. Positive angles indicate the down-propagating sonar beam
+        is oriented forward.
+unit: 0.0001 deg
+range: [-214748.3648 , 214748.3647 deg] EK 60 range: [-180.0000 ,
+        180.0000 deg]
+
+offset: 160
+field: Transducer main beam axis athwartship angle offset
+length: 4
+format: LONG
+content: Mechanical offset angle of the main axis of the acoustic beam
+        in the athwartship plane relative to the perpendicular to the
+        transducer face. Zero (0) is perpendicular to the transducer
+        face. Positive angles indicate the down-propagating sonar beam
+        is oriented to starboard.
+unit: 0.0001 deg
+range: [-214748.3648 , 214748.3647 deg] EK 60 range: [-180.0000 ,
+        180.0000 deg]
+
+offset: 164
+field: Absorption coefficient
+length: 4
+format: ULONG
+content: Absorption of sound in the propagation medium.
+unit: 0.0001 dB/km
+range: [0 , 429496.7295 dB/km] EK 60 range: [0 , 300.0000 dB/km]
+
+offset: 168
+field: Pulse duration
+length: 4
+format: ULONG
+content: Duration of transmitted pulse.
+unit: µs
+range: [0 , 4294967295 µs] EK 60 range: [0 , 65536 µs]
+
+offset: 172
+field: Bandwidth
+length: 4
+format: ULONG
+content: Transceiver bandwidth.
+unit: Hz
+range: [0 , 4294967295 Hz] EK 60 range: [100 , 100000 Hz]
+
+offset: 176
+field: Transmission power
+length: 4
+format: ULONG
+content: Transmit power referred to the transducer terminals.
+unit: W
+range: [0 , 4294967295 W] EK 60 range: [0 , 10000 W]
+
+offset: 180
+field: Transducer alongship angle sensitivity
+length: 4
+format: ULONG
+content: Electrical phase angle in degrees for one mechanical angle in
+        the alongship (fore-aft) direction.
+unit: 0.0001 El./mec. deg
+range: [0 ,429496.7295 El./mec. deg] EK 60 range: [0 , 100.0000
+        El./mec. deg]
+
+offset: 184
+field: Transducer athwartship angle sensitivity
+length: 4
+format: ULONG
+content: Electrical phase angle in degrees for one mechanical angle in
+        the athwartship (fore-aft) direction.
+unit: 0.0001 El./mec. deg
+range: [0 , 429496.7295 El./mec. deg] EK 60 range: [0 , 100.0000
+        El./mec. deg]
+
+offset: 188
+field: Transducer alongship 3 dB beam width
+length: 4
+format: ULONG
+content: Half power (3dB) beam width of the transducer in the alongship
+        direction.
+unit: 0.0001 deg
+range: [0 , 429496.7295 deg] EK 60 range: [1.0000 , 99.9999 deg]
+
+offset: 192
+field: Transducer athwartship 3 dB beam width
+length: 4
+format: ULONG
+content: Half power (3dB) beam width of the transducer in the
+        athwartship direction.
+unit: 0.0001 deg
+range: [0 , 429496.7295 deg] EK 60 range: [1.0000 , 99.9999 deg]
+
+offset: 196
+field: Transducer equivalent two-way beam angle
+length: 4
+format: LONG
+content: Equivalent two-way beam opening solid angle (See MacLennan and
+        Simmonds, 1992; Section 2.3).
+unit: 0.0001 dB
+range: [-2147483648 , 2147483647 dB] EK 60 range: [-100.0000 , 0.0000
+        dB]
+
+offset: 200
+field: Transducer gain
+length: 4
+format: ULONG
+content: Transducer gain used in power budget calculations for
+        calculation of TS.
+unit: 0.0001 dB
+range: [0 , 429496.7295 dB] EK 60 range: [0 , 99.9999 dB]
+
+offset: 204
+field: Transducer sA correction
+length: 4
+format: LONG
+content: Correction to transducer gain to obtain transducer gain used
+        in power budget calculations for calculation of Sv (and sA).
+        Transducer Sv gain = Transducer gain + Transducer sA
+        correction.
+unit: 0.0001 dB
+range: [-2147483648 , 2147483647 dB] EK 60 range: [-10.0000 , 10.0000 dB]
+
+offset: 208
+field: Bottom detection minimum depth
+length: 4
+format: ULONG
+content: Minimum depth required for bottom detection.
+unit: 0.0001 m EK 60 range:
+range: [0 , 429496.7295 m] [0 , 15000.0000 m]
+
+offset: 212
+field: Bottom detection maximum depth
+length: 4
+format: ULONG
+content: Maximum depth required for bottom detection.
+unit: 0.0001 m EK 60 range:
+range: [0 , 429496.7295 m] [0 , 15000.0000 m]
+
+offset: 216
+field: Bottom detection minimum level
+length: 4
+format: LONG
+content: Bottom detection minimum level used in the bottom detector
+        function. Ref. EK60 manual
+unit: 0.0001 dB
+range: [-214748.3648 , 214748.3647 dB] EK 60 range: [-80.0000 , 0 dB]
+
+offset: 220
+field: Remarks
+length: 40
+format: CHAR
+content: Character string used for any comments to this channel.
+unit: ASCII
+range: 40 characters
+
+offset: 260
+field: Tuple attribute
+length: 4
+format: LONG
+content: Attribute of the tuple according to Annex 3. 0 = original 1 =
+        edited 2 = temporary 3 = temporary + edited 4 = patched 5 =
+        patched + edited ...
+unit: unitless
+range: [-2147483648 , 2147483647]
+
+offset: 264
+field: Backlink
+length: 4
+format: ULONG
+content: Tuple size: 268 bytes
+unit: byte
+range: 268
+
+header: Table 15. Simrad EK500 Split-beam detected single target
+        parameters sub-channel tuple (4000).
+offset: 0
+field: Tuple size
+length: 4
+format: ULONG
+content: Tuple data size: 54 bytes
+unit: byte
+range: 54
+
+offset: 4
+field: Tuple type
+length: 2
+format: USHORT
+content: Tuple type code: 4000
+unit: unitless
+range: 4000
+
+offset: 6
+field: Time fraction
+length: 2
+format: USHORT
+content: Fraction of a second to add to the following CPU ANSI C time
+        for a time precision of 0.0001 s (Local time at which the
+        single-target TS logging was initiated).
+unit: 0.0001 s
+range: [0 , 6.5535 s] Practical range: [0 , 0.9999 s]
+
+offset: 8
+field: Time CPU ANSI C Standard time
+length: 4
+format: ULONG
+content: Local time at which the single-target TS logging was
+        initiated. ANSI C time given by the CPU clock, in seconds.
+        Usually the CPU clock is set to local time.
+unit: s
+range: [0 , 4294967295 s] i.e.: [up to year 2106]
+
+offset: 12
+field: Parent software channel identifier
+length: 2
+format: USHORT
+content: Unique EK500 channel (tuple no. 2000 and 2001) identifier to
+        which this TS parameter information applies. Note: This is not
+        the hardware channel number.
+unit: unitless
+range: [0 , 65535]
+
+offset: 14
+field: Detected single-target parameters sub-channel identifier
+length: 2
+format: USHORT
+content: Unique identifier for this software sub-channel tuple. Note:
+        This is not the hardware channel number.
+unit: unitless
+range: [0 , 65535]
+
+offset: 16
+field: Minimum value
+length: 2
+format: SHORT
+content: Threshold value (see EK500 TS-Detection menu).
+unit: 0.01 dB
+range: [-327.68 , 327.68 dB] Presently: [-100.00 , 0.00 dB]
+
+offset: 18
+field: Minimum echo length
+length: 2
+format: USHORT
+content: Minimum normalized echo length (see EK500 TS-Detection menu).
+unit: 0.01 steps
+range: [0 , 655.35 steps] Presently: [0 , 10.00 steps]
+
+offset: 20
+field: Maximum echo length
+length: 2
+format: USHORT
+content: Maximum normalized echo length (see EK500 TS-Detection menu).
+unit: 0.01 steps
+range: [0 , 655.35] Presently: [0 , 10.00]
+
+offset: 22
+field: Maximum gain compensation
+length: 2
+format: USHORT
+content: Maximum one-way gain compensation (see EK500 TS-Detection
+        menu).
+unit: 0.01 dB
+range: [0 , 655.35 dB] Presently: [0 , 6.00 dB]
+
+offset: 24
+field: Maximum phase compensation
+length: 2
+format: USHORT
+content: Maximum standard phase deviation (see EK500 TS-Detection
+        menu).
+unit: 0.01 steps
+range: [0 , 655.35] Presently: [0 , 10.00]
+
+offset: 26
+field: Remark
+length: 30
+format: CHAR
+content: Character string comment up to 30 characters.
+unit: ASCII char.
+range: 30 characters
+
+offset: 56
+field: Tuple attribute
+length: 4
+format: LONG
+content: Attribute of the tuple according to Annex 3. 0 = original 1 =
+        edited 2 = temporary 3 = temporary + edited 4 = patched 5 =
+        patched + edited ...
+unit: unitless
+range: [-2147483648 , 2147483647]
+
+offset: 60
+field: Backlink
+length: 4
+format: ULONG
+content: Tuple size: 64 bytes.
+unit: byte
+range: 64
+
+header: Table 16. Generic Channel tuple (9001) for the generic
+        echosounder.
+offset: 0
+field: Tuple size
+length: 4
+format: ULONG
+content: Tuple data size: 146 bytes
+unit: byte
+range: 146
+
+offset: 4
+field: Tuple type
+length: 2
+format: USHORT
+content: Tuple type code: 9001. This is the tuple type code for the
+        Generic Channel tuple.
+unit: unitless
+range: 9001
+
+offset: 6
+field: Software channel identifier
+length: 2
+format: USHORT
+content: Unique identifier for this software data channel. This
+        identifier must be unique for the whole file in order to
+        associate the pings to their proper parent channel. Note: This
+        is not the hardware channel number.
+unit: unitless
+range: [0 , 65535]
+
+offset: 8
+field: Echosounder document identifier
+length: 4
+format: ULONG
+content: Identification number for the parent echosounder document
+        (i.e. the group of channels) to which this data channel
+        belongs. It is the echosounder document identifier field of the
+        echosounder tuple.
+unit: unitless
+range: [0 , 4294967295]
+
+offset: 12
+field: Sampling rate
+length: 4
+format: ULONG
+content: Digitization rate for this channel. The nominal sampling
+        interval can be derived from this field and the mean sound
+        speed.
+unit: 1/s
+range: [0 , 4294967295 1/s]
+
+offset: 16
+field: Sampling interval
+length: 4
+format: ULONG
+content: Sampling interval for this channel. The nominal sampling rate
+        can be derived from this field and the mean sound speed.
+unit: 0.000001 m
+range: [0 , 4294.967295 m]
+
+offset: 20
+field: Acoustic frequency
+length: 4
+format: ULONG
+content: Acoustic frequency.
+unit: Hz
+range: [0 , 4294967295 Hz] Fisheries acoustics range: [100 , 1000000
+        Hz]
+
+offset: 24
+field: Transceiver channel number
+length: 2
+format: USHORT
+content: Hardware channel number from which the data are coming. It is
+        convenient to use the same channel numbers as from the
+        echosounder. Note: This field is not the software channel
+        number.
+unit: unitless
+range: [0 , 65535]
+
+offset: 26
+field: Type of data
+length: 2
+format: USHORT
+content: Type of data sampled: 0 = volts 1 = Sv (volume backscattering
+        strength in dB) 2 = TS (point target strength in dB) 3 = Off
+        axis mechanical angles of sample 4 = power in dB re 1 watt 5 =
+        volts2 6... the following codes are for data averaged over the
+        sample interval to accommodate echosounders which do not output
+        raw sample data: 10 = mean volts 11 = mean Sv (volume
+        backscattering strength in dB)* 12 = mean TS (point target
+        strength in dB)* 13 = Off-axis mechanical angles of samples 14
+        = mean power in dB re 1 watt* 15 = mean (volts2) ... *Note that
+        the average must be computed in the linear domain.
+unit: unitless
+range: [0 , 65535]
+
+offset: 28
+field: Time-varied gain multiplier
+length: 2
+format: USHORT
+content: Time-varied gain (TVG) multiplier applied for this channel:
+        XXX.XX (e.g. a value of 28.00 = 28.00(log R) + 2αR). Note:
+        This TVG is applied from the TVG minimum range up to the TVG
+        maximum range or for the sample range. Other components in the
+        TVG (e.g. α) are dealt with elsewhere. 0.00 = no TVG applied
+unit: unitless
+range: [0 , 655.35]
+
+offset: 30
+field: TVG blanking mode
+length: 2
+format: USHORT
+content: The gain operating mode before the TVG minimum range and after
+        the TVG maximum range. 0 = normal mode: the gain is maintained
+        constant at the minimum value before the TVG minimum range and
+        at the value reached at the TVG maximum range after the TVG
+        maximum range 1 = blank at range mode: the gain is zero before
+        the TVG minimum range and after the TVG maximum range.
+unit: unitless
+range: [0 , 65535]
+
+offset: 32
+field: TVG minimum range
+length: 2
+format: USHORT
+content: The range from which the TVG is applied. TVG is computed from
+        the transducer face and applied from the TVG minimum range up
+        to the TVG maximum range.
+unit: 0.1 m
+range: [0 , 6553.5 m]
+
+offset: 34
+field: TVG maximum range
+length: 2
+format: USHORT
+content: The range up to which the TVG is applied. TVG is computed from
+        the transducer face and applied from the TVG minimum range up
+        to the TVG maximum range. TVG maximum range must be greater
+        than TVG minimum range.
+unit: 0.1 m
+range: [0.1 , 6553.5 m]
+
+offset: 36
+field: Blanking up to range
+length: 4
+format: ULONG
+content: Blanking range from the transducer face up to which the
+        receiver output is blanked to zero or the range at which the
+        data started to be collected.
+unit: 0.0001 m
+range: [0 , 29496.7295 m]
+
+offset: 40
+field: Sample range
+length: 4
+format: ULONG
+content: Range over which the echo sample data are output by the
+        echosounder.
+unit: 0.0001 m
+range: [0 , 29496.7295 m]
+
+offset: 44
+field: Installation depth of transducer
+length: 4
+format: ULONG
+content: Installation depth of transducer relative to the sea surface.
+        429496.7294 = dynamic platform
+unit: 0.0001 m
+range: [0 , 429496.7295 m] Working range: [0 , 10000.0000 m]
+
+offset: 48
+field: Platform identifier
+length: 2
+format: USHORT
+content: Unique identifier of the installation platform of the
+        transducer.
+unit: unitless
+range: [0 , 65535]
+
+offset: 50
+field: Space
+length: 2
+format: USHORT
+content: Space to allow the next field to be aligned on an address that
+        is a multiple of 4.
+unit: unitless
+range: 0
+
+offset: 52
+field: Alongship offset relative to the attitude sensor
+length: 4
+format: LONG
+content: Distance between the center of the transducer and the
+        reference point of the attitude sensor in the fore and aft
+        direction (X). Positive values are on the foreward side of the
+        reference point of the attitude sensor. 214748.3647 = not
+        available
+unit: 0.0001 m
+range: [-214748.3647 , 214748.3647 m] Working range: [-500.0000 ,
+        500.0000 m]
+
+offset: 56
+field: Athwartship offset relative to the attitude sensor
+length: 4
+format: LONG
+content: Distance between the center of the transducer and the
+        reference point of the attitude sensor in the starboard and
+        port direction (Y). Positive values are on the starboard side
+        of the reference point of the attitude sensor. 214748.3647 =
+        not available
+unit: 0.0001 m
+range: [-214748.3647 , 214748.3647 m] Working range: [-500.0000 ,
+        500.0000 m]
+
+offset: 60
+field: Vertical offset relative to the attitude sensor
+length: 4
+format: LONG
+content: Distance between the transducer face and the reference point
+        of the attitude sensor in the vertical direction (Z). Positive
+        values are below the reference point of the attitude sensor.
+        214748.3647 = not available
+unit: 0.0001 m
+range: [-214748.3647 , 214748.3647 m] Working range: [-200.0000 ,
+        200.0000 m]
+
+offset: 64
+field: Alongship angle offset of the transducer face
+length: 2
+format: SHORT
+content: Mechanical offset angle of the transducer face relative to the
+        horizontal in the alongship plane of the attitude sensor
+        coordinate system (XY). Positive angles indicate the foreward
+        side is above the horizontal.
+unit: 0.01 deg
+range: [-327.68 , 327.67 deg] Working range: [-180.00 , 180.00 deg]
+
+offset: 66
+field: Athwartship angle offset of the transducer face
+length: 2
+format: SHORT
+content: Mechanical offset angle of the transducer face relative to the
+        horizontal in the athwartship plane of the attitude sensor
+        coordinate system (YZ). Positive angles indicate the port side
+        is above the horizontal.
+unit: 0.01 deg
+range: [-327.68 , 327.67 deg] Working range: [-180.00 , 180.00 deg]
+
+offset: 68
+field: Rotation angle of transducer face
+length: 2
+format: SHORT
+content: Mechanical angle of rotation of alongship axis of transducer
+        relative to alongship axis of attitude sensor coordinate
+        system. Positive angles are clockwise rotation (to starboard).
+unit: 0.01 deg
+range: [-327.68 , 327.67 deg] Working range: [-180.00 , 180.00 deg]
+
+offset: 70
+field: Alongship angleoffset of the main axis of the acoustic beam
+length: 2
+format: SHORT
+content: Mechanical offset angle of the main axis of the acoustic beam
+        in the alongship plane relative to the perpendicular to the
+        transducer face (XY). Zero (0) is perpendicular to the
+        transducer face. Positive angles indicate the down-propagating
+        sonar beam is oriented foreward.
+unit: 0.01 deg
+range: [-327.68 , 327.67 deg] Working range: [-90.00 , 90.00 deg]
+
+offset: 72
+field: Athwartship angle offset of the main axis of the acoustic beam
+length: 2
+format: SHORT
+content: Mechanical offset angle of the main axis of the acoustic beam
+        in the athwartship plane relative to the perpendicular to the
+        transducer face (YZ). Zero (0) is perpendicular to the
+        transducer face. Positive angles indicate the down-propagating
+        sonar beam is oriented to starboard.
+unit: 0.01 deg
+range: [-327.68 , 327.67 deg] Working range: [-90.00 , 90.00 deg]
+
+offset: 74
+field: Absorption of sound
+length: 2
+format: USHORT
+content: Absorption of sound (α) in the propagation medium used for
+        TVG compensation.
+unit: 0.01 dB/km
+range: [0 , 655.35 dB km-1] Practical range: [0 , 300.00 dB km-1]
+
+offset: 76
+field: Pulse duration
+length: 4
+format: ULONG
+content: Duration of the transmitted pulse.
+unit: 0.0001 ms
+range: [0 , 429496.7295 ms]
+
+offset: 80
+field: Pulse shape mode
+length: 2
+format: USHORT
+content: Shape of the transmitted pulse. 0 = other 1 = rectangular 2 =
+        modulated 3 = chirp
+unit: unitless
+range: [0 , 65535] Presently: [0,1,2,3]
+
+offset: 82
+field: Bandwidth
+length: 2
+format: USHORT
+content: Transceiver specific bandwidth.
+unit: 0.01 kHz
+range: [0 , 655.35 kHz]
+
+offset: 84
+field: Transducer shape mode
+length: 2
+format: USHORT
+content: Physical shape of the transducer element configuration. 0=
+        other 1= oval (which includes circular transducer) 2=
+        rectangular 3= cross array 4= ring
+unit: unitless
+range: [0 , 65535] Presently: [0, 1, 2, 3, 4]
+
+offset: 86
+field: 3 dB alongship beamwidth of the transducer beam
+length: 2
+format: USHORT
+content: Half power (3 dB) beam width of the transducer beam in the
+        alongship plane.
+unit: 0.1 deg
+range: [0 , 6553.5 deg] Practical range: [1.0 , 50.0 deg]
+
+offset: 88
+field: 3 dB athwartship beam width of the transducer beam
+length: 2
+format: USHORT
+content: Half power (3 dB) beam width of the transducer beam in the
+        athwartship plane.
+unit: 0.1 deg
+range: [0 , 6553.5 deg] Practical range: [1.0 , 50.0 deg]
+
+offset: 90
+field: Two-way beam angle
+length: 2
+format: SHORT
+content: Equivalent two-way solid beam angle: (1) = 10 log ψ, or (2)
+        =10 log ((ß *ß )/5800), where ß and ß are the longitudinal
+        and transversal beam widths (degrees), respectively, or (3) to
+        derive this field 2 from the beam pattern factor (b2 (see
+        Urick, 1983, and MacLennan and Simmonds, 1992, Section 2.3).
+unit: 0.01 dB
+range: [-327.68 , 327.67 dB] Practical range: [10.00 , 50.00 dB]
+
+offset: 92
+field: Calibration source level
+length: 2
+format: USHORT
+content: Source level (SL of the sonar equation).
+unit: 0.01 dB
+range: [0 , 655.35 dB] Practical range: [150.00 , 250.00 dB]
+
+offset: 94
+field: Calibration receiving sensitivity
+length: 2
+format: SHORT
+content: Calibration receiving sensitivity (VR of the sonar equation)
+        of the transceiver. Note: This includes all through receiver
+        gain.
+unit: 0.01 dB
+range: [-327.68 , 327.67 dB] Practical range: [-200.00 , -100.00 dB]
+
+offset: 96
+field: SL+VR
+length: 2
+format: SHORT
+content: Sum of the calibration source level (SL of the sonar equation)
+        and the receiving sensitivity (VR of the sonar equation). Note:
+        This includes all through receiver gain. This field should be
+        used when the values of SL and VR are not known separately.
+unit: 0.01 dB
+range: [-327.68 , 327.67 dB] Practical range: [0 , 100.00 dB]
+
+offset: 98
+field: Bottom detection: minimum level
+length: 2
+format: SHORT
+content: Level for the bottom detection in the units selected in the
+        above field “Type of data sampled”.
+unit: volts, volts2, watts or dB
+range: For all units: [-327.68 , 327.67] Practical range: [2.50 , 15.00
+        volts] [6.25 , 225.00 volts2] [-150.00 to 0.00 dB]
+
+offset: 100
+field: Bottom window minimum
+length: 4
+format: ULONG
+content: Minimum depth for bottom detection window.
+unit: 0.01 m
+range: [0 , 42949672.95 m] Working range: [0 , 999.99 m]
+
+offset: 104
+field: Bottom window maximum
+length: 4
+format: ULONG
+content: Maximum depth for bottom detection window.
+unit: 0.01 m
+range: [0 , 42949672.95 m] Working range: [0 , 999.99 m]
+
+offset: 108
+field: Remarks
+length: 40
+format: CHAR
+content: Character string comment. This field could be used to store
+        the transducer serial number. The string must be space filled
+        to the 4-byte boundary. The Remarks field can be missing if
+        there are no comments.
+unit: ASCII char.
+range: 40 characters
+
+offset: 148
+field: Tuple attribute
+length: 4
+format: LONG
+content: Attribute of the tuple according to Annex 3. 0 = original 1 =
+        edited 2 = temporary 3 = temporary + edited 4 = patched 5 =
+        patched + edited ...
+unit: unitless
+range: [-2147483648 , 2147483647]
+
+offset: 152
+field: Backlink
+length: 4
+format: ULONG
+content: Tuple size: 156 bytes
+unit: byte
+range: 156
+
+header: Table 17. Ping tuple U-32 (10000).
+offset: 0
+field: Tuple size
+length: 4
+format: ULONG
+content: Tuple data size: variable
+unit: byte
+range: [30 , 4294967295]
+
+offset: 4
+field: Tuple type
+length: 2
+format: USHORT
+content: Tuple type code: 10000
+unit: unitless
+range: 10000
+
+offset: 6
+field: Time fraction
+length: 2
+format: USHORT
+content: Time of the transmitted pulse. Fraction of a second to add to
+        the CPU ANSI C time (next field) to get a time precision of
+        0.0001 s.
+unit: 0.0001 s
+range: [0 , 6.5535 s] Practical range: [0 , 0.9999 s]
+
+offset: 8
+field: Time CPU ANSI C Standard time
+length: 4
+format: ULONG
+content: Time of the transmitted pulse. ANSI C time given by the CPU
+        clock, in seconds. Usually the CPU clock is set to local time.
+unit: s
+range: [0 , 4294967295 s] i.e.: [up to year 2106]
+
+offset: 12
+field: Software channel identifier
+length: 2
+format: USHORT
+content: Unique identifier for this software data channel to which the
+        ping data is associated.
+unit: unitless
+range: [0 , 65535]
+
+offset: 14
+field: Transceiver mode
+length: 2
+format: USHORT
+content: Operating mode of the transmitter: 0 = active: the transceiver
+        is transmitting and receiving a monotone pulse 1 = passive: the
+        transceiver is receiving but not transmitting 2 = test: a
+        calibration signal is injected in the sounder 3 =
+        eavesdropping: the transceiver is receiving while another
+        transceiver is transmitting
+unit: unitless
+range: [0 , 65535] Presently: [0, 1, 2, 3]
+
+offset: 16
+field: Ping number
+length: 4
+format: ULONG
+content: Ping sequence number since the beginning of the file. This
+        should be a permanent label of the pings that should not be
+        altered in further processing steps, namely the edition steps.
+unit: unitless
+range: [0 , 4294967295]
+
+offset: 20
+field: Detected bottom range
+length: 4
+format: LONG
+content: Positive values indicate the range from the transducer face
+        where the bottom detection criteria were encountered, under the
+        above active transmitter mode. The sound speed field of the
+        echosounder tuple is used for conversion of time space.
+        Negative values are reserved for future use. 2147483.647 =
+        bottom not detected.
+unit: 0.001 m
+range: [-2147483.648 , 2147483.647 m] Practical range: [0 , 15000.000
+        m]
+
+offset: 24
+field: Sample sequence number
+length: 4
+format: ULONG
+content: Sample sequence number since the beginning of the ping
+        (samples < threshold contribute to the sequence count).
+unit: unitless
+range: [0 , 4294967295]
+
+offset: 28
+field: Sample value (> threshold)
+length: 4
+format: LONG
+content: Sample value on 32 bits. Encoded units and limit ranges depend
+        on the “type of data sample” of the channel tuple. (For
+        phase angles from the split-beam analysis, see Ping tuple
+        U-32-16-angles)
+unit: 0.000001 volts;0.000001 dB;0.000001 dB
+range: For volts: [-2147.483648 , 2147.483647 volts] Practical range:
+        [0 , 25.000000 volts]; For Sv or TS: [-2147.483648 ,
+        2147.483647 dB] Practical range: [-150.000000 , 0.000000 dB]
+
+offset: ...
+field: Sample sequence number
+length: 4
+format: ULONG
+content: idem
+
+offset: ...
+field: Sample value (> threshold)
+length: 4
+format: LONG
+content: idem
+
+offset: ...
+field: Tuple attribute
+length: 4
+format: LONG
+content: Attribute of the tuple according to Annex 3. 0 = original 1 =
+        edited 2 = temporary 3 = temporary + edited 4 = patched 5 =
+        patched + edited ...
+unit: unitless
+range: [-2147483648 , 2147483647]
+
+offset: ...
+field: Backlink
+length: 4
+format: ULONG
+content: Tuple size: variable (multiple of 4 bytes)
+unit: byte
+range: [40 , 4294967295]
+
+header: Table 18. Ping tuple U-32-16-angles (10001).
+offset: 0
+field: Tuple size
+length: 4
+format: ULONG
+content: Tuple data size: variable
+unit: byte
+range: [30 , 4294967295]
+
+offset: 4
+field: Tuple type
+length: 2
+format: USHORT
+content: Tuple type code: 10001
+unit: unitless
+range: 10001
+
+offset: 6
+field: Time fraction
+length: 2
+format: USHORT
+content: Time of the transmitted pulse. Fraction of a second to add to
+        the CPU ANSI C time (next field) to get a time precision of
+        0.0001 s.
+unit: 0.0001 s
+range: [0 , 6.5535 s] Practical range: [0 , 0.9999 s]
+
+offset: 8
+field: Time CPU ANSI C Standard time
+length: 4
+format: ULONG
+content: Time of the transmitted pulse. CPU ANSI C time, in seconds.
+        Usually the CPU clock is set to local time.
+unit: s
+range: [0 , 4294967295 s] i.e.: [up to year 2106]
+
+offset: 12
+field: Software channel identifier
+length: 2
+format: USHORT
+content: Unique identifier for this software data channel to which the
+        ping data is associated.
+unit: unitless
+range: [0 , 65535]
+
+offset: 14
+field: Transceiver mode
+length: 2
+format: USHORT
+content: Operating mode of the transmitter: 0 = active: the transceiver
+        is transmitting and receiving a monotone pulse 1 = passive: the
+        transceiver is receiving but not transmitting 2 = test: a
+        calibration signal is injected in the sounder 3 =
+        eavesdropping: the transceiver is receiving while another
+        transceiver is transmitting
+unit: unitless
+range: [0 , 65535] Presently: [0, 1, 2, 3]
+
+offset: 16
+field: Ping number
+length: 4
+format: ULONG
+content: Ping sequence number since the beginning of the file. This
+        should be a permanent label of the pings that should not be
+        altered in further processing steps, namely the edition steps.
+unit: unitless
+range: [0 , 4294967295]
+
+offset: 20
+field: Detected bottom range
+length: 4
+format: LONG
+content: Positive values indicate the range from the transducer face
+        where the bottom detection criteria were encountered, under the
+        above active transmitter mode. The sound speed field of the
+        echosounder tuple is used for conversion of time to space.
+        Negatives are reserved for future use. 2147483.647 = bottom not
+        detected.
+unit: 0.001 m
+range: [-2147483.648 , 2147483.647 m] Practical range: [0 , 15000.000
+        m]
+
+offset: 24
+field: Sample sequence number
+length: 4
+format: ULONG
+content: Sample sequence number since the beginning of the ping
+        (samples < threshold contribute to the sequence count).
+unit: unitless
+range: [0 , 4294967295]
+
+offset: 28
+field: Sample value, alongship off-axis angle
+length: 2
+format: SHORT
+content: Alongship off-axis angle of the sample from the split-beam
+        analysis. Zero (0) is the main axis of the transducer beam and
+        positive is in the fore direction.
+unit: 0.1 deg
+range: [-3276.8 , 3276.7 deg] Practical range: [-180.0 , 180.0 deg]
+
+offset: 30
+field: Sample value, athwartship off-axis angle
+length: 2
+format: SHORT
+content: Athwartship off-axis angle of the sample from the split-beam
+        analysis. Zero (0) is the main axis of the transducer beam and
+        positive is in the starboard direction.
+unit: 0.1 deg
+range: [-3276.8 , 3276.7 deg] Practical range: [-180.0 , 180.0 deg]
+
+offset: ...
+field: Sample sequence number
+length: 4
+format: ULONG
+content: idem
+
+offset: ...
+field: Sample value, alongship electrical phase angle
+length: 2
+format: SHORT
+content: idem
+
+offset: ...
+field: Sample value, athwartship electrical phase angle
+length: 2
+format: SHORT
+content: idem
+
+offset: ...
+field: Tuple attribute
+length: 4
+format: LONG
+content: Attribute of the tuple according to Annex 3. 0 = original 1 =
+        edited 2 = temporary 3 = temporary + edited 4 = patched 5 =
+        patched + edited ...
+unit: unitless
+range: [-2147483648 , 2147483647]
+
+offset: ...
+field: Backlink
+length: 4
+format: ULONG
+content: Tuple size: variable (multiple of 4 bytes).
+unit: byte
+range: [40 , 4294967295]
+
+header: Table 19. Ping tuple C-32 (10010).
+offset: 0
+field: Tuple size
+length: 4
+format: ULONG
+content: Tuple data size: variable
+unit: byte
+range: [30 , 4294967295]
+
+offset: 4
+field: Tuple type
+length: 2
+format: USHORT
+content: Tuple type code: 10010
+unit: unitless
+range: 10010
+
+offset: 6
+field: Time fraction
+length: 2
+format: USHORT
+content: Time of the transmitted pulse. Fraction of a second to add to
+        the CPU ANSI C time (next field) to get a time precision of
+        0.0001 s.
+unit: 0.0001 s
+range: [0 , 6.5535 s] Practical range: [0 , 0.9999 s]
+
+offset: 8
+field: Time CPU ANSI C Standard time
+length: 4
+format: ULONG
+content: Time of the transmitted pulse. CPU ANSI C time, in seconds.
+        Usually the CPU clock is set to local time.
+unit: s
+range: [0 , 4294967295 s] i.e.: [up to year 2106]
+
+offset: 12
+field: Software channel identifier
+length: 2
+format: USHORT
+content: Unique identifier for this software data channel to which the
+        ping data is associated.
+unit: unitless
+range: [0 , 65535]
+
+offset: 14
+field: Transceiver mode
+length: 2
+format: USHORT
+content: Operating mode of the transmitter: 0 = active: the transceiver
+        is transmitting and receiving a monotone pulse 1 = passive: the
+        transceiver is receiving but not transmitting 2 = test: a
+        calibration signal is injected in the sounder 3 =
+        eavesdropping: the transceiver is receiving while another
+        transceiver is transmitting
+unit: unitless
+range: [0 , 65535] Presently: [0, 1, 2, 3]
+
+offset: 16
+field: Ping number
+length: 4
+format: ULONG
+content: Ping sequence number since the beginning of the file. This
+        should be a permanent label of the pings that should not be
+        altered in further processing steps, namely the edition steps.
+unit: unitless
+range: [0 , 4294967295]
+
+offset: 20
+field: Detected bottom range
+length: 4
+format: LONG
+content: Positive values indicate the range from the transducer face
+        where the bottom detection criteria were encountered under the
+        above active transmitter mode. The sound speed field of the
+        echosounder tuple is used for conversion of time to space.
+        Negative values are reserved for future use. 2147483.647 =
+        bottom not detected.
+unit: 0.001 m
+range: [-2147483.648 , 2147483.647 m] Practical range: [0 , 15000.000
+        m]
+
+offset: 24
+field: No. of samples (> threshold) in this ping
+length: 4
+format: ULONG
+content: No. of samples (> threshold) in this ping (This information
+        can also be computed from the tuple size).
+unit: unitless
+range: [0 , 4294967295]
+
+offset: 28
+field: Sample value
+length: 4
+format: LONG
+content: Sample value on 31 bit or zero series (< threshold) compressed
+        into RLE samples (the upper bit is set to 1 and the lower 31
+        bits indicate the number of zeros - 1; 2147483648 below
+        threshold values can then be compressed into one RLE sample; no
+        value smaller than -1073741825 or larger than 1073741824 can be
+        encoded). Encoded units and limit ranges depend on the “type
+        of data sample” of the channel tuple.
+unit: 0.000001 volts Sv or TS: 0.000001 dB
+range: For volts: [-1073.741825 , 1073.741824 volts] Practical range:
+        [0 , 25.000000 volts] For Sv and TS: [-1073.741825 ,
+        1073.741824 dB] Practical range: [-150.000000 , 0.000000 dB]
+
+offset: ...
+field: Sample value
+length: 4
+format: LONG
+content: idem
+
+offset: ...
+field: Tuple attribute
+length: 4
+format: LONG
+content: Attribute of the tuple according to Annex 3. 0 = original 1 =
+        edited 2 = temporary 3 = temporary + edited 4 = patched 5 =
+        patched + edited ...
+unit: unitless
+range: [-2147483648 , 2147483647]
+
+offset: ...
+field: Backlink
+length: 4
+format: ULONG
+content: Tuple size: variable (multiple of 4 bytes).
+unit: byte
+range: [40 , 4294967295]
+
+header: Table 20. Ping tuple C-32-16-angles (10011).
+offset: 0
+field: Tuple size
+length: 4
+format: ULONG
+content: Tuple data size: variable
+unit: byte
+range: [30 , 4294967295]
+
+offset: 4
+field: Tuple type
+length: 2
+format: USHORT
+content: Tuple type code: 10011
+unit: unitless
+range: 10011
+
+offset: 6
+field: Time fraction
+length: 2
+format: USHORT
+content: Time of the transmitted pulse. Fraction of a second to add to
+        the CPU ANSI C time (next field) to get a time precision of
+        0.0001 s.
+unit: 0.0001 s
+range: [0 , 6.5535 s] Practical range: [0 , 0.9999 s]
+
+offset: 8
+field: Time CPU ANSI C Standard time
+length: 4
+format: ULONG
+content: Time of the transmitted pulse. CPU ANSI C time, in seconds.
+        Usually the CPU clock is set to local time.
+unit: s
+range: [0 , 4294967295 s] i.e.: [up to year 2106]
+
+offset: 12
+field: Software channel identifier
+length: 2
+format: USHORT
+content: Unique identifier for this software data channel to which the
+        ping data is associated.
+unit: unitless
+range: [0 , 65535]
+
+offset: 14
+field: Transceiver mode
+length: 2
+format: USHORT
+content: Operating mode of the transmitter: 0 = active: the transceiver
+        is transmitting and receiving a monotone pulse 1 = passive: the
+        transceiver is receiving but not transmitting 2 = test: a
+        calibration signal is injected in the sounder 3 =
+        eavesdropping: the transceiver is receiving while another
+        transceiver is transmitting
+unit: unitless
+range: [0 , 65535] Presently: [0, 1, 2]
+
+offset: 16
+field: Ping number
+length: 4
+format: ULONG
+content: Ping sequence number since the beginning of the file. This
+        should be a permanent label of the pings that should not be
+        altered in further processing steps, namely the edition steps.
+unit: unitless
+range: [0 , 4294967295]
+
+offset: 20
+field: Detected bottom range
+length: 4
+format: LONG
+content: Positive values indicate the range from the transducer face
+        where the bottom detection criteria were encountered, under the
+        above active transmitter mode. The sound speed field of the
+        echosounder tuple is used for conversion of time to space.
+        Negative values are reserved for future use. 2147483.647 =
+        bottom not detected.
+unit: 0.001 m
+range: [-2147483.648 , 2147483.647 m] Practical range: [0 , 15000.000
+        m]
+
+offset: 24
+field: No. of samples (> threshold) in this ping
+length: 4
+format: ULONG
+content: No. of samples (> threshold) in this ping (This information
+        can also be computed from the tuple size).
+unit: unitless
+range: [0 , 4294967295]
+
+offset: 28
+field: Sample value
+length: 4
+format: LONG
+content: Sample values on 32 bit or zero series (< threshold)
+        compressed into RLE samples (the upper bit is set to 1 and the
+        lower 31 bit indicate the no. of zeros - 1; 2147483648 below
+        threshold values can then be compressed into one RLE sample;
+        alongship angle data are found in bits 16 to 30 while
+        athwartship angle data are found in bits 0 to 15, thus the
+        values are encompassed in the intervals [,16384, 16383] and
+        [,32768, 32767], respectively.
+unit: 0.1 deg
+range: [-1638.4 , 1638.4 deg] Practical range: [-180.0 , 180.0 deg];
+        [-3276.8 , 3276.8 deg] Practical range: [-180.0 , 180.0 deg]
+
+offset: ...
+field: Sample value
+length: 4
+format: LONG
+content: idem
+
+offset: ...
+field: Tuple attribute
+length: 4
+format: LONG
+content: Attribute of the tuple according to Annex 3. 0 = original 1 =
+        edited 2 = temporary 3 = temporary + edited 4 = patched 5 =
+        patched + edited ...
+unit: unitless
+range: [-2147483648 , 2147483647]
+
+offset: ...
+field: Backlink
+length: 4
+format: ULONG
+content: Tuple size: variable (multiple of 4 bytes).
+unit: byte
+range: [40 , 4294967295]
+
+header: Table 21. Ping tuple U-16 (10030).
+offset: 0
+field: Tuple size
+length: 4
+format: ULONG
+content: Tuple data size: variable
+unit: byte
+range: [26 , 4294967295]
+
+offset: 4
+field: Tuple type
+length: 2
+format: USHORT
+content: Tuple type code: 10030
+unit: unitless
+range: 10030
+
+offset: 6
+field: Time fraction
+length: 2
+format: USHORT
+content: Time of the transmitted pulse. Fraction of a second to add to
+        the CPU ANSI C time (next field) to get a time precision of
+        0.0001 s.
+unit: 0.0001 s
+range: [0 , 6.5535 s] Practical range: [0 , 0.9999 s]
+
+offset: 8
+field: Time CPU ANSI C Standard time
+length: 4
+format: ULONG
+content: Time of the transmitted pulse. CPU ANSI C time, in seconds.
+        Usually the CPU clock is set to local time.
+unit: s
+range: [0 , 4294967295 s] i.e.: [up to year 2106]
+
+offset: 12
+field: Software channel identifier
+length: 2
+format: USHORT
+content: Unique identifier for this software data channel to which the
+        ping data is associated.
+unit: unitless
+range: [0 , 65535]
+
+offset: 14
+field: Transceiver mode
+length: 2
+format: USHORT
+content: Operating mode of the transmitter: 0 = active: the transceiver
+        is transmitting and receiving a monotone pulse 1 = passive: the
+        transceiver is receiving but not transmitting 2 = test: a
+        calibration signal is injected in the sounder 3 =
+        eavesdropping: the transceiver is receiving while another
+        transceiver is transmitting
+unit: unitless
+range: [0 , 65535] Presently: [0, 1, 2, 3]
+
+offset: 16
+field: Ping number
+length: 4
+format: ULONG
+content: Ping sequence number since the beginning of the file. This
+        should be a permanent label of the pings that should not be
+        altered in further processing steps, namely the edition steps.
+unit: unitless
+range: [0 , 4294967295]
+
+offset: 20
+field: Detected bottom range
+length: 4
+format: LONG
+content: Positive values indicate the range from the transducer face
+        where the bottom detection criteria were encountered under the
+        above active transmitter mode. The sound speed field of the
+        echosounder tuple is used for conversion of time to space.
+        Negative values are reserved for future use. 2147483.647 =
+        bottom not detected.
+unit: 0.001 m
+range: [-2147483.648 , 2147483.647 m] Practical range: [0 , 15000.000
+        m]
+
+offset: 24
+field: Sample sequence number
+length: 2
+format: USHORT
+content: Sample sequence number since the beginning of the ping
+        (samples < threshold contribute to the sequence count).
+unit: unitless
+range: [0 , 65535]
+
+offset: 26
+field: Sample value (> threshold)
+length: 2
+format: SHORT
+content: Sample value on 16 bit. Encoded units and limit ranges depend
+        on the “type of data sample” of the channel tuple.
+unit: 0.001 volts SV or TS: 0.01 dB
+range: For volts: [-32.767 , 32.767 volts] Practical range: [0,25.000
+        volts]; For Sv and TS: [-327.68,327.67 dB] Practical range:
+        [-150.00,0.00 dB]
+
+offset: ...
+field: Sample sequence number
+length: 2
+format: USHORT
+content: Idem
+
+offset: ...
+field: Sample value (> threshold)
+length: 2
+format: SHORT
+content: Idem
+
+offset: ...
+field: Tuple attribute
+length: 4
+format: LONG
+content: Attribute of the tuple according to Annex 3. 0= original 1=
+        edited 2= temporary 3= temporary + edited 4= patched 5= patched
+        + edited ...
+unit: unitless
+range: [-2147483648, 2147483647]
+
+offset: ...
+field: Backlink
+length: 4
+format: ULONG
+content: Tuple size: variable (multiple of 4 bytes).
+unit: byte
+range: [36,4294967295]
+
+header: Table 22. Ping tuple U-16-angles (10031).
+offset: 0
+field: Tuple size
+length: 4
+format: ULONG
+content: Tuple data size: variable
+unit: byte
+range: [30,4294967295]
+
+offset: 4
+field: Tuple type
+length: 2
+format: USHORT
+content: Tuple type code: 10031
+unit: unitless
+range: 10031
+
+offset: 6
+field: Time fraction
+length: 2
+format: USHORT
+content: Time of the transmitted pulse. Fraction of a second to add to
+        the CPU ANSI C time (next field) to get a time precision of
+        0.0001 s.
+unit: 0.0001 s
+range: [0 , 6.5535 s] Practical range: [0 , 0.9999 s]
+
+offset: 8
+field: Time CPU ANSI C Standard time
+length: 4
+format: ULONG
+content: Time of the transmitted pulse. CPU ANSI C time, in seconds.
+        Usually the CPU clock is set to local time.
+unit: s
+range: [0 , 4294967295 s] i.e.: [up to year 2106]
+
+offset: 12
+field: Software channel identifier
+length: 2
+format: USHORT
+content: Unique identifier for this software data channel to which the
+        ping data is associated.
+unit: unitless
+range: [0 , 65535]
+
+offset: 14
+field: Transceiver mode
+length: 2
+format: USHORT
+content: Operating mode of the transmitter: 0 = active: the transceiver
+        is transmitting and receiving a monotone pulse 1 = passive: the
+        transceiver is receiving but not transmitting 2 = test: a
+        calibration signal is injected in the sounder 3 =
+        eavesdropping: the transceiver is receiving while another
+        transceiver is transmitting
+unit: unitless
+range: [0 , 65535] Presently: [0, 1, 2, 3]
+
+offset: 16
+field: Ping number
+length: 4
+format: ULONG
+content: Ping sequence number since the beginning of the file. This
+        should be a permanent label of the pings that should not be
+        altered in further processing steps, namely the edition steps.
+unit: unitless
+range: [0 , 4294967295]
+
+offset: 20
+field: Detected bottom range
+length: 4
+format: LONG
+content: Positive values indicate the range from the transducer face
+        where the bottom detection criteria were encountered under the
+        above active transmitter mode. The sound speed field of the
+        echosounder tuple is used for conversion of time to space.
+        Negative values are reserved for future use. 2147483.647 =
+        bottom not detected.
+unit: 0.001 m
+range: [-2147483.648 , 2147483.647 m] Practical range: [0 , 15000.000
+        m]
+
+offset: 24
+field: Sample sequence number
+length: 2
+format: USHORT
+content: Sample sequence number since the beginning of the ping
+        (samples < threshold contribute to the sequence count)
+unit: unitless
+range: [0 , 65535]
+
+offset: 26
+field: Sample value, alongship electrical phase angle
+length: 2
+format: SHORT
+content: Alongship electrical phase angle of the sample from the
+        split-beam analysis. Zero (0) is the main axis of the
+        transducer beam and positive is in the fore direction. See
+        “Alongship angle sensitivity” in Simrad EK500 Channel tuple
+        for electrical to mechanical angle conversion (also see EK500
+        user manual).
+unit: 0.1 deg
+range: [-3276.8 , 3276.7 deg] Practical range: [-180.0 , 180.0 deg]
+
+offset: 28
+field: Sample value, athwartship electrical phase angle
+length: 2
+format: SHORT
+content: Athwartship electrical phase angle of the sample from the
+        split-beam analysis. Zero (0) is the main axis of the
+        transducer beam and positive is in the starboard direction. See
+        “Athwartship angle sensitivity” in Simrad EK500 Channel
+        tuple for electrical to mechanical angle conversion (also see
+        EK500 user manual).
+unit: 0.1 deg
+range: [-3276.8 , 3276.7 deg] Practical range: [-180.0 , 180.0 deg]
+
+offset: ...
+field: Sample sequence number
+length: 2
+format: USHORT
+content: idem
+
+offset: ...
+field: Sample value, alongship electrical phase angle
+length: 2
+format: SHORT
+content: idem
+
+offset: ...
+field: Sample value athwartship electrical phase angle
+length: 2
+format: SHORT
+content: idem
+
+offset: ...
+field: Optional field: Space
+length: 2
+format: USHORT
+content: When needed: Space to allow the next field to be aligned on an
+        address that is a multiple of 4.
+unit: unitless
+range: 0
+
+offset: ...
+field: Tuple attribute
+length: 4
+format: LONG
+content: Attribute of the tuple according to Annex 3. 0 = original 1 =
+        edited 2 = temporary 3 = temporary + edited 4 = patched 5 =
+        patched + edited ...
+unit: unitless
+range: [-2147483648 , 2147483647]
+
+offset: ...
+field: Backlink
+length: 4
+format: ULONG
+content: Tuple size: variable (multiple of 4 bytes).
+unit: byte
+range: [40 , 4294967295]
+
+header: Table 23. Ping tuple C-16 (10040).
+offset: 0
+field: Tuple size
+length: 4
+format: ULONG
+content: Tuple data size: variable
+unit: byte
+range: [30 , 4294967295]
+
+offset: 4
+field: Tuple type
+length: 2
+format: USHORT
+content: Tuple type code: 10040
+unit: unitless
+range: 10040
+
+offset: 6
+field: Time fraction
+length: 2
+format: USHORT
+content: Time of the transmitted pulse. Fraction of a second to add to
+        the CPU ANSI C time (next field) to get a time precision of
+        0.0001 s.
+unit: 0.0001 s
+range: [0 , 6.5535 s] Practical range: [0 , 0.9999 s]
+
+offset: 8
+field: Time CPU ANSI C Standard time
+length: 4
+format: ULONG
+content: Time of the transmitted pulse. CPU ANSI C time, in seconds.
+        Usually the CPU clock is set to local time.
+unit: s
+range: [0 , 4294967295 s] i.e.: [up to year 2106]
+
+offset: 12
+field: Software channel identifier
+length: 2
+format: USHORT
+content: Unique identifier for this software data channel to which the
+        ping data is associated.
+unit: unitless
+range: [0 , 65535]
+
+offset: 14
+field: Transceiver mode
+length: 2
+format: USHORT
+content: Operating mode of the transmitter: 0 = active: the transceiver
+        is transmitting and receiving a monotone pulse 1 = passive: the
+        transceiver is receiving but not transmitting 2 = test: a
+        calibration signal is injected in the sounder 3 =
+        eavesdropping: the transceiver is receiving while another
+        transceiver is transmitting
+unit: unitless
+range: [0 , 65535] Presently: [0, 1, 2, 3]
+
+offset: 16
+field: Ping number
+length: 4
+format: ULONG
+content: Ping sequence number since the beginning of the file. This
+        should be a permanent label of the pings that should not be
+        altered in further processing steps, namely the edition steps.
+unit: unitless
+range: [0 , 4294967295]
+
+offset: 20
+field: Detected bottom range
+length: 4
+format: LONG
+content: Positive values indicate the range from the transducer face
+        where the bottom detection criteria were encountered under the
+        above active transmitter mode. The sound speed field of the
+        echosounder tuple is used for conversion of time to space.
+        Negative values are reserved for future use. 2147483.647 =
+        bottom not detected.
+unit: 0.001 m
+range: [-2147483.648 , 2147483.647 m] Practical range: [0 , 15000.000
+        m]
+
+offset: 24
+field: No. of samples (> threshold) in this ping
+length: 4
+format: ULONG
+content: No. of samples (> threshold) in this ping (This information
+        can also be computed from the tuple size).
+unit: unitless
+range: [0 , 4294967295]
+
+offset: 28
+field: Sample value
+length: 2
+format: SHORT
+content: Sample value on 16 bit or zero series (< threshold) compressed
+        into RLE samples (the upper bit is set to 1 and the lower 15
+        bits indicate the no. of zeros - 1; 32768 below threshold
+        values can then be compressed into one RLE sample; no value
+        smaller than -16384 or larger than 16383 can be encoded).
+        Encoded units and limit ranges depend on the “type of data
+        sample” of the channel tuple.
+unit: 0.001 volts; Sv or TS: 0.01 dB
+range: For volts: [-16.384 , 16.383 volts] Practical range: [0 , 25.000
+        volts]; For Sv or TS: [-163.84 , 163.83 dB] Practical range:
+        [-150.00 , 0.00 dB]
+
+offset: ...
+field: Sample value
+length: 2
+format: SHORT
+content: idem
+
+offset: ...
+field: Optional field: Space
+length: 2
+format: USHORT
+content: When needed: Space to allow the next field to be aligned on an
+        address that is a multiple of 4.
+unit: unitless
+range: 0
+
+offset: ...
+field: Tuple attribute
+length: 4
+format: LONG
+content: Attribute of the tuple according to Annex 3. 0 = original 1 =
+        edited 2 = temporary 3 = temporary + edited 4 = patched 5 =
+        patched + edited ...
+unit: unitless
+range: [-2147483648 , 2147483647]
+
+offset: ...
+field: Backlink
+length: 4
+format: ULONG
+content: Tuple size: variable (multiple of 4 bytes).
+unit: byte
+range: [40 , 4294967295]
+
+header: Table 24. Split-beam detected single-target tuple (10090).
+offset: 0
+field: Tuple size
+length: 4
+format: ULONG
+content: Tuple data size: variable
+unit: byte
+range: [58 , 4294967295]
+
+offset: 4
+field: Tuple type
+length: 2
+format: USHORT
+content: Tuple type code: 10090
+unit: unitless
+range: 10090
+
+offset: 6
+field: Time fraction
+length: 2
+format: USHORT
+content: Fraction of a second to add to the following CPU ANSI C time
+        for a time precision of 0.0001 s (Local time at which the
+        single target detection was made). This should correspond to
+        the raw ping tuple time fraction.
+unit: 0.0001 s
+range: [0 , 6.5535 s] Practical range: [0 , 0.9999 s]
+
+offset: 8
+field: Time CPU ANSI C Standard time
+length: 4
+format: ULONG
+content: Local time at which the single-target detection was made. ANSI
+        C time given by the CPU clock, in seconds. Usually the CPU
+        clock is set to local time. This should correspond to the raw
+        ping tuple time.
+unit: s
+range: [0 , 4294967295 s] i.e.: [up to year 2106]
+
+offset: 12
+field: Parent sub-channel identifier
+length: 2
+format: USHORT
+content: Split-beam detected single-target parameter sub-channel
+        identifier to which this TS information applies.
+unit: unitless
+range: [0 , 65535]
+
+offset: 14
+field: Space
+length: 2
+format: USHORT
+content: Space to allow the next field to be aligned on an address that
+        is a multiple of 4.
+unit: unitless
+range: 0
+
+offset: 16
+field: Ping number
+length: 4
+format: ULONG
+content: Ping sequence number since the beginning of logging. This
+        should be a permanent label, corresponding to the raw ping
+        tuple, and should not be altered in subsequent processing.
+unit: unitless
+range: [0 , 4294967295]
+
+offset: 20
+field: Search start range
+length: 4
+format: ULONG
+content: Range at which search for single targets started for this
+        ping.
+unit: 0.0001 m
+range: [0 , 429496.7295]
+
+offset: 24
+field: Search end range
+length: 4
+format: ULONG
+content: Range at which search for single targets ended for this ping.
+unit: 0.0001 m
+range: [0 , 429496.7295]
+
+offset: 28
+field: Detected bottom range
+length: 4
+format: LONG
+content: Positive values indicate the range from the transducer face
+        where the bottom detection criteria were encountered, under the
+        above active transmitter mode. The sound speed field of the
+        echosounder tuple is used for conversion of time to space.
+        214748.3647 = bottom not detected.
+unit: 0.0001 m
+range: [-214748.3648 , 214748.3647 m]
+
+offset: 32
+field: Number of detected single targets
+length: 4
+format: ULONG
+content: Number of single targets detected in this ping.
+unit: unitless
+range: [1 , 4294967295]
+
+offset: 36
+field: Range (target #1)
+length: 4
+format: LONG
+content: Range of the first detected single target. Note: The Simrad
+        EK500 and EK60 echosounders output “Depth” to the target
+        relative to the surface, i.e. Range=Depth to the
+        target,transducer depth,heave. The EK60 estimates the front
+        edge of the echo (d), i.e. will seldom be an integer multiple
+        of sample intervals, and is given by the equation: d=x,2*s,
+        where s is the sample interval (and 2*s is half of a pulse
+        length) and x is the centre of gravity of the target as
+        estimated from the raw power samples (i.e. no TVG) according to
+        the equation: x=Σ(p *r )/Σ(p ), where p is the linear power
+        value of sample i and r is the i i i i range to sample i. i
+        ranges from -2 to 2, where i=0 refers to the position of
+        detected peak for the current single target. The closest TVG
+        (40log) value is used to calculate the TS value.
+unit: 0.0001 m
+range: [-214748.3648 , 214748.3647]
+
+offset: 40
+field: Compensated TS (target #1)
+length: 2
+format: SHORT
+content: Target strength of detected single target after compensation
+        for off-axis angle.
+unit: 0.01 dB
+range: [-327.68 , 327.67 dB] EK500 range: [-100.00 , 0.00 dB]
+
+offset: 42
+field: Uncompensated TS (target #1)
+length: 2
+format: SHORT
+content: Raw target strength of detected single target uncompensated
+        for off-axis angle.
+unit: 0.01 dB
+range: [-327.68 , 327.67 dB] EK500 range: [-100.00 , 0.00 dB]
+
+offset: 44
+field: Alongship angle (target #1)
+length: 2
+format: SHORT
+content: Fore-and-aft off-axis angle of the detected single target.
+unit: 0.01 deg
+range: [-327.68 , 327.67 dB]
+
+offset: 46
+field: Athwartship angle (target #1)
+length: 2
+format: SHORT
+content: Athwartship off-axis angle of the detected single target.
+unit: 0.01 deg
+range: [-327.68 , 327.67 dB]
+
+offset: 48
+field: Range (target #2)
+length: 4
+format: LONG
+content: Range of the second detected single target.
+unit: 0.0001 m
+range: [-214748.3648 , 214748.3647]
+
+offset: 52
+field: Compensated TS (target #2)
+length: 2
+format: SHORT
+content: Target strength of detected single target after compensation
+        for off-axis angle.
+unit: 0.01 dB
+range: [-327.68 , 327.67 dB] EK500 range: [-100.00 , 0.00 dB]
+
+offset: 54
+field: Uncompensated TS (target #2)
+length: 2
+format: SHORT
+content: Raw target strength of detected single target uncompensated
+        for off-axis angle.
+unit: 0.01 dB
+range: [-327.68 , 327.67 dB] EK500 range: [-100.00 , 0.00 dB]
+
+offset: 56
+field: Alongship angle (target #2)
+length: 2
+format: SHORT
+content: Fore-and-aft off-axis angle of the detected single target.
+unit: 0.01 deg
+range: [-327.68 , 327.67 dB]
+
+offset: 58
+field: Athwartship angle (target #2)
+length: 2
+format: SHORT
+content: Athwartship off-axis angle of the detected single target.
+unit: 0.01 deg
+range: [-327.68 , 327.67 dB]
+
+offset: ...
+field: Tuple attribute
+length: 4
+format: LONG
+content: Attribute of the tuple according to Annex 3. 0 = original 1 =
+        edited 2 = temporary 3 = temporary + edited 4 = patched 5 =
+        patched + edited ...
+unit: unitless
+range: [-2147483648 , 2147483647]
+
+offset: ...
+field: Backlink
+length: 4
+format: ULONG
+content: Tuple size: variable (multiple of 4 bytes).
+unit: byte
+range: [68 , 4294967295]
+
+header: Table 25. General Threshold tuple (10100).
+offset: 0
+field: Tuple size
+length: 4
+format: ULONG
+content: Tuple data size: 34 bytes
+unit: byte
+range: 34
+
+offset: 4
+field: Tuple type
+length: 2
+format: USHORT
+content: Tuple type code: 10100
+unit: unitless
+range: 10100
+
+offset: 6
+field: Time fraction
+length: 2
+format: USHORT
+content: Time of threshold setting. Fraction of a second to add to the
+        CPU ANSI C time (next field) to get a time precision of 0.0001
+        s.
+unit: 0.0001 s
+range: [0 , 6.5535 s] Practical range: [0 , 0.9999 s]
+
+offset: 8
+field: Time CPU ANSI C Standard time
+length: 4
+format: ULONG
+content: Time of threshold setting. ANSI C time given by the CPU clock,
+        in seconds. Usually the CPU clock is set to local time.
+unit: s
+range: [0 , 4294967295 s] i.e.: [up to year 2106]
+
+offset: 12
+field: Software channel identifier
+length: 2
+format: USHORT
+content: Unique identifier for the software data channel to which this
+        threshold tuple is associated. The equation used for the TVT
+        evaluation should be dependent on channel data units (volts, Sv
+        or TS, etc.). Some channels may not require any thresholding.
+unit: unitless
+range: [0 , 65535]
+
+offset: 14
+field: TVG max. range
+length: 2
+format: USHORT
+content: Maximum range from the transducer on which the TVG is applied
+        by the echosounder. This is the TVG maximum range field of the
+        echosounder tuple (see Biosonics Model 102 Echosounder tuple).
+unit: 0.1 m
+range: [0 , 6553.5 m] Biosonics 102 options: [0 , 999.9 m]
+
+offset: 16
+field: TVG min. range
+length: 2
+format: USHORT
+content: Minimum range from which the TVG is applied by the
+        echosounder. It is either the hardware determined TVG min.
+        range (of either 1.25, 2.5, 5.0 or 10.0 m) or the value of the
+        blank-at-range field of the echosounder tuple (see pertinent
+        fields in Biosonics Model 102 Echosounder tuple).
+unit: 0.1 m
+range: [0 , 6553.5 m] Biosonics 102 options: [0 , 999.9 m]
+
+offset: 18
+field: TVT evaluation: Mode
+length: 2
+format: USHORT
+content: Time-varied threshold (TVT) evaluation mode: 0 = no TVT, a
+        constant threshold is applied. When the mode is 0 and the
+        “amplification field” is 0, the “offset field”
+        specifies a constant threshold (which could be zero). When the
+        offset is zero, no threshold is applied. 1 = manual (TVT is
+        evaluated on the user’s request) 2 = automatic (TVT was
+        evaluated at regular time intervals). 3 = manually set by user
+unit: unitless
+range: [0 , 65535] Presently: [0, 1, 2]
+
+offset: 20
+field: TVT evaluation: Interval
+length: 2
+format: USHORT
+content: Time interval between two TVT evaluations under the automatic
+        TVT evaluation mode of CH1 software.
+unit: s
+range: [0 , 65535 s] i.e.: [up to 18.2 h]
+
+offset: 22
+field: TVT evaluation: No. of pings
+length: 2
+format: USHORT
+content: Number of pings over which the TVT is evaluated.
+unit: unitless
+range: [0 , 65535]
+
+offset: 24
+field: TVT evaluation: Starting TVT ping number
+length: 4
+format: ULONG
+content: Starting TVT ping number of the ping series used for the TVT
+        evaluation of this threshold tuple. The ending TVT ping number
+        of the ping series is obtained by adding the above field “TVT
+        evaluation: No. of pings” to the present field.
+unit: unitless
+range: [0 , 4294967295]
+
+offset: 28
+field: TVT offset parameter or constant threshold parameter
+length: 4
+format: LONG
+content: Coefficient C of the TVT formula. This parameter becomes a
+        constant threshold if the A coefficient =0. 2 βR For volts
+        (Note: not the energy, V ), the 20 log R TVG = A R e βR 20 20
+        e + C ; where R is the range, A and C are the estimated
+        coefficients, and β is the sound absorption 40 coefficient in
+        nepers per m. For Sv or TS (dB), the formula for a 20 log R TVG
+        = A(20 log(R) + 2αR) + C, and for a 40 log R TVG = A(40 log(R)
+        + 2αR) + C, where R is the range, A and C are the estimated
+        coefficients, and α is the sound absorption coefficient in
+        dB/m. Note: β = α/10 log e. The curve is fitted for the range
+        interval between TVG minimum and TVG maximum ranges or for the
+        sample range. 2 2 βR C ; and the 40 log R TVG = A R e + C ;
+        where R is the range, A and C are the estimated 20 40 40
+        coefficients, and β is the sound absorption coefficient in
+        nepers per m. For Sv or TS (dB), the formula for a 20 log R TVG
+        = A(20 log(R) + 2αR) + C, and for a 40 log R TVG = A(40 log(R)
+        + 2αR) + C, where R is the range, A and C are the estimated
+        coefficients, and α is the sound absorption coefficient in
+        dB/m. Note: β = α/10 log e. The curve is fitted for the range
+        interval between TVG minimum and TVG maximum ranges or for the
+        sample range. 2 + C ; and the 40 log R TVG = A R 40 βR 20
+unit: 0.000001
+range: [-2147.483648 , 2147.483647]
+
+offset: 32
+field: TVT amplification parameter
+length: 4
+format: LONG
+content: Coefficient A of the TVT formula.
+unit: 0.000001
+range: [0 , 4294.967295]
+
+offset: 36
+field: Tuple attribute
+length: 4
+format: LONG
+content: Attribute of the tuple according to Annex 3. 0 = original 1 =
+        edited 2 = temporary 3 = temporary + edited 4 = patched 5 =
+        patched + edited ...
+unit: unitless
+range: [-2147483648 , 2147483647]
+
+offset: 40
+field: Backlink
+length: 4
+format: ULONG
+content: Tuple size: 44 bytes
+unit: byte
+range: 44
+
+header: Table 26. Attitude sensor tuple (10140).
+offset: 0
+field: Tuple size
+length: 4
+format: ULONG
+content: Tuple data size: 22 bytes
+unit: byte
+range: 22
+
+offset: 4
+field: Tuple type
+length: 2
+format: USHORT
+content: Tuple type code: 10140
+unit: unitless
+range: 10140
+
+offset: 6
+field: Time fraction
+length: 2
+format: USHORT
+content: Fraction of a second to add to the following CPU ANSI C time
+        to get a time precision of 0.0001 s (Local time at which the
+        platform attitude reading was taken).
+unit: 0.0001 s
+range: [0 , 6.5535 s] Practical range: [0 , 0.9999 s]
+
+offset: 8
+field: Time CPU ANSI C Standard time
+length: 4
+format: ULONG
+content: Local time at which the platform attitude reading was taken.
+        ANSI C time given by the CPU clock, in seconds. Usually the CPU
+        clock is set to local time.
+unit: s
+range: [0 , 4294967295 s] i.e.: [up to year 2106]
+
+offset: 12
+field: Attitude sensor identifier
+length: 2
+format: USHORT
+content: Unique identifier for the attitude sensor providing the
+        attitude information.
+unit: unitless
+range: [0 , 65535]
+
+offset: 14
+field: Pitch
+length: 2
+format: SHORT
+content: Inclination of the platform relative to the horizontal plane
+        in the fore-and-aft direction (X). Positive angles indicate bow
+        up.
+unit: 0.1 deg
+range: [-3276.8 , 3276.7 deg] Practical range: [-90.0 , 90.0 deg]
+
+offset: 16
+field: Roll
+length: 2
+format: SHORT
+content: Inclination of the platform relative to the horizontal plane
+        in the starboard-and-port direction (Y). Positive angles
+        indicate port up.
+unit: 0.1 deg
+range: [-3276.8 , 3276.7 deg] Practical range: [-90.0 , 90.0 deg]
+
+offset: 18
+field: Heave
+length: 2
+format: SHORT
+content: Heave of the platform in the vertical direction (Z). Positive
+        heave is downwards.
+unit: 0.01 m
+range: [-327.68 , 327.67 m]
+
+offset: 20
+field: Yaw
+length: 2
+format: SHORT
+content: Yaw of the platform. Positive angles indicate yaw to
+        starboard.
+unit: 0.1 deg
+range: [-3276.8 , 3276.7 deg] Practical range: [-180.0 , 180.0 deg]
+
+offset: 22
+field: Space
+length: 2
+format: USHORT
+content: Space to allow the next field to be aligned on an address that
+        is a multiple of 4.
+unit: unitless
+range: 0
+
+offset: 24
+field: Tuple attribute
+length: 4
+format: LONG
+content: Attribute of the tuple according to Annex 3. 0 = original 1 =
+        edited 2 = temporary 3 = temporary + edited 4 = patched 5 =
+        patched + edited ...
+unit: unitless
+range: [-2147483648 , 2147483647]
+
+offset: 28
+field: Backlink
+length: 4
+format: ULONG
+content: Tuple size: 32 bytes
+unit: byte
+range: 32
+
+header: Table 27. Platform position tuple (10142).
+offset: 0
+field: Tuple size
+length: 4
+format: ULONG
+content: Tuple data size: 26 bytes
+unit: byte
+range: 26
+
+offset: 4
+field: Tuple type
+length: 2
+format: USHORT
+content: Tuple type code: 10142
+unit: unitless
+range: 10142
+
+offset: 6
+field: Time fraction
+length: 2
+format: USHORT
+content: Fraction of a second to add to the following CPU ANSI C time
+        to get a time precision of 0.0001 s (Local time at which the
+        platform position reading was taken).
+unit: 0.0001 s
+range: [0 , 6.5535 s] Practical range : [0 , 0.9999 s]
+
+offset: 8
+field: Time CPU ANSI C Standard time
+length: 4
+format: ULONG
+content: Local time at which the platform position was taken ANSI C
+        time given by the CPU clock, in seconds. Usually the CPU clock
+        is set to local time.
+unit: s
+range: [0,4294967295 s] i.e.: [up to year 2106]
+
+offset: 12
+field: Distance sensor identifier
+length: 2
+format: USHORT
+content: Unique identifier of the distance sensor providing the X and Y
+        position information.
+unit: unitless
+range: [0 - 65535]
+
+offset: 14
+field: Depth sensor identifier
+length: 2
+format: USHORT
+content: Unique identifier of the depth sensor providing the Z position
+        information.
+unit: unitless
+range: [0 , 65535]
+
+offset: 16
+field: Alongship distance (X)
+length: 4
+format: LONG
+content: Alongship distance between platform and reference point on
+        vessel; negative values are on the aft side of the reference
+        point.
+unit: 0.0001 m
+range: [-214748.3648 , 214748.3647 m]
+
+offset: 20
+field: Athwartship distance (Y)
+length: 4
+format: LONG
+content: Athwartship distance between platform and reference point on
+        vessel; negative values are on the port side of the reference
+        point.
+unit: 0.0001 m
+range: [-214748.3648 , 214748.3647 m]
+
+offset: 24
+field: Depth (Z)
+length: 4
+format: LONG
+content: Platform depth, referred to sea surface.
+unit: 0.0001 m
+range: [-214748.3648 , 214748.3647 m]
+
+offset: 28
+field: Tuple attribute
+length: 4
+format: LONG
+content: Attribute of the tuple according to Annex 3. 0 = original 1 =
+        edited 2 = temporary 3 = temporary + edited 4 = patched 5 =
+        patched + edited ...
+unit: unitless
+range: [-2147483648 , 2147483647]
+
+offset: 32
+field: Backlink
+length: 4
+format: ULONG
+content: Tuple size: 36 bytes
+unit: byte
+range: 36
+
+header: Table 28. STD profile tuple (11000).
+offset: 0
+field: Tuple size
+length: 4
+format: ULONG
+content: Tuple data size: variable
+unit: byte
+range: [38,4294967295]
+
+offset: 4
+field: Tuple type
+length: 2
+format: USHORT
+content: Tuple type code: 11000
+unit: unitless
+range: 11000
+
+offset: 6
+field: Time fraction
+length: 2
+format: USHORT
+content: Fraction of a second to add to the following CPU ANSI C time
+        to get a time precision of 0.0001 s (Local time at which the
+        STD profile started).
+unit: 0.0001 s
+range: [0 , 6.5535 s] Practical range: [0 , 0.9999 s]
+
+offset: 8
+field: Time CPU ANSI C Standard time
+length: 4
+format: ULONG
+content: Local time at which the STD profile started. ANSI C time given
+        by the CPU clock, in seconds. Usually the CPU clock is set to
+        local time.
+unit: s
+range: [0 , 4294967295 s] i.e.: [up to year 2106]
+
+offset: 12
+field: Sensor type
+length: 2
+format: USHORT
+content: STD profiler used: 0 = XBT 1 = CTD 2 = XCTD 3 = Mobile sound
+        velocity profiler
+unit: unitless
+range: [0 , 65535]
+
+offset: 14
+field: Number of measurements
+length: 2
+format: USHORT
+content: Number of measurements in this profile.
+unit: unitless
+range: [0 , 65535]
+
+offset: 16
+field: Pressure (record#1)
+length: 4
+format: ULONG
+content: Pressure.
+unit: 0.001 Pa(dbar?)
+range: [0 , 4294967.295 s] Practical range: [0 , 1000000.000 Pa]
+
+offset: 20
+field: Temperature (record #1)
+length: 4
+format: LONG
+content: Temperature.
+unit: 0.0001 °C
+range: [-214748.3648 , 214748.3647°C] Practical range: [-5.000 ,
+        50.0000 °C]
+
+offset: 24
+field: Conductivity (record #1)
+length: 2
+format: USHORT
+content: Conductivity.
+unit: 0.001 S/m
+range: [0 , 65.535 S/m] Practical range: [0 , 7.000 S/m]
+
+offset: 26
+field: Sound velocity (record #1)
+length: 2
+format: USHORT
+content: Speed of sound.
+unit: 0.1 m/s
+range: [0 , 6553.5 m/s] Practical range: [1400.0 , 1700.0 m/s]
+
+offset: 28
+field: Depth (record #1)
+length: 4
+format: ULONG
+content: Depth from surface.
+unit: 0.0001 m
+range: [0 , 429496.7295 m] Practical range: [0 , 10000.0000 m]
+
+offset: 32
+field: Salinity (record#1)
+length: 4
+format: ULONG
+content: Salinity.
+unit: 0.001 psu
+range: [0, 4294967.295 psu] Practical range: [0 , 42.000 psu]
+
+offset: 36
+field: Absorption (record #1)
+length: 4
+format: ULONG
+content: Absorption of sound in the propagation medium.
+unit: 0.0001 dB/km
+range: [0 , 429496.7295 dB/km] Practical range: [0 , 300.0000 dB/km]
+
+offset: 40
+field: Pressure (record#2)
+length: 4
+format: ULONG
+content: Pressure.
+unit: 0.001 Pa(dbar?)
+range: [0 , 4294967.295 s] Practical range: [0 , 1000000.000 Pa]
+
+offset: 44
+field: Temperature (record #2)
+length: 4
+format: LONG
+content: Temperature.
+unit: 0.0001 °C
+range: [-214748.3648 , 214748.3647 °C] Practical range: [-5.000 , 50.0000 °C]
+
+offset: 48
+field: Conductivity (record #2)
+length: 2
+format: USHORT
+content: Conductivity.
+unit: 0.001 S/m
+range: [0 , 65.535 S/m] Practical range: [0 , 7.000 S/m]
+
+offset: 50
+field: Sound velocity (record #2)
+length: 2
+format: USHORT
+content: Speed of sound.
+unit: 0.1 m/s 
+range: [0 , 6553.5 m/s] Practical range: [1400.0 , 1700.0 m/s]
+
+offset: 52
+field: Depth (record #2)
+length: 4
+format: ULONG
+content: Depth from the surface.
+unit: 0.0001 m
+range: [0 , 429496.7295 m] Practical range: [0 , 10000.0000 m]
+
+offset: 56
+field: Salinity (record#2)
+length: 4
+format: ULONG
+content: Salinity.
+unit: 0.001 psu
+range: [0 , 4294967.295 psu] Practical range: [0 , 42.000 psu]
+
+offset: 60
+field: Absorption(record #2)
+length: 4
+format: ULONG
+content: Absorption of sound in the propagation medium.
+unit: 0.0001 dB/km
+range: [0 , 429496.7295 dB/km] Practical range: [0 , 300.0000 dB/km]
+
+offset: ...
+field: Tuple attribute
+length: 4
+format: LONG
+content: Attribute of the tuple according to Annex 3. 0 = original 1 =
+        edited 2 = temporary 3 = temporary + edited 4 = patched 5 =
+        patched + edited ...
+unit: unitless
+range: [-2147483648 , 2147483647]
+
+offset: ...
+field: Backlink
+length: 4
+format: ULONG
+content: Tuple size: variable (multiple of 4 bytes).
+unit: byte
+range: [48 , 4294967295]
+
+header: Table 29. Private tuple (65397).
+offset: 0
+field: Tuple Size
+length: 4
+format: ULONG
+content: Tuple data size: variable
+unit: bytes
+range: [6 , 4294967295]
+
+offset: 4
+field: Tuple Type
+length: 2
+format: USHORT
+content: Tuple type code: 65397
+unit: unitless
+range: 65397
+
+offset: 6
+field: Organization
+length: 2
+format: USHORT
+content: Code identifying the organization that controls the format of
+        the data section of the tuple. Codes allocated by the HAC tuple
+        coordination committee and described publicly. 1 = DFO-Maurice
+        Lamontagne Institute 2 = BioSonics 3 = Simrad 4 = HTI 5 =
+        IFREMER 6 = SonarData
+unit: unitless
+range: [0 , 65535]
+
+offset: 8
+field: Data
+length: multiple of 4 bytes
+content: Space for data; structure to be determined by user with
+        restriction that total length must be a multiple of 4 bytes.
+
+offset: ...
+field: Tuple attribute
+length: 4
+format: LONG
+content: Attribute of the tuple according to Annex 3. 0 = original 1 =
+        edited 2 = temporary 3 = temporary 4 = patched 5 = patched +
+        edited ...
+unit: unitless
+range: [-2147483648 , 2147483647]
+
+offset: ...
+field: Backlink
+length: 4
+format: ULONG
+content: Tuple size: variable (multiple of 4 bytes)
+unit: byte
+range: [16 , 4294967295]
+
+header: Table 30. End of file tuple (65534).
+offset: 0
+field: Tuple size
+length: 4
+format: ULONG
+content: Tuple data size: variable
+unit: byte
+range: [14 , 4294967295]
+
+offset: 4
+field: Tuple type
+length: 2
+format: USHORT
+content: Standard end of file tuple type code: 65534
+unit: unitless
+range: 65534
+
+offset: 6
+field: Time fraction
+length: 2
+format: USHORT
+content: Fraction of a second to add to the following CPU ANSI C
+        standard time to get a time precision of 0.0001 s (Local time
+        at which the file was closed).
+unit: 0.0001 s
+range: [0 , 6.5535 s] Practical range: [0 , 0.9999 s]
+
+offset: 8
+field: Time CPU ANSI C standard time
+length: 4
+format: ULONG
+content: Local time at which the file was closed. ANSI C time given by
+        the CPU clock, in seconds. Usually the CPU clock is set to
+        local time.
+unit: s
+range: [0 , 4294967295 s] i.e.: [up to year 2106]
+
+offset: 12
+field: Closing mode
+length: 2
+format: USHORT
+content: How the file was closed: 0 = closed manually by the operator
+        command 1 = closed automatically by the program 2 = closed by
+        the program while an error was detected.
+unit: unitless
+range: [0 , 65535] Presently: [0, 1]
+
+offset: ...
+field: Space for possible data; structure if any, to be determined.
+
+offset: ...
+field: Tuple attribute
+length: 4
+format: LONG
+content: Attribute of the tuple according to Annex 3. 0 = original 1 =
+        edited 2 = temporary 3 = temporary + edited 4 = patched 5 =
+        patched + edited ...
+unit: unitless
+range: [-2147483648 , 2147483647]
+
+offset: ...
+field: Backlink
+length: 4
+format: ULONG
+content: Tuple size: variable (multiple of 4 bytes).
+unit: byte
+range: [24 , 4294967295]
+
+header: Table 31. HAC Signature tuple (65535).
+offset: 0
+field: Tuple size
+length: 4
+format: ULONG
+content: Tuple data size: 14
+unit: byte
+range: 14
+
+offset: 4
+field: Tuple type
+length: 2
+format: USHORT
+content: Tuple type code: 65535
+unit: unitless
+range: 65535
+
+offset: 6
+field: HAC identifier
+length: 2
+format: USHORT
+content: Unique code identifying the HAC tuple files. The chosen code
+        was determined from the hexadecimal 0xACAC (decimal 44204), the
+        two first letters of ACoustics).
+unit: unitless
+range: 44204
+
+offset: 8
+field: HAC version
+length: 2
+format: USHORT
+content: HAC format version.
+unit: 0.00
+range: [0 , 655.35]
+
+offset: 10
+field: Acquisition software version
+length: 2
+format: USHORT
+content: Version number of the acquisition software, e.g. 1.00.
+unit: 0.00
+range: [0 , 655.35] Practical range: [0 , 99.99]
+
+offset: 12
+field: Acquisition software identifier
+length: 4
+format: ULONG
+content: Unique code identifying the software used to acquire the tuple
+        file. 1 = Echoview from SonarData 3741428908 = CH1 from DFO
+        (hexadecimal 0xDF01ACAC) 4278234284 = MOVIES+ from IFREMER
+        (hexadecimal 0xFF00ACAC).
+unit: unitless
+range: [0 , 4294967295]
+
+offset: 16
+field: Tuple attribute
+length: 4
+format: LONG
+content: Attribute of the tuple according to Annex 3. 0 = original 1 =
+        edited 2 = temporary 3 = temporary + edited 4 = patched 5 =
+        patched + edited ...
+unit: unitless
+range: [-2147483648 , 2147483647]
+
+offset: 20
+field: Backlink
+length: 4
+format: ULONG
+content: Tuple size: 24 bytes
+unit: byte
+range: 24
