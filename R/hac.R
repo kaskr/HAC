@@ -372,7 +372,7 @@ identifierRegexpr <- list(
                           attitudesensor="attitude sensor identifier",
                           time="time cpu ansi c standard",
                           timefraction="time fraction",
-                          typeofdata="type of data"
+                          typeofdata="type of data|Data type"
                           )
 identifierOffsetList <- lapply(identifierRegexpr,getIdentifierOffset)
 
