@@ -192,14 +192,14 @@ if(TRUE){ ## DO_PATCH
 
 ## Extractor functions (vectorized) from binary format.
 USHORT <- function(raw){
-  raw <- matrix(raw,2)
+  dim(raw) <- c(2L, length(raw) / 2L)
   storage.mode(raw) <- "integer"
-  as.integer(t(c(1,256))%*%raw)
+  as.integer( t( c(1, 256) ) %*% raw )
 }
 ULONG <- function(raw){
   ## Largest ulong is 2^32-1. Greater than largest R integer (2^31-1)!
   ## ==> MUST represent ULONG as double !
-  raw <- matrix(raw,4)
+  dim(raw) <- c(4L, length(raw) / 4L)
   storage.mode(raw) <- "integer"
   as.numeric( t( c(1, 256, 65536, 16777216) ) %*% raw )
 }
