@@ -10,7 +10,10 @@ file <- system.file("hacdef.dcf",package="HAC")
 zz <- read.dcf(file,all=TRUE)
 zz$offset[zz$offset=="..."] <- NA
 zz$offset <- as.numeric(zz$offset)
-zz$length <- as.numeric(zz$length) ## Fix: "multiple of 4 bytes"
+## FIXME: Private tuple (65397) has "length: multiple of 4 bytes"
+##        For now un-supported :
+zz$length[zz$length=="multiple of 4 bytes"] <- NA
+zz$length <- as.numeric(zz$length)
 head <- zz$header[!is.na(zz$header)]
 regexpr <- ".*\\. (.*)\\((.*)\\).*"
 tup <- as.integer(gsub(regexpr,"\\2",head))
@@ -19,6 +22,7 @@ tuple2text <- txt; names(tuple2text) <- tup
 df <- data.frame(txt=txt,tup=tup,stringsAsFactors=FALSE)
 tableList <- base::split(zz,cumsum(!is.na(zz$header))) ## All 30 tables
 names(tableList) <- df$tup                       ## Name = tuple code
+rm("df","file","head","regexpr","tup","txt","zz")
 
 ## Interpretations
 ## e.g.: Repetition patterns, unique identifier, parent identifier etc.
@@ -34,7 +38,7 @@ interpretations <- function(df){
   if(length(idem)>0){
     stopifnot(all(diff(idem))==1)
     df$rep[idem-length(idem)] <- TRUE ## Repeat previous entries
-    df <- df[-idem,]                     ## Remove "idem" entries
+    df <- df[-idem,]                  ## Remove "idem" entries
   }
   df
 }
@@ -45,15 +49,19 @@ tableList <- lapply(tableList,interpretations)
 ## tuple2parent
 ## === List of known tuple codes:
 ## > cat(deparse(as.integer(df$tup)))
-known.tuples <- c(20L, 41L, 42L, 100L, 200L, 210L, 901L, 1000L, 1001L, 2000L,  2001L, 2002L, 2100L, 4000L, 9001L, 10000L, 10001L, 10010L, 10011L,  10030L, 10031L, 10040L, 10090L, 10100L, 10140L, 10142L, 11000L,  65397L, 65534L, 65535L)
+known.tuples <- c(20L, 41L, 42L, 100L, 200L, 210L, 901L, 1000L, 1001L,
+2000L, 2001L, 2002L, 2100L, 4000L, 9001L, 10000L, 10001L, 10010L,
+10011L, 10030L, 10031L, 10040L, 10090L, 10100L, 10140L, 10142L,
+11000L, 65397L, 65534L, 65535L)
 
 ## Interpret unit field
 ## x <- unique(zz$unit)
 parseUnit <- function(def,datatype){
   x <- def$unit
   regexpr <- "([0-9|\\.]*)[ ]*([a-z|A-Z|/]*).*"
-  ## Unit field can be a semicolon separated string of the form "0th unit;1st unit;2nd unit;3rd unit" etc
-  ## "datatype" determines the number.
+  ## Unit field can be a semicolon separated string of the form "0th
+  ## unit;1st unit;2nd unit;3rd unit" etc "datatype" determines the
+  ## number.
   ch <- paste("^",paste(rep("[^;]*;",datatype),collapse=""),sep="")
   x <- sub(ch,"",x)
   ans <- data.frame(mult=as.numeric(sub(regexpr,"\\1",x)),
@@ -85,10 +93,8 @@ addUnits <- function(x){
   i <- grep("software channel identifier",names(x),ignore.case=TRUE)
   if(length(i)>0){
     channel <- unique(x[[i]])
-    ##print(channel)
     stopifnot(length(channel)<=1)
     datatype <- channel2datatype(x)[as.character(channel)]
-    ##print(datatype)
   } else datatype <- 0
   def <- tableList[[as.character(type)]]
   df <- parseUnit(def,datatype)
@@ -100,7 +106,6 @@ addUnits <- function(x){
     if(!is.na(df$mult)){
       x[] <- x[]*df$mult
     } else if(df$haslevels){
-      ##x <- factor(co[[i]][as.character(x)])
       x <- (co[[i]][as.character(x)])
     }
     x
@@ -111,46 +116,57 @@ addUnits <- function(x){
   ans
 }
 
+## Quotes from ICES HAC manual:
+## ============================
+##
 ## All tuple types contain five required fields in the following order:
 ##   (1) the tuple data size (totallength of the data fields),
 ##   (2) the tuple type code, or file tag,
 ##   (3) the data fields,
-##   (4) the tuple attribute field (e.g. original tuple, edited tuple), and
-##   (5) the tuple backlink, which gives the tuple size (i.e. 10 bytes longer than the tuple data size).
-
-## A software application is defined as HAC compatible if it can read and/or write, and use a
-## minimum number of commonly used basic tuples following the HAC syntax rules as outlined
-## in this document. These tuple numbers are:
-## * 20, 100, 200, 901, 1000, 2000, 2001, 2002, 9001, 10000, 10001, 10010, 10011,
-## 10030, 10031, 10040, 10100, 65534, 65535
-
+##   (4) the tuple attribute field (e.g. original tuple, edited
+##       tuple), and
+##   (5) the tuple backlink, which gives the tuple size (i.e. 10 bytes
+##       longer than the tuple data size).
+##
+## A software application is defined as HAC compatible if it can read
+## and/or write, and use a minimum number of commonly used basic
+## tuples following the HAC syntax rules as outlined in this
+## document. These tuple numbers are:
+##
+## * 20, 100, 200, 901, 1000, 2000, 2001, 2002, 9001, 10000, 10001,
+## 10010, 10011, 10030, 10031, 10040, 10100, 65534, 65535
+##
 ## Therefore a file
-##   (1) must start with the code 172 (=hexadecimal 0xAC, for ACoustics) stored in a ULONG2 word
-##       in the HAC signature tuple, to identify the byte encoding mode of the computer platform, and
-##   (2) must contain at least the seven minimum tuple types. The first tuple in an HAC file must be
-##       the HAC signature tuple. The last tuple must be the End of file tuple.
-
-
-
+##
+##   (1) must start with the code 172 (=hexadecimal 0xAC, for
+##       ACoustics) stored in a ULONG2 word in the HAC signature
+##       tuple, to identify the byte encoding mode of the computer
+##       platform, and
+##
+##   (2) must contain at least the seven minimum tuple types. The
+##       first tuple in an HAC file must be the HAC signature
+##       tuple. The last tuple must be the End of file tuple.
+##
 ## Position tuple
-## This tuple type stores the geographic position of the transducer deployment platform. The data
-## collection rate of position data can be independent of the ping rate. [Reserved tuple type
-## codes: 20 – 29].
+## This tuple type stores the geographic position of the transducer
+## deployment platform. The data collection rate of position data can
+## be independent of the ping rate. [Reserved tuple type codes: 20 -
+## 29].
 
 
-## ===================================================== PART I: PARSE ICES DOCUMENTATION
+## =============================== PART I: PARSE ICES DOCUMENTATION
 ## get Tuple definitions
 ## Each Table defines a tuple.
-##source("tupleData.R")
-
 ## ============== At page 3 of the manual we have: 
 ## ...... 
-## To solve these ambiguities, it was decided to fix the Remark field lengths of tuples
-## 901 and 9001 at 40 and 100 bytes, respectively, and at 20 bytes for tuple 2002.
+## To solve these ambiguities, it was decided to fix the Remark field
+## lengths of tuples 901 and 9001 at 40 and 100 bytes, respectively,
+## and at 20 bytes for tuple 2002.
 ## ......
 ## ==============
-## We have to patch the tables: 901 has 100 bytes and 9001 has 40
-## Hm, not solving the problem. In practice the character field can have variable length.
+## We have to patch the tables: 901 has 100 bytes and 9001 has 40.
+## Hm, not solving the problem. In practice the character field can
+## have variable length.
 if(TRUE){ ## DO_PATCH
   DO_PATCH <- TRUE
   patchTable <- function(x,n){
@@ -165,46 +181,42 @@ if(TRUE){ ## DO_PATCH
   ## tableList[["9001"]] <- patchTable(tableList[["9001"]],100)
 }
 
-
 ## TODO: we can do a lot more:
 ## * Data values: grep for "Idem". Then we know the data pattern.
 
 
+## =============================== PART II: READ EXAMPLE FILE
 
-## ===================================================== PART II: READ EXAMPLE FILE
+## TODO: Handle NA values correctly: Manual says extreme values are
+## used to code NAs.
 
-## TODO: Handle NA values correctly: Manual says extreme values are used to code NAs.
+## Extractor functions (vectorized) from binary format.
 USHORT <- function(raw){
   raw <- matrix(raw,2)
   storage.mode(raw) <- "integer"
   as.integer(t(c(1,256))%*%raw)
 }
-ULONG <- function(raw){ ## Largest ulong is 2^32-1. Greater than largest R integer (2^31-1)!
-                        ## ==> MUST represent ULONG as double !
+ULONG <- function(raw){
+  ## Largest ulong is 2^32-1. Greater than largest R integer (2^31-1)!
+  ## ==> MUST represent ULONG as double !
   raw <- matrix(raw,4)
   storage.mode(raw) <- "integer"
-  ##storage.mode(raw) <- "double"
-  ##as.integer(t(c(1,256,65536,16777216))%*%raw)
-  as.numeric(t(c(1,256,65536,16777216))%*%raw)
+  as.numeric( t( c(1, 256, 65536, 16777216) ) %*% raw )
 }
 CHAR <- function(raw){
-  ##rawToChar(raw)
-  ##paste(sapply(raw,rawToChar),collapse="") ## Workaround embedded nulls
   nulmatch <- match(as.raw(0),raw)
-  if(is.na(nulmatch))return(rawToChar(raw))
-  i <- seq.int(length=nulmatch) ## Let \0 interrupt character
+  if(is.na(nulmatch)) return(rawToChar(raw))
+  i <- seq.int(length.out = nulmatch) ## Let \0 interrupt character
   rawToChar(raw[i])
 }
-## Implementation of "twos complement".
 SHORT <- function(raw){
-  ##USHORT(raw)-as.integer(2^15)*(USHORT(raw)>0)
+  ## Implementation of "twos complement".
   tmp <- USHORT(raw)
-  tmp-(tmp>=2^15)*2^16
+  tmp - (tmp >= 2^15) * 2^16
 }
 LONG <- function(raw){
-  ##as.integer(ULONG(raw)-2^31*(ULONG(raw)>0))
   tmp <- ULONG(raw)
-  tmp-(tmp>=2^31)*2^32
+  tmp - (tmp >= 2^31) * 2^32
 }
 RAW <- function(raw)raw
 
@@ -234,14 +246,16 @@ parseBinaryTuple <- function(tup){
   ## Variable character length bug
   if(DO_PATCH){
     i <- which(def$format=="CHAR")
-    if(length(i)==1){ ## Only one tuple has length=4 (2100) and current fix wont work...
+    if(length(i)==1){
+      ## Only one tuple has length=4 (2100) and current fix wont work
+      ## (not a problem if '2100' uses fixed length CHARs - which
+      ## seems to be the case in practice)
       newlen <- ULONG(tup[1:4])+10-sum(def$length[-i]) ## This must be CHAR length !
       def <- patchTable(def,newlen)
     }
   }
   
   ## Allow many compatible tuples to be parsed simultaneously
-  ## !!!! NOt yer working - is there an error in hac files?
   size <- ULONG(tup[1:4])+10 ## Size of this tuple type (bytes)
   dim(tup) <- c(size,length(tup)/size)
 
@@ -266,7 +280,6 @@ parseBinaryTuple <- function(tup){
   if(blocksize>0){ ## Have data
     offset <- def$offset[def$rep][1]+1
     nblocks <- floor((length(tup[,1])-8-offset)/blocksize)
-    ##nblocks <- floor((length(tup)-8-offset)/blocksize)
   }
   sequence <- function(offset,length,rep=FALSE){
     ans <- seq.int(offset,length.out=length)
@@ -277,12 +290,8 @@ parseBinaryTuple <- function(tup){
     }
     ans
   }
-  ##args <- Map(function(x,y)tup[seq.int(x,length=y)],def$offset+1,def$length)
-  ##args <- Map(function(x,y,z)tup[sequence(x,y,z)],def$offset+1,def$length,def$rep)
   args <- Map(function(x,y,z)tup[sequence(x,y,z),],def$offset+1,def$length,def$rep)
-  
-  ##tmp <- Map(function(x,y,name)get("name")(tup[seq.int(x,length=y)]),def$offset+1,def$length,def$format)
-  funs <- lapply(def$format,get)
+  funs <- lapply(def$format,get, envir = asNamespace("HAC"), inherits = FALSE)
   ans <- Map(function(x,f)f(x),args,funs)
   setdim <- function(x){
     if(ncol(tup)>1 & length(x)>ncol(tup))dim(x) <- c(length(x)/ncol(tup),ncol(tup))
@@ -307,10 +316,8 @@ print.tuple <- function(x,show=2,...){
     }
     if(is.matrix(x)){
       txt <- paste("[dim=",paste(dim(x),collapse="x"),"]",sep="")
-      ##x <- c(txt,head(x,show),"...",tail(x,show))
       space <- paste(rep(" ",m+nchar(txt)+1),collapse="")
-      x <- c(txt,##"\n",
-             ##space,
+      x <- c(txt,
              head(x[1,],show),"...",tail(x[1,],show),"\n",
              space,"...\n",
              space,head(x[nrow(x),],show),"...",tail(x[nrow(x),],show))
@@ -343,20 +350,6 @@ getIdentifierOffset <- function(regexpr="software channel"){
   offset
 }
 
-
-identifier <- function(idoff){ ## Return identifier vector (by tuple)
-  typ <- types()
-  offset <- idoff[as.character(typ)]
-  p0 <- 4*p[-length(p)]-3+offset         ## RAW-pointers of identifier
-  length <- attr(idoff,"length")         ## Sizeof pointer
-  mat <- outer(seq(0,length-1),p0,"+")
-  dim(mat) <- NULL
-  fun <- match.fun(attr(idoff,"format")) 
-  ans <- fun(m[mat])
-  ans[is.na(p0)] <- NA
-  ans
-}
-
 ## Now, we can create a "map" to aid extracting relevant tuples.
 ## A map here is a data.frame with a row for each tuple.
 ## A HAC subset should be performed in two steps:
@@ -376,19 +369,6 @@ identifierRegexpr <- list(
                           )
 identifierOffsetList <- lapply(identifierRegexpr,getIdentifierOffset)
 
-## i <- grep("identifier",zz$field,ignore=TRUE,val=TRUE)
-## table(i)
-
-
-## Printing trees - maybe use "dendrogram" class ?
-## node <- function(x,leaf=FALSE){attr(x,"leaf") <- leaf;attr(x,"members") <- length(unlist(x));
-##                                if(is.list(x))h <- attr(x[[1]],"height")+1 else h <- 0;
-##                              attr(x,"height") <- h;attr(x,"label") <- NULL;x}
-## li <- node(list(node(1:5,TRUE),node(list(node(2,TRUE),node(3,TRUE))),node(4,TRUE)))
-## class(li) <- "dendrogram"
-## str(li,last.str="'")
-
-
 ## HAC class
 ## =========
 ## * Simply a data.frame with a row for each tuple.
@@ -407,10 +387,6 @@ binary <- function(x){
   x
 }
 channel2datatype <- function(x)attr(x,"binary")$channel2datatype
-## df <- data.frame(a=1:1e3,b=1:1e3)
-## binary(df) <- 1:4
-## binary(df)
-
 
 ## ---------------------------------------------------------------------------
 ##' Read raw HAC data file
@@ -457,7 +433,7 @@ readHAC <- function(file){
     length <- attr(idoff,"length")         ## Sizeof pointer
     mat <- outer(seq(0,length-1),p0,"+")
     dim(mat) <- NULL
-    fun <- match.fun(attr(idoff,"format")) 
+    fun <- get(attr(idoff,"format"), mode="function")
     ans <- fun(m[mat])
     ans[is.na(p0)] <- NA
     ans
@@ -505,6 +481,7 @@ writeHAC <- function(x,file){
 ##' @title Extract tuples.
 ##' @param x HAC object
 ##' @param i Integer vector
+##' @param ... Currently not used
 ##' @return HAC object
 ##' @rdname indexSubset
 ##' @examples
@@ -588,5 +565,3 @@ print.HAC <- function(x,show.max=10,...){
   y <- paste("$",nm,"\t",y,"\n",sep="")
   for(z in y)cat(z)
 }
-
-

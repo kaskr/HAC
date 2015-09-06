@@ -2,5 +2,12 @@
 # Remove the previous line if you edit this file
 
 # Export all names
-exportPattern(".")
+# exportPattern(".")
 
+## Exports
+export(readHAC, writeHAC, parseHAC)
+
+## Methods :
+S3method("[", HAC)
+S3method(print, HAC)
+S3method(print, tuple)
