@@ -2371,7 +2371,7 @@ field: Time sample interval
 length: 4
 format: ULONG
 content: Time between each sample.
-unit: µs
+unit: 0.000001 s
 range: [0 , 4294967295 µs] EK 60 range:[1 , 65536 µs]
 
 offset: 124
@@ -2511,7 +2511,7 @@ field: Pulse duration
 length: 4
 format: ULONG
 content: Duration of transmitted pulse.
-unit: µs
+unit: 0.000001 s
 range: [0 , 4294967295 µs] EK 60 range: [0 , 65536 µs]
 
 offset: 172
