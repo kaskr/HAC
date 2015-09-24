@@ -10,6 +10,11 @@ file <- system.file("hacdef.dcf",package="HAC")
 zz <- read.dcf(file,all=TRUE)
 zz$offset[zz$offset=="..."] <- NA
 zz$offset <- as.numeric(zz$offset)
+## FIXME: Some tuples e.g. 10040 have a field "Optional field: Space".
+## It is unclear how to tell whether it is in use or not...
+## For now discard this field (but beware that if space-field is in use
+## it will be read as an additional sample)
+zz <- subset(zz, field != "Optional field: Space")
 ## FIXME: Private tuple (65397) has "length: multiple of 4 bytes"
 ##        For now un-supported :
 zz$length[zz$length=="multiple of 4 bytes"] <- NA
