@@ -493,6 +493,15 @@ readHAC <- function(file){
   ## Lets store the channel to datatype information as part of the HAC object:
   env <- attr(map,"binary")
   env$channel2datatype <- tapply(map$typeofdata,map$softwarechannel,function(x)x[1])
+  ## Also store the 'unitname' corresponding to the datatype (number)
+  channel2type <- tapply(map$type,map$softwarechannel,function(x)x[1])
+  myf <- function(datatype, type){
+      def <- tableList[[as.character(type)]]
+      i <- grep("Type of data|Data type", def$field)
+      tab <- parseContent(def[i,])[[1]]
+      structure(tab[as.character(datatype)], names=NULL)
+  }
+  env$channel2unitname <- unlist(Map(myf, env$channel2datatype, channel2type))
 
   map
 }
