@@ -3590,7 +3590,7 @@ range: [0 , 4294967295]
 offset: 28
 field: Sample value
 length: 4
-format: LONG
+format: LONGrle
 content: Sample value on 31 bit or zero series (< threshold) compressed
         into RLE samples (the upper bit is set to 1 and the lower 31
         bits indicate the number of zeros - 1; 2147483648 below
@@ -3721,7 +3721,7 @@ range: [0 , 4294967295]
 offset: 28
 field: Sample value
 length: 4
-format: LONG
+format: LONGrle
 content: Sample values on 32 bit or zero series (< threshold)
         compressed into RLE samples (the upper bit is set to 1 and the
         lower 31 bit indicate the no. of zeros - 1; 2147483648 below
@@ -4146,7 +4146,7 @@ range: [0 , 4294967295]
 offset: 28
 field: Sample value
 length: 2
-format: SHORT
+format: SHORTrle
 content: Sample value on 16 bit or zero series (< threshold) compressed
         into RLE samples (the upper bit is set to 1 and the lower 15
         bits indicate the no. of zeros - 1; 32768 below threshold
