@@ -225,6 +225,43 @@ LONG <- function(raw){
 }
 RAW <- function(raw)raw
 
+## Interpretation of n-bit RLE compression (note: we count bits from 1
+## to n as opposed to C-style 0 to n-1).
+## Highest bit (n) codes the type of sample:
+##   * If 1 the remaining n-1 bits code an unsigned integer giving the
+##   number (minus-1) of zero-samples.
+##   * If 0 the remaining n-1 bits code a signed integer giving *one*
+##   sample.
+SHORTrle <- function(raw){
+  tmp <- USHORT(raw)
+  ## Get highest bit (16).
+  b16 <- tmp >= 2^15
+  ## Get second highest bit (15).
+  b15 <- (tmp - b16 * 2^16) >= 2^14
+  ## Case b16=1: Get *unsigned* 15 bit integer
+  u <- tmp - b16 * 2^16
+  ## Case b16=0: Get *signed* 15 bit integer
+  s <- u - b15 * 2^15
+  ## Do RLE decompression
+  value <- ifelse(b16,   0, s)
+  repl  <- ifelse(b16, u+1, 1)
+  rep(value, repl)
+}
+LONGrle <- function(raw){
+  tmp <- ULONG(raw)
+  ## Get highest bit (32).
+  b32 <- tmp >= 2^31
+  ## Get second highest bit (31).
+  b31 <- (tmp - b32 * 2^32) >= 2^30
+  ## Case b32=1: Get *unsigned* 31 bit integer
+  u <- tmp - b32 * 2^32
+  ## Case b32=0: Get *signed* 31 bit integer
+  s <- u - b31 * 2^31
+  ## Do RLE decompression
+  value <- ifelse(b32,   0, s)
+  repl  <- ifelse(b32, u+1, 1)
+  rep(value, repl)
+}
 
 ## Parse tuple
 ## TODO:
