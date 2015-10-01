@@ -67,8 +67,19 @@ parseUnit <- function(def,datatype){
   ## Unit field can be a semicolon separated string of the form "0th
   ## unit;1st unit;2nd unit;3rd unit" etc "datatype" determines the
   ## number.
-  ch <- paste("^",paste(rep("[^;]*;",datatype),collapse=""),sep="")
-  x <- sub(ch,"",x)
+  if(is.character(datatype)){
+      y <- strsplit(x, ";")
+      x <- sapply(y, function(y)findBestMatch(datatype, y))
+  }
+  ## Cleanup string:
+  ## Example:
+  ##   x <- c("0.000001 deg precision: ~ 2 cm",
+  ##          "description: 10 dB")
+  ## Should become:
+  ##        c("0.000001 deg",
+  ##          "10 dB")
+  x <- sub("[ ]*", "", x) ## Remove initial whitespace
+  x <- sub("^[a-z|A-Z].*:[ ]*", "", x) ## E.g: "description: 10 dB"
   ans <- data.frame(mult=as.numeric(sub(regexpr,"\\1",x)),
                     unit=sub(regexpr,"\\2",x),stringsAsFactors=FALSE)
   ans$mult[ans$mult==0] <- NA
@@ -99,7 +110,7 @@ addUnits <- function(x){
   if(length(i)>0){
     channel <- unique(x[[i]])
     stopifnot(length(channel)<=1)
-    datatype <- channel2datatype(x)[as.character(channel)]
+    datatype <- channel2unitname(x)[as.character(channel)]
   } else datatype <- 0
   def <- tableList[[as.character(type)]]
   df <- parseUnit(def,datatype)
@@ -451,6 +462,7 @@ binary <- function(x){
   x
 }
 channel2datatype <- function(x)attr(x,"binary")$channel2datatype
+channel2unitname <- function(x)attr(x,"binary")$channel2unitname
 
 ## ---------------------------------------------------------------------------
 ##' Read raw HAC data file
