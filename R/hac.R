@@ -67,8 +67,19 @@ parseUnit <- function(def,datatype){
   ## Unit field can be a semicolon separated string of the form "0th
   ## unit;1st unit;2nd unit;3rd unit" etc "datatype" determines the
   ## number.
-  ch <- paste("^",paste(rep("[^;]*;",datatype),collapse=""),sep="")
-  x <- sub(ch,"",x)
+  if(is.character(datatype)){
+      y <- strsplit(x, ";")
+      x <- sapply(y, function(y)findBestMatch(datatype, y))
+  }
+  ## Cleanup string:
+  ## Example:
+  ##   x <- c("0.000001 deg precision: ~ 2 cm",
+  ##          "description: 10 dB")
+  ## Should become:
+  ##        c("0.000001 deg",
+  ##          "10 dB")
+  x <- sub("[ ]*", "", x) ## Remove initial whitespace
+  x <- sub("^[a-z|A-Z].*:[ ]*", "", x) ## E.g: "description: 10 dB"
   ans <- data.frame(mult=as.numeric(sub(regexpr,"\\1",x)),
                     unit=sub(regexpr,"\\2",x),stringsAsFactors=FALSE)
   ans$mult[ans$mult==0] <- NA
@@ -99,7 +110,7 @@ addUnits <- function(x){
   if(length(i)>0){
     channel <- unique(x[[i]])
     stopifnot(length(channel)<=1)
-    datatype <- channel2datatype(x)[as.character(channel)]
+    datatype <- channel2unitname(x)[as.character(channel)]
   } else datatype <- 0
   def <- tableList[[as.character(type)]]
   df <- parseUnit(def,datatype)
@@ -119,6 +130,28 @@ addUnits <- function(x){
   names(ans) <- paste(names(x)," [",df$unit,"]",sep="")
   class(ans) <- "tuple"
   ans
+}
+## Utility to help finding the right unit.
+## Given a one-length character x find the best match in
+## a character vector y.
+## Example:
+## x <- "Sv [Volume backscattering strength in dB]"
+## y <- c("0.001 volts", "Sv or TS: 0.01 dB")
+findBestMatch <- function(x, y){
+    stopifnot(length(x)==1 &&
+              is.character(x) &&
+              is.character(y))
+    doSplit <- function(x){
+        strsplit(gsub("\\[*\\]*\\(*\\)*","",x),"[ ]+")[[1]]
+    }
+    splx <- doSplit(x)
+    score <- function(y){
+        sply <- doSplit(y)
+        sum(splx %in% sply) +
+            sum(tolower(splx) %in% tolower(sply))
+    }
+    s <- sapply(y, score)
+    y[which.max(s)]
 }
 
 ## Quotes from ICES HAC manual:
@@ -429,6 +462,7 @@ binary <- function(x){
   x
 }
 channel2datatype <- function(x)attr(x,"binary")$channel2datatype
+channel2unitname <- function(x)attr(x,"binary")$channel2unitname
 
 ## ---------------------------------------------------------------------------
 ##' Read raw HAC data file
@@ -493,6 +527,15 @@ readHAC <- function(file){
   ## Lets store the channel to datatype information as part of the HAC object:
   env <- attr(map,"binary")
   env$channel2datatype <- tapply(map$typeofdata,map$softwarechannel,function(x)x[1])
+  ## Also store the 'unitname' corresponding to the datatype (number)
+  channel2type <- tapply(map$type,map$softwarechannel,function(x)x[1])
+  myf <- function(datatype, type){
+      def <- tableList[[as.character(type)]]
+      i <- grep("Type of data|Data type", def$field)
+      tab <- parseContent(def[i,])[[1]]
+      structure(tab[as.character(datatype)], names=NULL)
+  }
+  env$channel2unitname <- unlist(Map(myf, env$channel2datatype, channel2type))
 
   map
 }
