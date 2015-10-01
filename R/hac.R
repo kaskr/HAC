@@ -120,6 +120,28 @@ addUnits <- function(x){
   class(ans) <- "tuple"
   ans
 }
+## Utility to help finding the right unit.
+## Given a one-length character x find the best match in
+## a character vector y.
+## Example:
+## x <- "Sv [Volume backscattering strength in dB]"
+## y <- c("0.001 volts", "Sv or TS: 0.01 dB")
+findBestMatch <- function(x, y){
+    stopifnot(length(x)==1 &&
+              is.character(x) &&
+              is.character(y))
+    doSplit <- function(x){
+        strsplit(gsub("\\[*\\]*\\(*\\)*","",x),"[ ]+")[[1]]
+    }
+    splx <- doSplit(x)
+    score <- function(y){
+        sply <- doSplit(y)
+        sum(splx %in% sply) +
+            sum(tolower(splx) %in% tolower(sply))
+    }
+    s <- sapply(y, score)
+    y[which.max(s)]
+}
 
 ## Quotes from ICES HAC manual:
 ## ============================
