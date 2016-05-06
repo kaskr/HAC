@@ -1,6 +1,15 @@
-# HAC
+# readHAC
 
 R package to read acoustic HAC format
+
+## Installation
+
+To install `readHAC` run
+```
+devtools::install_github("kaskr/HAC",subdir="readHAC")
+```
+
+## Tested tuples
 
 | Tuple | Tested | TODO               |
 |-------|--------|--------------------|

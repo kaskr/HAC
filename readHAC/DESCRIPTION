@@ -1,4 +1,4 @@
-Package: HAC
+Package: readHAC
 Type: Package
 Title: Read acoustic HAC format.
 Version: 1.0
@@ -11,5 +11,6 @@ Suggests:
 License: GPL
 LazyLoad: yes
 Collate:
-    'hac.R'
-    'HACpackage.R'
+    'readHAC.R'
+    'readHACpackage.R'
+RoxygenNote: 5.0.1

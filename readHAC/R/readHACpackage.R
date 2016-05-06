@@ -10,8 +10,8 @@
 ##' 1.0\cr Date: \tab 2013-01-01\cr License: \tab GPL\cr
 ##' LazyLoad: \tab yes\cr } 
 ##' 
-##' @name HAC-package
-##' @aliases HAC-package HAC
+##' @name readHAC-package
+##' @aliases readHAC-package readHAC
 ##' @docType package
 ##' @author Kasper Kristensen and Casper Berg
 ##' 

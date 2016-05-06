@@ -1,4 +1,4 @@
-require(HAC)
+require(readHAC)
 
 ## Example file
 hacfile <- system.file("hac","Hac-test_000001.hac",package="HAC")
