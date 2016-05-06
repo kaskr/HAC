@@ -270,9 +270,9 @@ SHORTrle <- function(raw){
   ## Get highest bit (16).
   b16 <- tmp >= 2^15
   ## Get second highest bit (15).
-  b15 <- (tmp - b16 * 2^16) >= 2^14
+  b15 <- (tmp - b16 * 2^15) >= 2^14
   ## Case b16=1: Get *unsigned* 15 bit integer
-  u <- tmp - b16 * 2^16
+  u <- tmp - b16 * 2^15
   ## Case b16=0: Get *signed* 15 bit integer
   s <- u - b15 * 2^15
   ## Do RLE decompression
@@ -285,9 +285,9 @@ LONGrle <- function(raw){
   ## Get highest bit (32).
   b32 <- tmp >= 2^31
   ## Get second highest bit (31).
-  b31 <- (tmp - b32 * 2^32) >= 2^30
+  b31 <- (tmp - b32 * 2^31) >= 2^30
   ## Case b32=1: Get *unsigned* 31 bit integer
-  u <- tmp - b32 * 2^32
+  u <- tmp - b32 * 2^31
   ## Case b32=0: Get *signed* 31 bit integer
   s <- u - b31 * 2^31
   ## Do RLE decompression
