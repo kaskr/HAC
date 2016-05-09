@@ -27,7 +27,7 @@ the \code{subset} function.
 }
 \examples{
 \dontshow{
-hacfile <- system.file("hac","Hac-test_000001.hac",package="HAC")
+hacfile <- system.file("hac","Hac-test_000001.hac",package="readHAC")
 x <- readHAC(hacfile)
 }
 x[1:2]

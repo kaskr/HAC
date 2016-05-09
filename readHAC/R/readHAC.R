@@ -6,7 +6,7 @@
 ## * known.tuples:       Vector of known tuples
 
 ## Read tuple definitions
-file <- system.file("hacdef.dcf",package="HAC")
+file <- system.file("hacdef.dcf",package="readHAC")
 zz <- read.dcf(file,all=TRUE)
 zz$offset[zz$offset=="..."] <- NA
 zz$offset <- as.numeric(zz$offset)
@@ -366,7 +366,7 @@ parseBinaryTuple <- function(tup){
     ans
   }
   args <- Map(function(x,y,z)tup[sequence(x,y,z),],def$offset+1,def$length,def$rep)
-  funs <- lapply(def$format,get, envir = asNamespace("HAC"), inherits = FALSE)
+  funs <- lapply(def$format,get, envir = asNamespace("readHAC"), inherits = FALSE)
   ans <- Map(function(x,f)f(x),args,funs)
   setdim <- function(x){
     if(ncol(tup)>1 & length(x)>ncol(tup))dim(x) <- c(length(x)/ncol(tup),ncol(tup))
@@ -571,7 +571,7 @@ writeHAC <- function(x,file){
 ##' @rdname indexSubset
 ##' @examples
 ##' \dontshow{
-##' hacfile <- system.file("hac","Hac-test_000001.hac",package="HAC")
+##' hacfile <- system.file("hac","Hac-test_000001.hac",package="readHAC")
 ##' x <- readHAC(hacfile)
 ##' }
 ##' x[1:2]

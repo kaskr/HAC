@@ -1,7 +1,7 @@
 require(readHAC)
 
 ## Example file
-hacfile <- system.file("hac","Hac-test_000001.hac",package="HAC")
+hacfile <- system.file("hac","Hac-test_000001.hac",package="readHAC")
 
 ## Step 1. Read hac data into R
 hac <- readHAC(hacfile)
