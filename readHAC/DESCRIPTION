@@ -10,6 +10,4 @@ License: GPL-2
 URL: https://github.com/kaskr/HAC
 BugReports: https://github.com/kaskr/HAC/issues
 LazyLoad: yes
-Collate:
-    'readHAC.R'
 RoxygenNote: 5.0.1

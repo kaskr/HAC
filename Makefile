@@ -15,7 +15,7 @@ all:
 	make pdf
 
 doc-update: $(PACKAGE)/R/*.R
-	echo "library(roxygen2);roxygenize(\"$(PACKAGE)\",roclets = c(\"collate\", \"rd\"))" | $(R) --slave
+	echo "library(roxygen2);roxygenize(\"$(PACKAGE)\",roclets = c(\"rd\"))" | $(R) --slave
 	@touch doc-update
 
 namespace-update :: $(PACKAGE)/NAMESPACE
