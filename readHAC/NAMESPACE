@@ -1,3 +1,6 @@
+## Imports
+importFrom("utils", head, tail)
+
 ## Exports
 export(readHAC, writeHAC, parseHAC)
 
