@@ -12,5 +12,4 @@ BugReports: https://github.com/kaskr/HAC/issues
 LazyLoad: yes
 Collate:
     'readHAC.R'
-    'readHACpackage.R'
 RoxygenNote: 5.0.1
