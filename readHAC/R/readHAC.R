@@ -5,18 +5,20 @@
 ##' For instance tuples exist to specify positions, echosounder information and
 ##' acoustic signal data etc.
 ##' This R package can read, write and manipulate the HAC data format.
-##' 
-##' \tabular{ll}{ Package: \tab HAC\cr Type: \tab Package\cr Version: \tab
-##' 1.0\cr Date: \tab 2013-01-01\cr License: \tab GPL\cr
-##' LazyLoad: \tab yes\cr } 
+##'
+##' See the description of the ICES HAC standard data exchange format,
+##' version 1.60.
 ##' 
 ##' @name readHAC-package
 ##' @aliases readHAC-package
 ##' @docType package
 ##' @author Kasper Kristensen
-##' 
-##' Maintainer: <kaskr@@imm.dtu.dk>
-##' @references \url{http://biblio.uqar.ca/archives/30005500.pdf}
+##' Maintainer: <kaskr@@dtu.dk>
+##' @references
+##'     McQuinn, Ian H., et al. Description of the ICES HAC standard
+##'     data exchange format, version 1.60. Conseil international pour
+##'     l'exploration de la mer, 2005.
+##'     \url{http://biblio.uqar.ca/archives/30005500.pdf}
 ##' @example demo/intro.R
 NULL
 

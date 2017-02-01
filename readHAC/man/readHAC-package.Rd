@@ -12,9 +12,8 @@ acoustic signal data etc.
 This R package can read, write and manipulate the HAC data format.
 }
 \details{
-\tabular{ll}{ Package: \tab HAC\cr Type: \tab Package\cr Version: \tab
-1.0\cr Date: \tab 2013-01-01\cr License: \tab GPL\cr
-LazyLoad: \tab yes\cr }
+See the description of the ICES HAC standard data exchange format,
+version 1.60.
 }
 \examples{
 require(readHAC)
@@ -49,10 +48,12 @@ legend("topright",legend=paste(names(info),unlist(info)))
 }
 \author{
 Kasper Kristensen
-
-Maintainer: <kaskr@imm.dtu.dk>
+Maintainer: <kaskr@dtu.dk>
 }
 \references{
-\url{http://biblio.uqar.ca/archives/30005500.pdf}
+McQuinn, Ian H., et al. Description of the ICES HAC standard
+    data exchange format, version 1.60. Conseil international pour
+    l'exploration de la mer, 2005.
+    \url{http://biblio.uqar.ca/archives/30005500.pdf}
 }
 
