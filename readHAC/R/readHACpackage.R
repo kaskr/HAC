@@ -11,11 +11,11 @@
 ##' LazyLoad: \tab yes\cr } 
 ##' 
 ##' @name readHAC-package
-##' @aliases readHAC-package readHAC
+##' @aliases readHAC-package
 ##' @docType package
-##' @author Kasper Kristensen and Casper Berg
+##' @author Kasper Kristensen
 ##' 
-##' Maintainer: <kaskr@@imm.dtu.dk> <cbe@@aqua.dtu.dk>
-##' @references \url{http://biblio.uqar.qc.ca/archives/30005500.pdf}
+##' Maintainer: <kaskr@@imm.dtu.dk>
+##' @references \url{http://biblio.uqar.ca/archives/30005500.pdf}
 ##' @example demo/intro.R
 NULL

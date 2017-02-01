@@ -2,7 +2,6 @@
 % Please edit documentation in R/readHACpackage.R
 \docType{package}
 \name{readHAC-package}
-\alias{readHAC}
 \alias{readHAC-package}
 \title{Read acoustic HAC raw data}
 \description{
@@ -49,11 +48,11 @@ box()
 legend("topright",legend=paste(names(info),unlist(info)))
 }
 \author{
-Kasper Kristensen and Casper Berg
+Kasper Kristensen
 
-Maintainer: <kaskr@imm.dtu.dk> <cbe@aqua.dtu.dk>
+Maintainer: <kaskr@imm.dtu.dk>
 }
 \references{
-\url{http://biblio.uqar.qc.ca/archives/30005500.pdf}
+\url{http://biblio.uqar.ca/archives/30005500.pdf}
 }
 

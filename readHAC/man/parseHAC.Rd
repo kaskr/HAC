@@ -4,7 +4,8 @@
 \alias{parseHAC}
 \title{Parse binary HAC.}
 \usage{
-parseHAC(hac, split = FALSE, split.by = paste(type, length), units = TRUE)
+parseHAC(hac, split = FALSE, split.by = paste(hac$type, hac$length),
+  units = TRUE)
 }
 \arguments{
 \item{hac}{Object of class \code{HAC} to be parsed.}

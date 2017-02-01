@@ -1,14 +1,14 @@
 Package: readHAC
 Type: Package
-Title: Read acoustic HAC format.
+Title: Read Acoustic HAC Format
 Version: 1.0
-Date: 2013-01-01
-Author: Kasper Kristensen and Casper Berg
-Maintainer: <kaskr@imm.dtu.dk>
-Description: Read acoustic HAC format.
-Suggests:
-    Matrix
-License: GPL
+Date: 2017-02-01
+Author: Kasper Kristensen [aut, cre]
+Maintainer: Kasper Kristensen <kaskr@dtu.dk>
+Description: Read Acoustic HAC format.
+License: GPL-2
+URL: https://github.com/kaskr/HAC
+BugReports: https://github.com/kaskr/HAC/issues
 LazyLoad: yes
 Collate:
     'readHAC.R'

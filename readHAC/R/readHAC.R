@@ -595,7 +595,7 @@ writeHAC <- function(x,file){
 ##' @param split.by If \code{split=TRUE} then split by this factor.
 ##' @param units Convert to human readable units?
 ##' @return Object of class \code{tuple}.
-parseHAC <- function(hac,split=FALSE,split.by=paste(type,length),units=TRUE){
+parseHAC <- function(hac,split=FALSE,split.by=paste(hac$type,hac$length),units=TRUE){
   if(split){
     split.by <- substitute(split.by)
     fac <- eval(split.by,hac)
