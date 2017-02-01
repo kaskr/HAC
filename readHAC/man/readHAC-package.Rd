@@ -9,7 +9,7 @@ The HAC data format is a binary format containing so-called \code{tuples}.
 A tuple can hold various sorts of information depending on the tuple type.
 For instance tuples exist to specify positions, echosounder information and
 acoustic signal data etc.
-This R package can read, write and manipulate the HAC data format.
+This R package can read, write and subset the HAC data format.
 }
 \details{
 See the description of the ICES HAC standard data exchange format,

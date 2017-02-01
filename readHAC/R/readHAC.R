@@ -4,7 +4,7 @@
 ##' A tuple can hold various sorts of information depending on the tuple type.
 ##' For instance tuples exist to specify positions, echosounder information and
 ##' acoustic signal data etc.
-##' This R package can read, write and manipulate the HAC data format.
+##' This R package can read, write and subset the HAC data format.
 ##'
 ##' See the description of the ICES HAC standard data exchange format,
 ##' version 1.60.
@@ -489,8 +489,7 @@ channel2unitname <- function(x)attr(x,"binary")$channel2unitname
 ## ---------------------------------------------------------------------------
 ##' Read raw HAC data file
 ##'
-##' This function reads the binary HAC format, locates tuples and
-##' extracts certain tuple information.
+##' This function reads the binary HAC format and locates the tuples.
 ##' @title Read HAC data into R.
 ##' @param file File to read.
 ##' @return HAC object.
@@ -597,8 +596,8 @@ writeHAC <- function(x,file){
 ##' x <- readHAC(hacfile)
 ##' }
 ##' x[1:2]
-##' subset(x,type==10000)
-##' split(x,x$type)
+##' subset(x, type == 10000)
+##' split(x, x$type)
 "[.HAC" <- function(x, i, ...){
   ans <- as.data.frame(x)[i,,drop=FALSE]
   class(ans) <- class(x)

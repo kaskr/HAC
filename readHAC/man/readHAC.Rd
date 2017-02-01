@@ -16,7 +16,6 @@ HAC object.
 Read raw HAC data file
 }
 \details{
-This function reads the binary HAC format, locates tuples and
-extracts certain tuple information.
+This function reads the binary HAC format and locates the tuples.
 }
 
