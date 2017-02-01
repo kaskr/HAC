@@ -12,8 +12,6 @@
 ##' @name readHAC-package
 ##' @aliases readHAC-package
 ##' @docType package
-##' @author Kasper Kristensen
-##' Maintainer: <kaskr@@dtu.dk>
 ##' @references
 ##'     McQuinn, Ian H., et al. Description of the ICES HAC standard
 ##'     data exchange format, version 1.60. Conseil international pour
