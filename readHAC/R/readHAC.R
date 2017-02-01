@@ -489,8 +489,8 @@ channel2unitname <- function(x)attr(x,"binary")$channel2unitname
 ## ---------------------------------------------------------------------------
 ##' Read raw HAC data file
 ##'
-##' This function reads the binary HAC format, locate tuples and extract certain
-##' tuple information. 
+##' This function reads the binary HAC format, locates tuples and
+##' extracts certain tuple information.
 ##' @title Read HAC data into R.
 ##' @param file File to read.
 ##' @return HAC object.
