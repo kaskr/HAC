@@ -618,9 +618,7 @@ writeHAC <- function(x,file){
 ##' @return Object of class \code{tuple}.
 parseHAC <- function(hac,split=FALSE,split.by=paste(hac$type,hac$length),units=TRUE){
   if(split){
-    split.by <- substitute(split.by)
-    fac <- eval(split.by,hac)
-    spl <- split(hac,fac)
+    spl <- split(hac,split.by)
     ans <- lapply(spl,parseHAC,split=FALSE)
     names(ans) <- NULL
     ans <- unlist(ans,FALSE)
